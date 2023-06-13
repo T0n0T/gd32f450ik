@@ -13,17 +13,14 @@
 #include <rtdevice.h>
 #include <board.h>
 
-/* defined the LED1 pin: PD4 */
-#define LED1_PIN GET_PIN(D, 4)
+/* defined the LED1 pin: PG3 */
+#define LED1_PIN GET_PIN(G, 3)
 
 int main(void)
 {
-    int count = 1;
-
     /* set LED1 pin mode to output */
     rt_pin_mode(LED1_PIN, PIN_MODE_OUTPUT);
-
-    while (count++)
+    while (1)
     {
         rt_pin_write(LED1_PIN, PIN_HIGH);
         rt_thread_mdelay(500);

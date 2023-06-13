@@ -80,6 +80,7 @@
 #define RT_USING_DFS_V1
 #define DFS_FILESYSTEMS_MAX 4
 #define DFS_FILESYSTEM_TYPES_MAX 4
+#define RT_USING_DFS_RAMFS
 
 /* Device Drivers */
 
@@ -89,7 +90,13 @@
 #define RT_USING_SERIAL_V1
 #define RT_SERIAL_USING_DMA
 #define RT_SERIAL_RB_BUFSZ 64
+#define RT_USING_PHY
 #define RT_USING_PIN
+#define RT_USING_SPI
+#define RT_USING_SFUD
+#define RT_SFUD_USING_SFDP
+#define RT_SFUD_USING_FLASH_INFO_TABLE
+#define RT_SFUD_SPI_MAX_HZ 50000000
 
 /* Using USB */
 
@@ -231,6 +238,8 @@
 #define BSP_USING_GPIO
 #define BSP_USING_UART
 #define BSP_USING_UART0
+#define BSP_USING_SPI
+#define BSP_USING_SPI1
 
 /* Board extended module Drivers */
 

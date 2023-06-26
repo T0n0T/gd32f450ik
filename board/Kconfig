@@ -127,6 +127,21 @@ menu "On-chip Peripheral Drivers"
                 depends on BSP_USING_SPI1
                 select BSP_SPI1_TX_USING_DMA
                 default n
+				
+			config BSP_USING_SPI5
+                bool "Enable SPI5 BUS"
+                default n
+
+            config BSP_SPI5_TX_USING_DMA
+                bool "Enable SPI5 TX DMA"
+                depends on BSP_USING_SPI5
+                default n
+
+            config BSP_SPI5_RX_USING_DMA
+                bool "Enable SPI5 RX DMA"
+                depends on BSP_USING_SPI5
+                select BSP_SPI5_TX_USING_DMA
+                default n
         endif
 
     menuconfig BSP_USING_I2C1

@@ -29,6 +29,11 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>Applications/fs.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/applications/fs.c</location>
+		</link>
+		<link>
 			<name>Applications/main.c</name>
 			<type>1</type>
 			<location>D:/SCM/git/keil/gd32/gd32f450ik/applications/main.c</location>
@@ -149,9 +154,34 @@
 			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/drivers/misc/pin.c</location>
 		</link>
 		<link>
+			<name>DeviceDrivers/phy.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/drivers/phy/phy.c</location>
+		</link>
+		<link>
 			<name>DeviceDrivers/serial.c</name>
 			<type>1</type>
 			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/drivers/serial/serial.c</location>
+		</link>
+		<link>
+			<name>DeviceDrivers/sfud.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/drivers/spi/sfud/src/sfud.c</location>
+		</link>
+		<link>
+			<name>DeviceDrivers/spi_core.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/drivers/spi/spi_core.c</location>
+		</link>
+		<link>
+			<name>DeviceDrivers/spi_dev.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/drivers/spi/spi_dev.c</location>
+		</link>
+		<link>
+			<name>DeviceDrivers/spi_flash_sfud.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/drivers/spi/spi_flash_sfud.c</location>
 		</link>
 		<link>
 			<name>Drivers</name>
@@ -174,6 +204,16 @@
 			<location>D:/SCM/git/keil/gd32/gd32f450ik/libraries/gd32_drivers/drv_gpio.c</location>
 		</link>
 		<link>
+			<name>Drivers/drv_spi.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/libraries/gd32_drivers/drv_spi.c</location>
+		</link>
+		<link>
+			<name>Drivers/drv_spi_flash.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/libraries/gd32_drivers/drv_spi_flash.c</location>
+		</link>
+		<link>
 			<name>Drivers/drv_usart.c</name>
 			<type>1</type>
 			<location>D:/SCM/git/keil/gd32/gd32f450ik/libraries/gd32_drivers/drv_usart.c</location>
@@ -184,14 +224,9 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>Filesystem/dfs_posix.c</name>
+			<name>Filesystem/dfs_ramfs.c</name>
 			<type>1</type>
-			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/dfs/dfs_v1/src/dfs_posix.c</location>
-		</link>
-		<link>
-			<name>Filesystem/dfs_fs.c</name>
-			<type>1</type>
-			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/dfs/dfs_v1/src/dfs_fs.c</location>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/dfs/dfs_v1/filesystems/ramfs/dfs_ramfs.c</location>
 		</link>
 		<link>
 			<name>Filesystem/dfs.c</name>
@@ -202,6 +237,16 @@
 			<name>Filesystem/dfs_file.c</name>
 			<type>1</type>
 			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/dfs/dfs_v1/src/dfs_file.c</location>
+		</link>
+		<link>
+			<name>Filesystem/dfs_fs.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/dfs/dfs_v1/src/dfs_fs.c</location>
+		</link>
+		<link>
+			<name>Filesystem/dfs_posix.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/dfs/dfs_v1/src/dfs_posix.c</location>
 		</link>
 		<link>
 			<name>Finsh</name>
@@ -337,6 +382,11 @@
 			<name>Libraries/gd32f4xx_usart.c</name>
 			<type>1</type>
 			<location>D:/SCM/git/keil/gd32/gd32f450ik/libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_usart.c</location>
+		</link>
+		<link>
+			<name>Libraries/gd32f4xx_spi.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_spi.c</location>
 		</link>
 		<link>
 			<name>Libraries/system_gd32f4xx.c</name>

@@ -29,14 +29,14 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>Applications/fs.c</name>
-			<type>1</type>
-			<location>D:/SCM/git/keil/gd32/gd32f450ik/applications/fs.c</location>
-		</link>
-		<link>
 			<name>Applications/main.c</name>
 			<type>1</type>
 			<location>D:/SCM/git/keil/gd32/gd32f450ik/applications/main.c</location>
+		</link>
+		<link>
+			<name>Applications/fs.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/applications/fs.c</location>
 		</link>
 		<link>
 			<name>Compiler</name>
@@ -164,6 +164,11 @@
 			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/drivers/serial/serial.c</location>
 		</link>
 		<link>
+			<name>DeviceDrivers/qspi_core.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/drivers/spi/qspi_core.c</location>
+		</link>
+		<link>
 			<name>DeviceDrivers/sfud.c</name>
 			<type>1</type>
 			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/drivers/spi/sfud/src/sfud.c</location>
@@ -222,6 +227,21 @@
 			<name>Filesystem</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>Filesystem/dfs_elm.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/dfs/dfs_v1/filesystems/elmfat/dfs_elm.c</location>
+		</link>
+		<link>
+			<name>Filesystem/ff.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/dfs/dfs_v1/filesystems/elmfat/ff.c</location>
+		</link>
+		<link>
+			<name>Filesystem/ffunicode.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/dfs/dfs_v1/filesystems/elmfat/ffunicode.c</location>
 		</link>
 		<link>
 			<name>Filesystem/dfs_ramfs.c</name>

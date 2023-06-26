@@ -15,6 +15,7 @@ Debug
 documentation/html
 packages/
 *~
+*.scvd
 *.o
 *.obj
 *.out

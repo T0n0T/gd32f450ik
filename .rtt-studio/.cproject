@@ -67,6 +67,7 @@
 									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/dfs/dfs_v1/include"></listOptionValue>
 									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/drivers/spi"></listOptionValue>
 									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/include"></listOptionValue>
+									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/dfs/dfs_v1/filesystems/elmfat"></listOptionValue>
 									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/finsh"></listOptionValue>
 									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/dfs/dfs_v1/filesystems/ramfs"></listOptionValue>
 									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/libc/posix/ipc"></listOptionValue>

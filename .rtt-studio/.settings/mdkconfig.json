@@ -87,6 +87,7 @@
             "rt-thread\\components\\dfs\\dfs_v1\\include",
             "rt-thread\\components\\drivers\\spi",
             "rt-thread\\include",
+            "rt-thread\\components\\dfs\\dfs_v1\\filesystems\\elmfat",
             "rt-thread\\components\\finsh",
             "rt-thread\\components\\dfs\\dfs_v1\\filesystems\\ramfs",
             "rt-thread\\components\\libc\\posix\\ipc",

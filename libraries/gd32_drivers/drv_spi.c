@@ -218,6 +218,7 @@ static rt_ssize_t xfer(struct rt_spi_device* device, struct rt_spi_message* mess
                     *recv_ptr++ = data;
                 }
             }
+
             DEBUG_PRINTF("spi poll transfer finsh\n");
         }
         else if(config->data_width <= 16)
@@ -262,6 +263,11 @@ static rt_ssize_t xfer(struct rt_spi_device* device, struct rt_spi_message* mess
 
     return message->length;
 };
+
+//static rt_ssize_t quad_xfer(struct rt_spi_device* device, struct rt_spi_message* message)
+//{
+//
+//}
 
 
 static struct rt_spi_bus spi_bus[];

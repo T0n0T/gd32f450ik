@@ -164,11 +164,6 @@
 			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/drivers/serial/serial.c</location>
 		</link>
 		<link>
-			<name>DeviceDrivers/qspi_core.c</name>
-			<type>1</type>
-			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/drivers/spi/qspi_core.c</location>
-		</link>
-		<link>
 			<name>DeviceDrivers/sfud.c</name>
 			<type>1</type>
 			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/drivers/spi/sfud/src/sfud.c</location>
@@ -202,6 +197,11 @@
 			<name>Drivers/startup_gd32f4xx.s</name>
 			<type>1</type>
 			<location>D:/SCM/git/keil/gd32/gd32f450ik/libraries/GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/ARM/startup_gd32f4xx.s</location>
+		</link>
+		<link>
+			<name>Drivers/drv_exmc_sdram.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/libraries/gd32_drivers/drv_exmc_sdram.c</location>
 		</link>
 		<link>
 			<name>Drivers/drv_gpio.c</name>
@@ -372,6 +372,11 @@
 			<name>Libraries</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>Libraries/gd32f4xx_exmc.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_exmc.c</location>
 		</link>
 		<link>
 			<name>Libraries/gd32f4xx_syscfg.c</name>

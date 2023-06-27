@@ -144,6 +144,10 @@ menu "On-chip Peripheral Drivers"
                 default n
         endif
 
+	config BSP_USING_SDRAM
+		bool "Using sdram"
+		default n
+		
     menuconfig BSP_USING_I2C1
         bool "Enable I2C1 BUS (software simulation)"
         default n
@@ -178,7 +182,7 @@ menu "On-chip Peripheral Drivers"
                 bool "Enable ADC2"
                 default n
         endif
-
+	
     menuconfig BSP_USING_TIM
         bool "Enable timer"
         default n

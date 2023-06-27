@@ -30,6 +30,9 @@ if GetDepend(['RT_USING_CAN']):
 if GetDepend(['BSP_USING_ETH']):
     src += ['GD32F4xx_standard_peripheral/Source/gd32f4xx_enet.c']
 
+if GetDepend(['BSP_USING_SDRAM']):
+    src += ['GD32F4xx_standard_peripheral/Source/gd32f4xx_exmc.c']
+
 if GetDepend(['RT_USING_ADC']):
     src += ['GD32F4xx_standard_peripheral/Source/gd32f4xx_adc.c']
 

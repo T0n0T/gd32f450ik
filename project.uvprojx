@@ -675,25 +675,6 @@
           </Files>
           <Files>
             <File>
-              <FileName>qspi_core.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\spi\qspi_core.c</FilePath>
-              <FileOption>
-                <FileArmAds>
-                  <Cads>
-                    <VariousControls>
-                      <MiscControls>  --c99</MiscControls>
-                      <Define> </Define>
-                      <Undefine> </Undefine>
-                      <IncludePath> </IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
-            </File>
-          </Files>
-          <Files>
-            <File>
               <FileName>sfud.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\drivers\spi\sfud\src\sfud.c</FilePath>
@@ -783,6 +764,13 @@
               <FileName>startup_gd32f4xx.s</FileName>
               <FileType>2</FileType>
               <FilePath>libraries\GD32F4xx_Firmware_Library\CMSIS\GD\GD32F4xx\Source\ARM\startup_gd32f4xx.s</FilePath>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>drv_exmc_sdram.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\gd32_drivers\drv_exmc_sdram.c</FilePath>
             </File>
           </Files>
           <Files>
@@ -1007,6 +995,13 @@
         </Group>
         <Group>
           <GroupName>Libraries</GroupName>
+          <Files>
+            <File>
+              <FileName>gd32f4xx_exmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\GD32F4xx_Firmware_Library\GD32F4xx_standard_peripheral\Source\gd32f4xx_exmc.c</FilePath>
+            </File>
+          </Files>
           <Files>
             <File>
               <FileName>gd32f4xx_syscfg.c</FileName>

@@ -108,10 +108,8 @@
 #define RT_USING_PHY
 #define RT_USING_PIN
 #define RT_USING_SPI
-//#define RT_USING_QSPI
 #define RT_USING_SFUD
 #define RT_SFUD_USING_FLASH_INFO_TABLE
-//#define SFUD_USING_QSPI
 #define RT_SFUD_SPI_MAX_HZ 40000000
 
 /* Using USB */
@@ -266,6 +264,7 @@
 #define BSP_USING_SPI5
 #define BSP_SPI5_TX_USING_DMA
 #define BSP_SPI5_RX_USING_DMA
+#define BSP_USING_SDRAM
 
 /* Board extended module Drivers */
 

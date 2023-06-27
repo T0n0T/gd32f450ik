@@ -20,8 +20,8 @@
 #include <finsh.h>
 
 #define SPI_PERIPH                  SPI5
-#define SPI_BUS_NAME                "spi5"
-#define SPI_FLASH_DEVICE_NAME       "spi50"
+#define SPI_BUS_NAME                "qspi5"
+#define SPI_FLASH_DEVICE_NAME       "qspi50"
 #define SPI_FLASH_CHIP              "gd25q40"
 
 static int rt_hw_spi5_init(void)
@@ -38,6 +38,9 @@ static int rt_hw_spi5_init(void)
         gpio_af_set(GPIOG, GPIO_AF_5, GPIO_PIN_10|GPIO_PIN_11| GPIO_PIN_12|GPIO_PIN_13| GPIO_PIN_14);
         gpio_mode_set(GPIOG, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_10|GPIO_PIN_11| GPIO_PIN_12|GPIO_PIN_13| GPIO_PIN_14);
         gpio_output_options_set(GPIOG, GPIO_OTYPE_PP, GPIO_OSPEED_MAX, GPIO_PIN_10|GPIO_PIN_11| GPIO_PIN_12|GPIO_PIN_13| GPIO_PIN_14);
+
+        //using spi quad
+        spi_quad_io23_output_enable(SPI5);
 
         result = gd32_spi_bus_register(SPI5, SPI_BUS_NAME);
         if (result != RT_EOK)
@@ -68,6 +71,8 @@ static int rt_hw_spi5_init(void)
         }
     }
 
+
+
     return RT_EOK;
 }
 INIT_DEVICE_EXPORT(rt_hw_spi5_init);
@@ -75,12 +80,12 @@ INIT_DEVICE_EXPORT(rt_hw_spi5_init);
 #ifdef RT_USING_SFUD
 static int rt_hw_spi_flash_with_sfud_init(void)
 {
-    struct rt_spi_configuration cfg = {
-            .mode = RT_SPI_MODE_0 | RT_SPI_MSB,
-            .data_width = 8,
-            .max_hz = 50000000,
-        };
-    if (RT_NULL == rt_sfud_flash_probe_ex(SPI_FLASH_CHIP, SPI_FLASH_DEVICE_NAME, &cfg,0))
+//    struct rt_spi_configuration cfg = {
+//            .mode = RT_SPI_MODE_0 | RT_SPI_MSB,
+//            .data_width = 8,
+//            .max_hz = 50000000,
+//        };
+    if (RT_NULL == rt_sfud_flash_probe(SPI_FLASH_CHIP, SPI_FLASH_DEVICE_NAME))
     {
         return -RT_ERROR;
     };

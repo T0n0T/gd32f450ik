@@ -306,7 +306,6 @@ void sdram_readbuffer_8(uint32_t sdram_device, uint8_t *pbuffer, uint32_t readad
     for(; numbytetoread != 0; numbytetoread--) {
         /* read a byte from the memory */
         *pbuffer++ = *(uint8_t *)(temp_addr + readaddr);
-
         /* increment the address */
         readaddr += 1;
     }

@@ -25,6 +25,8 @@
 
 #define RT_KSERVICE_USING_STDLIB
 #define RT_DEBUG
+#define RT_DEBUG_MEMHEAP_CONFIG
+#define RT_DEBUG_MEMHEAP 1
 
 /* Inter-Thread communication */
 

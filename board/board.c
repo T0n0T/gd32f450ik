@@ -74,8 +74,9 @@ void rt_hw_board_init()
 #ifdef RT_USING_CONSOLE
     rt_console_set_device(RT_CONSOLE_DEVICE_NAME);
 #endif
-    rt_system_heap_init((void *)EXT_SDRAM_BEGIN, (void *)EXT_SDRAM_END);
-//    rt_system_heap_init((void *)HEAP_BEGIN, (void *)HEAP_END);
+
+    rt_system_heap_init((void *)HEAP_BEGIN, (void *)HEAP_END);
+//    rt_system_heap_init((void *)EXT_SDRAM_BEGIN, (void *)EXT_SDRAM_END);
 //#ifdef BSP_USING_SDRAM
 //    rt_system_heap_init((void *)EXT_SDRAM_BEGIN, (void *)EXT_SDRAM_END);
 //#else

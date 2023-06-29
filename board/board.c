@@ -13,10 +13,10 @@
 #include <board.h>
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @param  None
-  * @retval None
-  */
+ * @brief  This function is executed in case of error occurrence.
+ * @param  None
+ * @retval None
+ */
 void Error_Handler(void)
 {
     /* USER CODE BEGIN Error_Handler */
@@ -28,7 +28,7 @@ void Error_Handler(void)
 }
 
 /** System Clock Configuration
-*/
+ */
 void SystemClock_Config(void)
 {
     SysTick_Config(SystemCoreClock / RT_TICK_PER_SECOND);
@@ -56,13 +56,13 @@ void SysTick_Handler(void)
 void rt_hw_board_init()
 {
     /* NVIC Configuration */
-#define NVIC_VTOR_MASK              0x3FFFFF80
-#ifdef  VECT_TAB_RAM
+#define NVIC_VTOR_MASK 0x3FFFFF80
+#ifdef VECT_TAB_RAM
     /* Set the Vector Table base location at 0x10000000 */
-    SCB->VTOR  = (0x10000000 & NVIC_VTOR_MASK);
-#else  /* VECT_TAB_FLASH  */
+    SCB->VTOR = (0x10000000 & NVIC_VTOR_MASK);
+#else /* VECT_TAB_FLASH  */
     /* Set the Vector Table base location at 0x08000000 */
-    SCB->VTOR  = (0x08000000 & NVIC_VTOR_MASK);
+    SCB->VTOR = (0x08000000 & NVIC_VTOR_MASK);
 #endif
 
     SystemClock_Config();
@@ -76,12 +76,11 @@ void rt_hw_board_init()
 #endif
 
     rt_system_heap_init((void *)HEAP_BEGIN, (void *)HEAP_END);
-//    rt_system_heap_init((void *)EXT_SDRAM_BEGIN, (void *)EXT_SDRAM_END);
-//#ifdef BSP_USING_SDRAM
-//    rt_system_heap_init((void *)EXT_SDRAM_BEGIN, (void *)EXT_SDRAM_END);
-//#else
-//    rt_system_heap_init((void *)HEAP_BEGIN, (void *)HEAP_END);
-//#endif
+    // #ifdef BSP_USING_SDRAM
+    //     rt_system_heap_init((void *)EXT_SDRAM_BEGIN, (void *)EXT_SDRAM_END);
+    // #else
+    //     rt_system_heap_init((void *)HEAP_BEGIN, (void *)HEAP_END);
+    // #endif
 }
 
 /*@}*/

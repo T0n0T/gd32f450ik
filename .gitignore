@@ -44,3 +44,4 @@ cconfig.h
 /board/CubeMX_Config/MDK-ARM
 /board/CubeMX_Config/Drivers
 mdkdownload*
+gd32f450ik.*

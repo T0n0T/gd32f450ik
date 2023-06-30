@@ -315,6 +315,7 @@ void sdram_readbuffer_8(uint32_t sdram_device, uint8_t *pbuffer, uint32_t readad
 int rt_hw_sdram_init(void)
 {
     exmc_synchronous_dynamic_ram_init(EXMC_SDRAM_DEVICE0);
+    printf("sdram init OK\n");
     return 0;
 }
 INIT_COMPONENT_EXPORT(rt_hw_sdram_init);

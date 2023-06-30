@@ -95,9 +95,16 @@ void sdram()
 }
 MSH_CMD_EXPORT(sdram, test sdram);
 
+struct rt_memheap sdram_heap;
+
 int main(void)
 {
+    rt_ubase_t begin_align = RT_ALIGN((rt_ubase_t)EXT_SDRAM_BEGIN, RT_ALIGN_SIZE);
+    rt_ubase_t end_align   = RT_ALIGN_DOWN((rt_ubase_t)EXT_SDRAM_END, RT_ALIGN_SIZE);
     rt_pin_mode(LED1_PIN, PIN_MODE_OUTPUT);
+
+//    rt_memheap_init(&sdram_heap, "sdram", (void*)EXT_SDRAM_BEGIN, end_align-begin_align);
+    printf("start_addr: 0x%08x size: %d\n", EXT_SDRAM_BEGIN, end_align-begin_align);
     while (1)
     {
         rt_pin_write(LED1_PIN, PIN_HIGH);

@@ -16,39 +16,40 @@
 
 #include "gd32f4xx_exti.h"
 
-#define EXT_SDRAM_BEGIN    (0xC0000000U) /* the begining address of external SDRAM */
-#define EXT_SDRAM_END      (EXT_SDRAM_BEGIN + 0x10000000U) /* the end address of external SDRAM */
+#define EXT_SDRAM_BEGIN (0xC0000000U)				 /* the begining address of external SDRAM */
+#define EXT_SDRAM_END (EXT_SDRAM_BEGIN + 0x2000000U) /* the end address of external SDRAM */
+#define EXT_SDRAM_CAP (0x2000000U)
 
 // <o> Internal SRAM memory size[Kbytes] <8-256>
 //  <i>Default: 256
 #ifdef __ICCARM__
 // Use *.icf ram symbal, to avoid hardcode.
 extern char __ICFEDIT_region_RAM_end__;
-#define GD32_SRAM_END          &__ICFEDIT_region_RAM_end__
+#define GD32_SRAM_END &__ICFEDIT_region_RAM_end__
 #else
 
-//sram
-#define GD32_SRAM0_SIZE     112
-#define GD32_SRAM1_SIZE     16
-#define GD32_SRAM2_SIZE     64
-#define GD32_TCMSRAM_SIZE   64
+// sram
+#define GD32_SRAM0_SIZE 112
+#define GD32_SRAM1_SIZE 16
+#define GD32_SRAM2_SIZE 64
+#define GD32_TCMSRAM_SIZE 64
 
-#define GD32_SRAM_SIZE         (GD32_SRAM0_SIZE + GD32_SRAM1_SIZE + GD32_SRAM2_SIZE)   //192
-#define GD32_SRAM_END          (0x20000000 + GD32_SRAM_SIZE * 1024)
+#define GD32_SRAM_SIZE (GD32_SRAM0_SIZE + GD32_SRAM1_SIZE + GD32_SRAM2_SIZE) // 192
+#define GD32_SRAM_END (0x20000000 + GD32_SRAM_SIZE * 1024)
 
 #endif
 
 #ifdef __ARMCC_VERSION
 extern int Image$$RW_IRAM1$$ZI$$Limit;
-#define HEAP_BEGIN    (&Image$$RW_IRAM1$$ZI$$Limit)
+#define HEAP_BEGIN (&Image$$RW_IRAM1$$ZI$$Limit)
 #elif __ICCARM__
-#pragma section="HEAP"
-#define HEAP_BEGIN    (__segment_end("HEAP"))
+#pragma section = "HEAP"
+#define HEAP_BEGIN (__segment_end("HEAP"))
 #else
 extern int __bss_end;
-#define HEAP_BEGIN    (&__bss_end)
+#define HEAP_BEGIN (&__bss_end)
 #endif
 
-#define HEAP_END          GD32_SRAM_END
+#define HEAP_END GD32_SRAM_END
 
 #endif

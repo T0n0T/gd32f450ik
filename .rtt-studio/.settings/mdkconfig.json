@@ -1,0 +1,160 @@
+{
+    "global": {
+        "use-micro-lib": false,
+        "output-debug-info": true,
+        "build-output-dir": ".\\build\\",
+        "list-output-dir": ".\\build\\",
+        "mem-layout": {
+            "rom": [
+                {
+                    "name": "rom1",
+                    "checked": false,
+                    "address": "0x0",
+                    "size": "0x0",
+                    "is_entry": false
+                },
+                {
+                    "name": "rom2",
+                    "checked": false,
+                    "address": "0x0",
+                    "size": "0x0",
+                    "is_entry": false
+                },
+                {
+                    "name": "rom3",
+                    "checked": false,
+                    "address": "0x0",
+                    "size": "0x0",
+                    "is_entry": false
+                },
+                {
+                    "name": "irom1",
+                    "checked": true,
+                    "address": "0x8000000",
+                    "size": "0x300000",
+                    "is_entry": true
+                },
+                {
+                    "name": "irom2",
+                    "checked": false,
+                    "address": "0x0",
+                    "size": "0x0",
+                    "is_entry": false
+                }
+            ],
+            "ram": [
+                {
+                    "name": "ram1",
+                    "checked": false,
+                    "noInit": false,
+                    "address": "0x0",
+                    "size": "0x0"
+                },
+                {
+                    "name": "ram2",
+                    "checked": false,
+                    "noInit": false,
+                    "address": "0x0",
+                    "size": "0x0"
+                },
+                {
+                    "name": "ram3",
+                    "checked": false,
+                    "noInit": false,
+                    "address": "0x0",
+                    "size": "0x0"
+                },
+                {
+                    "name": "iram1",
+                    "checked": true,
+                    "noInit": false,
+                    "address": "0x20000000",
+                    "size": "0x30000"
+                },
+                {
+                    "name": "iram2",
+                    "checked": true,
+                    "noInit": false,
+                    "address": "0x10000000",
+                    "size": "0x10000"
+                }
+            ]
+        }
+    },
+    "c/cpp": {
+        "include-list": [
+            "rt-thread\\components\\drivers\\include",
+            "rt-thread\\components\\dfs\\dfs_v1\\include",
+            "rt-thread\\components\\drivers\\spi",
+            "rt-thread\\include",
+            "rt-thread\\components\\dfs\\dfs_v1\\filesystems\\elmfat",
+            "rt-thread\\components\\finsh",
+            "rt-thread\\components\\dfs\\dfs_v1\\filesystems\\ramfs",
+            "rt-thread\\components\\libc\\posix\\ipc",
+            "libraries\\GD32F4xx_Firmware_Library\\CMSIS\\GD\\GD32F4xx\\Include",
+            "rt-thread\\components\\libc\\posix\\io\\stdio",
+            "rt-thread\\components\\drivers\\spi\\sfud\\inc",
+            "rt-thread\\components\\drivers\\include",
+            "rt-thread\\components\\drivers\\include",
+            "rt-thread\\components\\drivers\\include",
+            "rt-thread\\components\\drivers\\include",
+            "applications",
+            "rt-thread\\libcpu\\arm\\cortex-m4",
+            "rt-thread\\components\\libc\\posix\\io\\poll",
+            "rt-thread\\components\\legacy\\dfs",
+            "libraries\\GD32F4xx_Firmware_Library\\CMSIS",
+            "board",
+            "libraries\\GD32F4xx_Firmware_Library\\GD32F4xx_standard_peripheral\\Include",
+            "rt-thread\\components\\legacy",
+            "rt-thread\\components\\libc\\compilers\\common\\extension\\fcntl\\octal",
+            "packages\\CmBacktrace-v1.4.1",
+            "rt-thread\\components\\libc\\compilers\\common\\include",
+            "rt-thread\\components\\libc\\compilers\\common\\extension",
+            "rt-thread\\libcpu\\arm\\common",
+            "libraries\\gd32_drivers",
+            "."
+        ],
+        "define-list": [
+            "__STDC_LIMIT_MACROS",
+            " RT_USING_ARMLIBC",
+            " USE_STDPERIPH_DRIVER",
+            " RT_USING_LIBC",
+            " __CLK_TCK=RT_TICK_PER_SECOND",
+            " GD32F450",
+            " __RTTHREAD__"
+        ],
+        "misc-controls": "",
+        "execute-only-code": false,
+        "read-only-position-independent": false,
+        "read-write-position-independent": false,
+        "split-load-and-store-multiple": false,
+        "c99-mode": true,
+        "optimization": 4,
+        "optimize-for-time": false,
+        "one-elf-section-per-function": false,
+        "strict-ansi-c": false,
+        "enum-container-always-int": false,
+        "plain-char-is-signed": false,
+        "gnu-extensions": false,
+        "warnings": 0
+    },
+    "asm": {
+        "include-list": [],
+        "define-list": [],
+        "misc-controls": "",
+        "execute-only-code": false,
+        "read-only-position-independent": false,
+        "read-write-position-independent": false,
+        "split-load-and-store-multiple": false,
+        "thumb-mode": false,
+        "no-warnings": false
+    },
+    "linker": {
+        "auto-gen-scatter-file": true,
+        "linker-scatter-file": ".\\gd32_rom.ld",
+        "misc-controls": "",
+        "read-only-position-independent": false,
+        "read-write-position-independent": false,
+        "not-search-std-libs": false
+    }
+}

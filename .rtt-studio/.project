@@ -39,6 +39,26 @@
 			<location>D:/SCM/git/keil/gd32/gd32f450ik/applications/fs.c</location>
 		</link>
 		<link>
+			<name>cm_backtrace</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>cm_backtrace/cmb_flash_log.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/packages/CmBacktrace-v1.4.1/cmb_flash_log.c</location>
+		</link>
+		<link>
+			<name>cm_backtrace/cm_backtrace.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/packages/CmBacktrace-v1.4.1/cm_backtrace.c</location>
+		</link>
+		<link>
+			<name>cm_backtrace/cmb_port.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/packages/CmBacktrace-v1.4.1/cmb_port.c</location>
+		</link>
+		<link>
 			<name>Compiler</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -367,6 +387,16 @@
 			<name>Kernel/timer.c</name>
 			<type>1</type>
 			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/src/timer.c</location>
+		</link>
+		<link>
+			<name>Legacy</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>Legacy/workqueue_legacy.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/legacy/ipc/workqueue_legacy.c</location>
 		</link>
 		<link>
 			<name>Libraries</name>

@@ -59,6 +59,7 @@
 #define RT_USING_USER_MAIN
 #define RT_MAIN_THREAD_STACK_SIZE 2048
 #define RT_MAIN_THREAD_PRIORITY 10
+#define RT_USING_LEGACY
 #define RT_USING_MSH
 #define RT_USING_FINSH
 #define FINSH_USING_MSH
@@ -171,11 +172,14 @@
 /* u8g2: a monochrome graphic library */
 
 
-/* PainterEngine: A cross-platform graphics application framework written in C language */
-
-
 /* tools packages */
 
+#define PKG_USING_CMBACKTRACE
+#define PKG_CMBACKTRACE_PLATFORM_M4
+#define PKG_CMBACKTRACE_DUMP_STACK
+#define PKG_CMBACKTRACE_PRINT_ENGLISH
+#define PKG_USING_CMBACKTRACE_V10401
+#define PKG_CMBACKTRACE_VER_NUM 0x10401
 
 /* system packages */
 
@@ -193,11 +197,19 @@
 
 /* peripheral libraries and drivers */
 
+/* sensors drivers */
+
+
+/* touch drivers */
+
 
 /* Kendryte SDK */
 
 
 /* AI packages */
+
+
+/* Signal Processing and Control Algorithm Packages */
 
 
 /* miscellaneous packages */
@@ -213,7 +225,7 @@
 /* Arduino libraries */
 
 
-/* Projects */
+/* Projects and Demos */
 
 
 /* Sensors */
@@ -232,10 +244,12 @@
 
 /* Communication */
 
+
 /* Device Control */
 
 
 /* Other */
+
 
 /* Signal IO */
 

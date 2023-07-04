@@ -20,8 +20,8 @@
 #include <finsh.h>
 
 #define SPI_PERIPH                  SPI5
-#define SPI_BUS_NAME                "qspi5"
-#define SPI_FLASH_DEVICE_NAME       "qspi50"
+#define SPI_BUS_NAME                "spi5"
+#define SPI_FLASH_DEVICE_NAME       "spi50"
 #define SPI_FLASH_CHIP              "gd25q40"
 
 static int rt_hw_spi5_init(void)
@@ -40,7 +40,7 @@ static int rt_hw_spi5_init(void)
         gpio_output_options_set(GPIOG, GPIO_OTYPE_PP, GPIO_OSPEED_MAX, GPIO_PIN_10|GPIO_PIN_11| GPIO_PIN_12|GPIO_PIN_13| GPIO_PIN_14);
 
         //using spi quad
-        spi_quad_io23_output_enable(SPI5);
+//        spi_quad_io23_output_enable(SPI5);
 
         result = gd32_spi_bus_register(SPI5, SPI_BUS_NAME);
         if (result != RT_EOK)

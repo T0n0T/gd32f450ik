@@ -154,6 +154,7 @@ rt_uint8_t *rt_hw_stack_init(void       *tentry,
     stack_frame = (struct stack_frame *)stk;
 
     /* init all register */
+    printf("num: %d", sizeof(struct stack_frame) / sizeof(rt_uint32_t));
     for (i = 0; i < sizeof(struct stack_frame) / sizeof(rt_uint32_t); i ++)
     {
         ((rt_uint32_t *)stack_frame)[i] = 0xdeadbeef;
@@ -368,6 +369,45 @@ struct exception_info
     rt_uint32_t exc_return;
     struct stack_frame stack_frame;
 };
+
+void printf_register_in_thread(rt_thread_t thread)
+{
+    struct stack_frame *context;
+    struct stack_frame *context2;
+    rt_uint8_t *stk;
+    rt_uint8_t *stack_addr = (rt_uint8_t *)((char *)thread->stack_addr + thread->stack_size - sizeof(rt_ubase_t));
+
+    stk  = stack_addr + sizeof(rt_uint32_t);
+    stk  = (rt_uint8_t *)RT_ALIGN_DOWN((rt_uint32_t)stk, 8);
+    stk -= sizeof(struct stack_frame);
+
+    context = (struct stack_frame *)stk;
+    context2 = (struct stack_frame *)thread->sp;
+
+    rt_kprintf("register |  sp-value    |   sp-addr       |   real-value   |    real-addr      |\n");
+#if USE_FPU
+    rt_kprintf("flag:    |  0x%08x  |   %p    |   0x%08x   |    %p     |\n", context->flag, &context->flag, context2->flag, &context2->flag);
+#endif /* USE_FPU */
+    rt_kprintf("r04:     |  0x%08x  |   %p    |   0x%08x   |    %p     |\n", context->r4, &context->r4, context2->r4, &context2->r4);
+    rt_kprintf("r05:     |  0x%08x  |   %p    |   0x%08x   |    %p     |\n", context->r5, &context->r5, context->r5, &context->r5);
+    rt_kprintf("r06:     |  0x%08x  |   %p    |   0x%08x   |    %p     |\n", context->r6, &context->r6, context->r6, &context->r6);
+    rt_kprintf("r07:     |  0x%08x  |   %p    |   0x%08x   |    %p     |\n", context->r7, &context->r7, context->r7, &context->r7);
+    rt_kprintf("r08:     |  0x%08x  |   %p    |   0x%08x   |    %p     |\n", context->r8, &context->r8, context->r8, &context->r8);
+    rt_kprintf("r09:     |  0x%08x  |   %p    |   0x%08x   |    %p     |\n", context->r9, &context->r9, context->r9, &context->r9);
+    rt_kprintf("r10:     |  0x%08x  |   %p    |   0x%08x   |    %p     |\n", context->r10, &context->r10, context->r10, &context->r10);
+    rt_kprintf("r11:     |  0x%08x  |   %p    |   0x%08x   |    %p     |\n", context->r11, &context->r11, context->r11, &context->r11);
+
+    rt_kprintf("r00:     |  0x%08x  |   %p    |   0x%08x   |    %p     |\n", context->exception_stack_frame.r0, &context->exception_stack_frame.r0, context->exception_stack_frame.r0, &context->exception_stack_frame.r0);
+    rt_kprintf("r01:     |  0x%08x  |   %p    |   0x%08x   |    %p     |\n", context->exception_stack_frame.r1, &context->exception_stack_frame.r1, context->exception_stack_frame.r1, &context->exception_stack_frame.r1);
+    rt_kprintf("r02:     |  0x%08x  |   %p    |   0x%08x   |    %p     |\n", context->exception_stack_frame.r2, &context->exception_stack_frame.r2, context->exception_stack_frame.r2, &context->exception_stack_frame.r2);
+    rt_kprintf("r03:     |  0x%08x  |   %p    |   0x%08x   |    %p     |\n", context->exception_stack_frame.r3, &context->exception_stack_frame.r3, context->exception_stack_frame.r3, &context->exception_stack_frame.r3);
+
+    rt_kprintf("r12:     |  0x%08x  |   %p    |   0x%08x   |    %p     |\n", context->exception_stack_frame.r12, &context->exception_stack_frame.r12, context->exception_stack_frame.r12, &context->exception_stack_frame.r12);
+    rt_kprintf(" lr:     |  0x%08x  |   %p    |   0x%08x   |    %p     |\n", context->exception_stack_frame.lr, &context->exception_stack_frame.lr, context->exception_stack_frame.lr, &context->exception_stack_frame.lr);
+    rt_kprintf(" pc:     |  0x%08x  |   %p    |   0x%08x   |    %p     |\n", context->exception_stack_frame.pc, &context->exception_stack_frame.pc, context->exception_stack_frame.pc, &context->exception_stack_frame.pc);
+    rt_kprintf("psr:     |  0x%08x  |   %p    |   0x%08x   |    %p     |\n", context->exception_stack_frame.psr, &context->exception_stack_frame.psr, context->exception_stack_frame.psr, &context->exception_stack_frame.psr);
+
+}
 
 void rt_hw_hard_fault_exception(struct exception_info *exception_info)
 {

@@ -116,60 +116,45 @@
 
 /* Using USB */
 
-
 /* C/C++ and POSIX layer */
 
 #define RT_LIBC_DEFAULT_TIMEZONE 8
 
 /* POSIX (Portable Operating System Interface) layer */
 
-
 /* Interprocess Communication (IPC) */
-
 
 /* Socket is in the 'Network' category */
 
-
 /* Network */
 
-
 /* Utilities */
-
 
 /* RT-Thread online packages */
 
 /* IoT - internet of things */
 
-
 /* Wi-Fi */
 
 /* Marvell WiFi */
 
-
 /* Wiced WiFi */
-
 
 /* IoT Cloud */
 
-
 /* security packages */
-
 
 /* language packages */
 
 /* JSON: JavaScript Object Notation, a lightweight data-interchange format */
 
-
 /* XML: Extensible Markup Language */
-
 
 /* multimedia packages */
 
 /* LVGL: powerful and easy-to-use embedded GUI library */
 
-
 /* u8g2: a monochrome graphic library */
-
 
 /* tools packages */
 
@@ -184,32 +169,23 @@
 
 /* enhanced kernel services */
 
-
 /* acceleration: Assembly language or algorithmic acceleration packages */
-
 
 /* CMSIS: ARM Cortex-M Microcontroller Software Interface Standard */
 
-
 /* Micrium: Micrium software products porting for RT-Thread */
-
 
 /* peripheral libraries and drivers */
 
 /* sensors drivers */
 
-
 /* touch drivers */
-
 
 /* Kendryte SDK */
 
-
 /* AI packages */
 
-
 /* Signal Processing and Control Algorithm Packages */
-
 
 /* miscellaneous packages */
 
@@ -217,41 +193,29 @@
 
 /* samples: kernel and components samples */
 
-
 /* entertainment: terminal games and other interesting software packages */
-
 
 /* Arduino libraries */
 
-
 /* Projects and Demos */
-
 
 /* Sensors */
 
-
 /* Display */
-
 
 /* Timing */
 
-
 /* Data Processing */
-
 
 /* Data Storage */
 
 /* Communication */
 
-
 /* Device Control */
-
 
 /* Other */
 
-
 /* Signal IO */
-
 
 /* Uncategorized */
 
@@ -275,6 +239,5 @@
 #define BSP_USING_SDRAM
 
 /* Board extended module Drivers */
-
 
 #endif

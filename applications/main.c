@@ -38,11 +38,11 @@ int sdram_heap_init()
 }
 INIT_BOARD_EXPORT(sdram_heap_init);
 
-void test(void* p)
+void test(void *p)
 {
     int count = 0;
     rt_thread_t thread = rt_thread_self();
-    while(1)
+    while (1)
     {
         count++;
         printf("%d %p\n", count, count);
@@ -52,7 +52,6 @@ void test(void* p)
 
         rt_thread_mdelay(500);
     }
-
 }
 
 int main(void)
@@ -60,7 +59,7 @@ int main(void)
     rt_pin_mode(LED1_PIN, PIN_MODE_OUTPUT);
 
     rt_thread_t tt = RT_NULL;
-    tt = rt_thread_create("try", test, RT_NULL, 666, 20, 15);
+    tt = rt_thread_create("try", test, RT_NULL, 512, 20, 15);
     rt_thread_startup(tt);
     while (1)
     {

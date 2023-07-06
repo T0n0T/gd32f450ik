@@ -24,6 +24,9 @@ packages/
 *.lib
 *.i
 *.d
+*.dis
+*.lst
+*.crf
 .DS_Stor*
 .config 3
 .config 4
@@ -53,3 +56,5 @@ gd32f450ik.*
 makefile.targets
 rtconfig_preinc.h
 /MDK-ARM
+Listings/
+Objects/

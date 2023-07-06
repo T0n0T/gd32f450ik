@@ -27,8 +27,8 @@
     ; IMPORT  |Image$$ZI$$Base|
     ; IMPORT  |Image$$ZI$$Limit|
     ; IMPORT  __tx_PendSVHandler
-	IMPORT  __Vectors
-	IMPORT  __initial_sp
+    IMPORT  __Vectors
+    IMPORT  __user_initial_stackheap
 ;
 ;
 SYSTEM_CLOCK        EQU     20000000
@@ -43,7 +43,7 @@ SYSTICK_CYCLES      EQU     ((SYSTEM_CLOCK / 1000) -1)
     ; AREA    STACK, NOINIT, READWRITE, ALIGN=3
 ; StackMem
     ; SPACE   STACK_SIZE
-; __initial_sp
+; __user_initial_stackheap
 
 
     ; AREA    HEAP, NOINIT, READWRITE, ALIGN=3
@@ -57,7 +57,7 @@ SYSTICK_CYCLES      EQU     ((SYSTEM_CLOCK / 1000) -1)
 ; ;
     ; EXPORT  __tx_vectors
 ; __tx_vectors
-    ; DCD     __initial_sp                            ; Reset and system stack ptr
+    ; DCD     __user_initial_stackheap                            ; Reset and system stack ptr
     ; DCD     Reset_Handler                           ; Reset goes to startup function
     ; DCD     __tx_NMIHandler                         ; NMI
     ; DCD     __tx_BadHandler                         ; HardFault
@@ -147,7 +147,7 @@ _tx_initialize_low_level
 ;    /* Set base of available memory to end of non-initialised RAM area.  */
 ;
     LDR     r0, =_tx_initialize_unused_memory       ; Build address of unused memory pointer
-    LDR     r1, =__initial_sp                 ; Build first free address
+    LDR     r1, =__user_initial_stackheap                 ; Build first free address
     ADD     r1, r1, #4                              ;
     STR     r1, [r0]                                ; Setup first unused memory pointer
 ;

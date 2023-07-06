@@ -40,12 +40,25 @@ INIT_BOARD_EXPORT(sdram_heap_init);
 
 void test(void *p)
 {
-    int count = 0;
+	int count4 = 4;
+	int count5 = 5;
+	int count6 = 6;
+	int count7 = 7;
+	int count8 = 8;
+	int count9 = 9;
+	int count10 = 10;
+	int count11 = 11;
     rt_thread_t thread = rt_thread_self();
     while (1)
     {
-        count++;
-        printf("%d %p\n", count, count);
+        count4++;
+		count5++;
+		count6++;
+		count7++;
+		count8++;
+		count9++;
+		count10++;
+		count11++;
         printf("%s sp --> 0x%08x \n", thread->parent.name, thread->sp);
 
         printf_register_in_thread(thread);

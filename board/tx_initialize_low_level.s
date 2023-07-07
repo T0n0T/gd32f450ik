@@ -233,8 +233,8 @@ _tx_initialize_low_level
     ; BX      LR
 ; }
 
-        EXPORT  __tx_SysTickHandler
-		EXPORT  SysTick_Handler
+    EXPORT  __tx_SysTickHandler
+    EXPORT  SysTick_Handler
 __tx_SysTickHandler
 SysTick_Handler
 ; VOID TimerInterruptHandler (VOID)

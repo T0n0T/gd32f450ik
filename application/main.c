@@ -72,7 +72,7 @@ int main(void)
     /* wait for completion of USART transmission */
     while(RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TC)){
     }
-	tx_kernel_enter( );
+    tx_kernel_enter( );
     // while(1){
         // /* check if the tamper key is pressed */
         // if(RESET == gd_eval_key_state_get(KEY_TAMPER)){

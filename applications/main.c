@@ -59,9 +59,9 @@ void test(void* p)
 		count9++;
 		count10++;
 		count11++;
-        printf("%s sp --> 0x%08x \n", thread->parent.name, thread->sp);
-
-        printf_register_in_thread(thread);
+//        printf("%s sp --> 0x%08x \n", thread->parent.name, thread->sp);
+//
+//        printf_register_in_thread(thread);
 
         rt_thread_mdelay(500);
     }

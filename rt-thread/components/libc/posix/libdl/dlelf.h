@@ -12,6 +12,8 @@
 #ifndef DL_ELF_H__
 #define DL_ELF_H__
 
+#include <rtthread.h>
+
 typedef rt_uint8_t              Elf_Byte;
 
 typedef rt_uint32_t             Elf32_Addr;    /* Unsigned program address */

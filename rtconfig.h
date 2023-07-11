@@ -97,12 +97,16 @@
 #define RT_DFS_ELM_MAX_SECTOR_SIZE 512
 #define RT_DFS_ELM_REENTRANT
 #define RT_DFS_ELM_MUTEX_TIMEOUT 3000
+#define RT_USING_DFS_DEVFS
 #define RT_USING_DFS_RAMFS
 
 /* Device Drivers */
 
 #define RT_USING_DEVICE_IPC
 #define RT_UNAMED_PIPE_NUMBER 64
+#define RT_USING_SYSTEM_WORKQUEUE
+#define RT_SYSTEM_WORKQUEUE_STACKSIZE 2048
+#define RT_SYSTEM_WORKQUEUE_PRIORITY 23
 #define RT_USING_SERIAL
 #define RT_USING_SERIAL_V1
 #define RT_SERIAL_USING_DMA
@@ -123,6 +127,9 @@
 
 /* POSIX (Portable Operating System Interface) layer */
 
+#define RT_USING_POSIX_FS
+#define RT_USING_MODULE
+#define RT_USING_CUSTOM_DLMODULE
 
 /* Interprocess Communication (IPC) */
 
@@ -173,12 +180,6 @@
 
 /* tools packages */
 
-#define PKG_USING_CMBACKTRACE
-#define PKG_CMBACKTRACE_PLATFORM_M4
-#define PKG_CMBACKTRACE_DUMP_STACK
-#define PKG_CMBACKTRACE_PRINT_ENGLISH
-#define PKG_USING_CMBACKTRACE_V10401
-#define PKG_CMBACKTRACE_VER_NUM 0x10401
 
 /* system packages */
 

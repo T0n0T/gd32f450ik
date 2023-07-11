@@ -40,6 +40,12 @@ SECTIONS
         __vsymtab_end = .;
         . = ALIGN(4);
 
+		/* section information for modules */
+		. = ALIGN(4);
+		__rtmsymtab_start = .;
+		KEEP(*(RTMSymTab))
+		__rtmsymtab_end = .;
+
         /* section information for initial. */
         . = ALIGN(4);
         __rt_init_start = .;
@@ -77,14 +83,14 @@ SECTIONS
         . = ALIGN(4);
         /* This is used by the startup in order to initialize the .data secion */
         _edata = . ;
-    } >DATA
+    } >RAM1
 
     .stack : 
     {
         . = . + _system_stack_size;
         . = ALIGN(4);
         _estack = .;
-    } >DATA
+    } >RAM1
 
     __bss_start = .;
     .bss :
@@ -102,7 +108,7 @@ SECTIONS
         _ebss = . ;
         
         *(.bss.init)
-    } > DATA
+    } > RAM1
     __bss_end = .;
 
     _end = .;

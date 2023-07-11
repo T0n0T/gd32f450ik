@@ -79,9 +79,11 @@
 									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/drivers/include"></listOptionValue>
 									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/drivers/include"></listOptionValue>
 									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/applications"></listOptionValue>
+									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/libc/posix/libdl"></listOptionValue>
 									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/libcpu/arm/cortex-m4"></listOptionValue>
 									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/libc/posix/io/poll"></listOptionValue>
 									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/legacy/dfs"></listOptionValue>
+									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/dfs/dfs_v1/filesystems/devfs"></listOptionValue>
 									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/libraries/GD32F4xx_Firmware_Library/CMSIS"></listOptionValue>
 									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/board"></listOptionValue>
 									<listOptionValue builtIn="false" value="D:/SCM/git/keil/gd32/gd32f450ik/libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Include"></listOptionValue>

@@ -44,14 +44,14 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>cm_backtrace/cmb_port.c</name>
-			<type>1</type>
-			<location>D:/SCM/git/keil/gd32/gd32f450ik/packages/CmBacktrace-v1.4.1/cmb_port.c</location>
-		</link>
-		<link>
 			<name>cm_backtrace/cmb_flash_log.c</name>
 			<type>1</type>
 			<location>D:/SCM/git/keil/gd32/gd32f450ik/packages/CmBacktrace-v1.4.1/cmb_flash_log.c</location>
+		</link>
+		<link>
+			<name>cm_backtrace/cmb_port.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/packages/CmBacktrace-v1.4.1/cmb_port.c</location>
 		</link>
 		<link>
 			<name>cm_backtrace/cm_backtrace.c</name>
@@ -247,6 +247,11 @@
 			<name>Filesystem</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>Filesystem/devfs.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/dfs/dfs_v1/filesystems/devfs/devfs.c</location>
 		</link>
 		<link>
 			<name>Filesystem/dfs_elm.c</name>
@@ -447,6 +452,61 @@
 			<name>Libraries/system_gd32f4xx.c</name>
 			<type>1</type>
 			<location>D:/SCM/git/keil/gd32/gd32f450ik/libraries/GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/system_gd32f4xx.c</location>
+		</link>
+		<link>
+			<name>POSIX</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>POSIX/arm.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/libc/posix/libdl/arch/arm.c</location>
+		</link>
+		<link>
+			<name>POSIX/riscv.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/libc/posix/libdl/arch/riscv.c</location>
+		</link>
+		<link>
+			<name>POSIX/x86.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/libc/posix/libdl/arch/x86.c</location>
+		</link>
+		<link>
+			<name>POSIX/dlclose.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/libc/posix/libdl/dlclose.c</location>
+		</link>
+		<link>
+			<name>POSIX/dlelf.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/libc/posix/libdl/dlelf.c</location>
+		</link>
+		<link>
+			<name>POSIX/dlerror.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/libc/posix/libdl/dlerror.c</location>
+		</link>
+		<link>
+			<name>POSIX/dlmodule.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/libc/posix/libdl/dlmodule.c</location>
+		</link>
+		<link>
+			<name>POSIX/dlopen.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/libc/posix/libdl/dlopen.c</location>
+		</link>
+		<link>
+			<name>POSIX/dlsym.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/libc/posix/libdl/dlsym.c</location>
+		</link>
+		<link>
+			<name>POSIX/dlsyms.c</name>
+			<type>1</type>
+			<location>D:/SCM/git/keil/gd32/gd32f450ik/rt-thread/components/libc/posix/libdl/dlsyms.c</location>
 		</link>
 	</linkedResources>
 </projectDescription>

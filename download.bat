@@ -1,0 +1,1 @@
+"C:\Program Files\SEGGER\JLink\JLink.exe" -device GD32F450IK -ExitOnError -CommanderScript rtthread_download_init.jlink

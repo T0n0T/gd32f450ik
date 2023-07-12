@@ -59,7 +59,7 @@ void test(void* p)
 		count9++;
 		count10++;
 		count11++;
-//        printf("%s sp --> 0x%08x \n", thread->parent.name, thread->sp);
+        printf("%s sp --> 0x%08x \n", thread->parent.name, thread->sp);
 //
 //        printf_register_in_thread(thread);
 
@@ -77,6 +77,7 @@ int main(void)
     rt_thread_startup(tt);
     while (1)
     {
+        printf("hello");
         rt_pin_write(LED1_PIN, PIN_HIGH);
         rt_thread_mdelay(500);
         rt_pin_write(LED1_PIN, PIN_LOW);

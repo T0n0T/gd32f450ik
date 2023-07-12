@@ -94,7 +94,7 @@
 #define RT_DFS_ELM_LFN_UNICODE 0
 #define RT_DFS_ELM_MAX_LFN 255
 #define RT_DFS_ELM_DRIVES 2
-#define RT_DFS_ELM_MAX_SECTOR_SIZE 512
+#define RT_DFS_ELM_MAX_SECTOR_SIZE 4096
 #define RT_DFS_ELM_REENTRANT
 #define RT_DFS_ELM_MUTEX_TIMEOUT 3000
 #define RT_USING_DFS_DEVFS
@@ -117,6 +117,7 @@
 #define RT_USING_SFUD
 #define RT_SFUD_USING_FLASH_INFO_TABLE
 #define RT_SFUD_SPI_MAX_HZ 40000000
+#define RT_DEBUG_SFUD
 
 /* Using USB */
 
@@ -142,6 +143,9 @@
 
 /* Utilities */
 
+#define RT_USING_RYM
+#define YMODEM_USING_CRC_TABLE
+#define YMODEM_USING_FILE_TRANSFER
 
 /* RT-Thread online packages */
 
@@ -180,6 +184,12 @@
 
 /* tools packages */
 
+#define PKG_USING_CMBACKTRACE
+#define PKG_CMBACKTRACE_PLATFORM_M4
+#define PKG_CMBACKTRACE_DUMP_STACK
+#define PKG_CMBACKTRACE_PRINT_ENGLISH
+#define PKG_USING_CMBACKTRACE_V10401
+#define PKG_CMBACKTRACE_VER_NUM 0x10401
 
 /* system packages */
 

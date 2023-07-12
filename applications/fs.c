@@ -13,16 +13,15 @@
 #include "drv_spi.h"
 #include "dfs_fs.h"
 
-static int rt_hw_spi_file_system_init(void)
+static int file_system_format(void)
 {
     //初始化，格式化flash
-    dfs_mkfs("elm","gd25q40");
-    if(dfs_mount("gd25q40", "/","elm",0,0) == 0)  //注册块设备，这一步可以将外部flash抽象为系统的块设备
-    {
-        return -RT_ERROR;
-    }
-    return RT_EOK;
+    return dfs_mkfs("elm","gd25q40");
 }
-//INIT_ENV_EXPORT(rt_hw_spi_file_system_init);
+MSH_CMD_EXPORT(file_system_format, format spi file system);
 
-
+static int rt_hw_file_system_mount(void)
+{
+    return dfs_mount("gd25q40", "/","elm",0,0); //注册块设备，这一步可以将外部flash抽象为系统的块设备
+}
+INIT_ENV_EXPORT(rt_hw_file_system_mount);

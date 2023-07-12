@@ -1,12 +1,12 @@
 /*
- * Copyright (c) 2006-2021, RT-Thread Development Team
+ * Copyright (c) 2006-2022, RT-Thread Development Team
  *
  * SPDX-License-Identifier: Apache-2.0
  *
  * Change Logs:
  * Date           Author       Notes
- * 2012-01-01     aozima       first implementation.
- * 2012-07-27     aozima       fixed variable uninitialized.
+ * 2021-12-31     BruceOu      first implementation
+ * 2023-06-03     CX           fixed sf probe error bug
  */
 #include <board.h>
 #include "drv_spi.h"
@@ -19,72 +19,47 @@
 #include <rthw.h>
 #include <finsh.h>
 
-#define SPI_PERIPH                  SPI5
 #define SPI_BUS_NAME                "spi5"
 #define SPI_FLASH_DEVICE_NAME       "spi50"
 #define SPI_FLASH_CHIP              "gd25q40"
 
-static int rt_hw_spi5_init(void)
+#define GD25Q_SPI_CS_GPIOX_CLK   RCU_GPIOI
+#define GD25Q_SPI_CS_GPIOX       GPIOI
+#define GD25Q_SPI_CS_GPIOX_PIN_X GPIO_PIN_8
+
+static int rt_hw_spi_flash_init(void)
 {
-    /* register spi bus */
+    rt_err_t res;
+    static struct rt_spi_device spi_dev_gd25q;           /* SPI device */
+    static struct gd32_spi_cs  spi_cs;
+    spi_cs.GPIOx = GD25Q_SPI_CS_GPIOX;
+    spi_cs.GPIO_Pin = GD25Q_SPI_CS_GPIOX_PIN_X;
+    
+    rcu_periph_clock_enable(GD25Q_SPI_CS_GPIOX_CLK);
+#if defined SOC_SERIES_GD32F4xx
+    gpio_mode_set(spi_cs.GPIOx, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, spi_cs.GPIO_Pin);
+    gpio_output_options_set(spi_cs.GPIOx, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, spi_cs.GPIO_Pin);
+
+    gpio_bit_set(spi_cs.GPIOx, spi_cs.GPIO_Pin);
+#else
+    gpio_init(spi_cs.GPIOx, GPIO_MODE_AF_PP, GPIO_OSPEED_50MHZ, spi_cs.GPIO_Pin);
+
+#endif
+    res = rt_spi_bus_attach_device(&spi_dev_gd25q, SPI_FLASH_DEVICE_NAME, SPI_BUS_NAME, (void*)&spi_cs);
+
+    if (res != RT_EOK)
     {
-        rt_err_t result;
-
-        rcu_periph_clock_enable(RCU_GPIOI);
-        rcu_periph_clock_enable(RCU_GPIOG);
-        rcu_periph_clock_enable(RCU_SPI5);
-
-        /* SPI5_CLK(PG13), SPI5_MISO(PG12), SPI5_MOSI(PG14),SPI5_IO2(PG10) and SPI5_IO3(PG11) GPIO pin configuration */
-        gpio_af_set(GPIOG, GPIO_AF_5, GPIO_PIN_10|GPIO_PIN_11| GPIO_PIN_12|GPIO_PIN_13| GPIO_PIN_14);
-        gpio_mode_set(GPIOG, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO_PIN_10|GPIO_PIN_11| GPIO_PIN_12|GPIO_PIN_13| GPIO_PIN_14);
-        gpio_output_options_set(GPIOG, GPIO_OTYPE_PP, GPIO_OSPEED_MAX, GPIO_PIN_10|GPIO_PIN_11| GPIO_PIN_12|GPIO_PIN_13| GPIO_PIN_14);
-
-        //using spi quad
-//        spi_quad_io23_output_enable(SPI5);
-
-        result = gd32_spi_bus_register(SPI5, SPI_BUS_NAME);
-        if (result != RT_EOK)
-        {
-            return result;
-        }
+        rt_kprintf("rt_spi_bus_attach_device() run failed!\n");
+        return res;
     }
-
-    /* attach cs */
-    {
-        static struct rt_spi_device spi_device;
-        static struct gd32_spi_cs  spi_cs;
-        rt_err_t result;
-
-        spi_cs.GPIOx = GPIOI;
-        spi_cs.GPIO_Pin = GPIO_PIN_8;
-
-        /* SPI5_CS(PG9) GPIO pin configuration */
-        gpio_mode_set(GPIOI, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO_PIN_8);
-        gpio_output_options_set(GPIOI, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_8);
-
-        gpio_bit_set(GPIOI, GPIO_PIN_8);
-
-        result = rt_spi_bus_attach_device(&spi_device, SPI_FLASH_DEVICE_NAME, SPI_BUS_NAME, (void*)&spi_cs);
-        if (result != RT_EOK)
-        {
-            return result;
-        }
-    }
-
-
 
     return RT_EOK;
 }
-INIT_DEVICE_EXPORT(rt_hw_spi5_init);
+INIT_DEVICE_EXPORT(rt_hw_spi_flash_init);
 
 #ifdef RT_USING_SFUD
 static int rt_hw_spi_flash_with_sfud_init(void)
 {
-//    struct rt_spi_configuration cfg = {
-//            .mode = RT_SPI_MODE_0 | RT_SPI_MSB,
-//            .data_width = 8,
-//            .max_hz = 50000000,
-//        };
     if (RT_NULL == rt_sfud_flash_probe(SPI_FLASH_CHIP, SPI_FLASH_DEVICE_NAME))
     {
         return -RT_ERROR;
@@ -94,3 +69,5 @@ static int rt_hw_spi_flash_with_sfud_init(void)
 }
 INIT_COMPONENT_EXPORT(rt_hw_spi_flash_with_sfud_init);
 #endif
+
+

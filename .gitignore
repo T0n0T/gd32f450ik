@@ -52,3 +52,4 @@ gd32f450ik.*
 .project
 makefile.targets
 rtconfig_preinc.h
+/apps

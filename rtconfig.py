@@ -41,7 +41,7 @@ if PLATFORM == 'gcc':
     TARGET_EXT = 'elf'
     SIZE = PREFIX + 'size'
     OBJDUMP = PREFIX + 'objdump'
-    OBJCPY = PREFIX + 'objcopy'
+    OBJCPY = PREFIX + 'objcopy'  
 
     DEVICE = ' -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -ffunction-sections -fdata-sections -DGD32F450'
     CFLAGS = DEVICE + ' -Dgcc'
@@ -60,6 +60,12 @@ if PLATFORM == 'gcc':
     CXXFLAGS = CFLAGS 
 
     POST_ACTION = OBJCPY + ' -O binary $TARGET rtthread.bin\n' + SIZE + ' $TARGET \n'
+    M_CFLAGS = CFLAGS + ' -mlong-calls -fPIC'
+    M_CXXFLAGS = CXXFLAGS + ' --mlong-calls -fPIC'
+    M_LFLAGS = DEVICE + CXXFLAGS + ' -Wl,--gc-sections,-z,max-page-size=0x4' +\
+                                    ' -shared -fPIC -nostartfiles -nostdlib -static-libgcc'
+    M_POST_ACTION = PREFIX + 'strip' + ' -R .hash $TARGET\n' + SIZE + ' $TARGET \n'
+    M_BIN_PATH = r'D:\SCM\git\keil\gd32\gd32f450ik\apps'
 
 elif PLATFORM == 'armcc':
     # toolchains

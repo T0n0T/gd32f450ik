@@ -333,7 +333,7 @@
               <MiscControls />
               <Define>__STDC_LIMIT_MACROS, RT_USING_ARMLIBC, USE_STDPERIPH_DRIVER, RT_USING_LIBC, __CLK_TCK=RT_TICK_PER_SECOND, GD32F450, __RTTHREAD__</Define>
               <Undefine />
-              <IncludePath>rt-thread\components\drivers\include;rt-thread\components\dfs\dfs_v1\include;rt-thread\components\drivers\spi;rt-thread\include;rt-thread\components\dfs\dfs_v1\filesystems\elmfat;rt-thread\components\finsh;rt-thread\components\dfs\dfs_v1\filesystems\ramfs;rt-thread\components\libc\posix\ipc;libraries\GD32F4xx_Firmware_Library\CMSIS\GD\GD32F4xx\Include;rt-thread\components\libc\posix\io\stdio;rt-thread\components\drivers\spi\sfud\inc;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;applications;rt-thread\components\libc\posix\libdl;rt-thread\libcpu\arm\cortex-m4;rt-thread\components\libc\posix\io\poll;rt-thread\components\legacy\dfs;rt-thread\components\dfs\dfs_v1\filesystems\devfs;libraries\GD32F4xx_Firmware_Library\CMSIS;board;libraries\GD32F4xx_Firmware_Library\GD32F4xx_standard_peripheral\Include;rt-thread\components\legacy;rt-thread\components\libc\compilers\common\extension\fcntl\octal;rt-thread\components\libc\compilers\common\include;rt-thread\components\libc\compilers\common\extension;rt-thread\libcpu\arm\common;libraries\gd32_drivers;.</IncludePath>
+              <IncludePath>rt-thread\components\drivers\include;rt-thread\components\dfs\dfs_v1\include;rt-thread\components\drivers\spi;rt-thread\include;rt-thread\components\dfs\dfs_v1\filesystems\elmfat;rt-thread\components\finsh;rt-thread\components\dfs\dfs_v1\filesystems\ramfs;rt-thread\components\libc\posix\ipc;libraries\GD32F4xx_Firmware_Library\CMSIS\GD\GD32F4xx\Include;rt-thread\components\libc\posix\io\stdio;rt-thread\components\drivers\spi\sfud\inc;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;applications;rt-thread\components\libc\posix\libdl;rt-thread\libcpu\arm\cortex-m4;rt-thread\components\libc\posix\io\poll;rt-thread\components\legacy\dfs;rt-thread\components\dfs\dfs_v1\filesystems\devfs;libraries\GD32F4xx_Firmware_Library\CMSIS;board;libraries\GD32F4xx_Firmware_Library\GD32F4xx_standard_peripheral\Include;rt-thread\components\legacy;rt-thread\components\libc\compilers\common\extension\fcntl\octal;packages\CmBacktrace-v1.4.1;rt-thread\components\utilities\ymodem;rt-thread\components\libc\compilers\common\include;rt-thread\components\libc\compilers\common\extension;rt-thread\libcpu\arm\common;libraries\gd32_drivers;.</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -388,6 +388,30 @@
               <FileName>fs.c</FileName>
               <FileType>1</FileType>
               <FilePath>applications\fs.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>cm_backtrace</GroupName>
+          <Files>
+            <File>
+              <FileName>cmb_flash_log.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\CmBacktrace-v1.4.1\cmb_flash_log.c</FilePath>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>cmb_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\CmBacktrace-v1.4.1\cmb_port.c</FilePath>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>cm_backtrace.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\CmBacktrace-v1.4.1\cm_backtrace.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1146,6 +1170,23 @@
               <FileName>dlsyms.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\libc\posix\libdl\dlsyms.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Utilities</GroupName>
+          <Files>
+            <File>
+              <FileName>ry_sy.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\utilities\ymodem\ry_sy.c</FilePath>
+            </File>
+          </Files>
+          <Files>
+            <File>
+              <FileName>ymodem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\utilities\ymodem\ymodem.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -12,6 +12,8 @@ if os.getenv('RTT_CC'):
     CROSS_TOOL = os.getenv('RTT_CC')
 if os.getenv('RTT_ROOT'):
     RTT_ROOT = os.getenv('RTT_ROOT')
+if os.getenv('BSP_ROOT'):
+    BSP_ROOT = os.getenv('BSP_ROOT')
 
 # cross_tool provides the cross compiler
 # EXEC_PATH is the compiler execute path, for example, CodeSourcery, Keil MDK, IAR
@@ -65,7 +67,7 @@ if PLATFORM == 'gcc':
     M_LFLAGS = DEVICE + CXXFLAGS + ' -Wl,--gc-sections,-z,max-page-size=0x4' +\
                                     ' -shared -fPIC -nostartfiles -nostdlib -static-libgcc'
     M_POST_ACTION = PREFIX + 'strip' + ' -R .hash $TARGET\n' + SIZE + ' $TARGET \n'
-    M_BIN_PATH = r'D:\SCM\git\keil\gd32\gd32f450ik\apps'
+    M_BIN_PATH = r'F:\code\Embedded\project\gd32f450\rtthread\app'
 
 elif PLATFORM == 'armcc':
     # toolchains

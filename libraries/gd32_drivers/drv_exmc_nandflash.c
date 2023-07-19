@@ -1,39 +1,3 @@
-/*!
-    \file    exmc_nandflash.c
-    \brief   nandflash(GD9FU1G8F2AMG\hynix HY27UF081G2A) driver
-
-    \version 2016-08-15, V1.0.0, demo for GD32F4xx
-    \version 2018-12-12, V2.0.0, demo for GD32F4xx
-    \version 2022-04-13, V2.0.1, demo for GD32F4xx
-*/
-
-/*
-    Copyright (c) 2022, GigaDevice Semiconductor Inc.
-
-    Redistribution and use in source and binary forms, with or without modification,
-are permitted provided that the following conditions are met:
-
-    1. Redistributions of source code must retain the above copyright notice, this
-       list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright notice,
-       this list of conditions and the following disclaimer in the documentation
-       and/or other materials provided with the distribution.
-    3. Neither the name of the copyright holder nor the names of its contributors
-       may be used to endorse or promote products derived from this software without
-       specific prior written permission.
-
-    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
-INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
-NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
-OF SUCH DAMAGE.
-*/
-
 #include "gd32f4xx.h"
 #include "drv_exmc_nandflash.h"
 #include <rtthread.h>
@@ -130,6 +94,14 @@ void exmc_nandflash_init(uint32_t nand_bank)
     /* enable EXMC NAND bank1 */
     exmc_nand_enable(EXMC_BANK1_NAND);
 }
+
+int rt_hw_nandflash_init(void)
+{
+    exmc_nandflash_init(EXMC_BANK1_NAND);
+    printf("nandflash init OK\n");
+    return 0;
+}
+INIT_COMPONENT_EXPORT(rt_hw_nandflash_init);
 
 /*!
     \brief      read NAND flash ID

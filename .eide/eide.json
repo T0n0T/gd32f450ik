@@ -1,0 +1,549 @@
+{
+  "name": "gd32f450ik",
+  "type": "ARM",
+  "dependenceList": [],
+  "srcDirs": [
+    ".eide/deps"
+  ],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": [
+      {
+        "name": "Applications",
+        "files": [
+          {
+            "path": "applications/fs.c"
+          },
+          {
+            "path": "applications/main.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "cm_backtrace",
+        "files": [
+          {
+            "path": "packages/CmBacktrace-v1.4.1/cm_backtrace.c"
+          },
+          {
+            "path": "packages/CmBacktrace-v1.4.1/cmb_flash_log.c"
+          },
+          {
+            "path": "packages/CmBacktrace-v1.4.1/cmb_port.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Compiler",
+        "files": [
+          {
+            "path": "rt-thread/components/libc/compilers/armlibc/syscall_mem.c"
+          },
+          {
+            "path": "rt-thread/components/libc/compilers/armlibc/syscalls.c"
+          },
+          {
+            "path": "rt-thread/components/libc/compilers/common/cctype.c"
+          },
+          {
+            "path": "rt-thread/components/libc/compilers/common/cstdio.c"
+          },
+          {
+            "path": "rt-thread/components/libc/compilers/common/cstdlib.c"
+          },
+          {
+            "path": "rt-thread/components/libc/compilers/common/cstring.c"
+          },
+          {
+            "path": "rt-thread/components/libc/compilers/common/ctime.c"
+          },
+          {
+            "path": "rt-thread/components/libc/compilers/common/cwchar.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "CPU",
+        "files": [
+          {
+            "path": "rt-thread/libcpu/arm/common/div0.c"
+          },
+          {
+            "path": "rt-thread/libcpu/arm/common/showmem.c"
+          },
+          {
+            "path": "rt-thread/libcpu/arm/cortex-m4/context_rvds.S"
+          },
+          {
+            "path": "rt-thread/libcpu/arm/cortex-m4/cpuport.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "DeviceDrivers",
+        "files": [
+          {
+            "path": "rt-thread/components/drivers/ipc/completion.c"
+          },
+          {
+            "path": "rt-thread/components/drivers/ipc/dataqueue.c"
+          },
+          {
+            "path": "rt-thread/components/drivers/ipc/pipe.c"
+          },
+          {
+            "path": "rt-thread/components/drivers/ipc/ringblk_buf.c"
+          },
+          {
+            "path": "rt-thread/components/drivers/ipc/ringbuffer.c"
+          },
+          {
+            "path": "rt-thread/components/drivers/ipc/waitqueue.c"
+          },
+          {
+            "path": "rt-thread/components/drivers/ipc/workqueue.c"
+          },
+          {
+            "path": "rt-thread/components/drivers/misc/pin.c"
+          },
+          {
+            "path": "rt-thread/components/drivers/mtd/mtd_nand.c"
+          },
+          {
+            "path": "rt-thread/components/drivers/phy/phy.c"
+          },
+          {
+            "path": "rt-thread/components/drivers/serial/serial.c"
+          },
+          {
+            "path": "rt-thread/components/drivers/spi/sfud/src/sfud.c"
+          },
+          {
+            "path": "rt-thread/components/drivers/spi/spi_core.c"
+          },
+          {
+            "path": "rt-thread/components/drivers/spi/spi_dev.c"
+          },
+          {
+            "path": "rt-thread/components/drivers/spi/spi_flash_sfud.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Drivers",
+        "files": [
+          {
+            "path": "board/board.c"
+          },
+          {
+            "path": "libraries/gd32_drivers/drv_exmc_sdram.c"
+          },
+          {
+            "path": "libraries/gd32_drivers/drv_gpio.c"
+          },
+          {
+            "path": "libraries/gd32_drivers/drv_spi_flash.c"
+          },
+          {
+            "path": "libraries/gd32_drivers/drv_spi.c"
+          },
+          {
+            "path": "libraries/gd32_drivers/drv_usart.c"
+          },
+          {
+            "path": "libraries/GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/ARM/startup_gd32f4xx.s"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Filesystem",
+        "files": [
+          {
+            "path": "rt-thread/components/dfs/dfs_v1/filesystems/devfs/devfs.c"
+          },
+          {
+            "path": "rt-thread/components/dfs/dfs_v1/filesystems/elmfat/dfs_elm.c"
+          },
+          {
+            "path": "rt-thread/components/dfs/dfs_v1/filesystems/elmfat/ff.c"
+          },
+          {
+            "path": "rt-thread/components/dfs/dfs_v1/filesystems/elmfat/ffunicode.c"
+          },
+          {
+            "path": "rt-thread/components/dfs/dfs_v1/filesystems/ramfs/dfs_ramfs.c"
+          },
+          {
+            "path": "rt-thread/components/dfs/dfs_v1/src/dfs_file.c"
+          },
+          {
+            "path": "rt-thread/components/dfs/dfs_v1/src/dfs_fs.c"
+          },
+          {
+            "path": "rt-thread/components/dfs/dfs_v1/src/dfs_posix.c"
+          },
+          {
+            "path": "rt-thread/components/dfs/dfs_v1/src/dfs.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Finsh",
+        "files": [
+          {
+            "path": "rt-thread/components/finsh/shell.c"
+          },
+          {
+            "path": "rt-thread/components/finsh/msh.c"
+          },
+          {
+            "path": "rt-thread/components/finsh/msh_parse.c"
+          },
+          {
+            "path": "rt-thread/components/finsh/cmd.c"
+          },
+          {
+            "path": "rt-thread/components/finsh/msh_file.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Kernel",
+        "files": [
+          {
+            "path": "rt-thread/src/clock.c"
+          },
+          {
+            "path": "rt-thread/src/components.c"
+          },
+          {
+            "path": "rt-thread/src/device.c"
+          },
+          {
+            "path": "rt-thread/src/idle.c"
+          },
+          {
+            "path": "rt-thread/src/ipc.c"
+          },
+          {
+            "path": "rt-thread/src/irq.c"
+          },
+          {
+            "path": "rt-thread/src/kservice.c"
+          },
+          {
+            "path": "rt-thread/src/memheap.c"
+          },
+          {
+            "path": "rt-thread/src/mempool.c"
+          },
+          {
+            "path": "rt-thread/src/object.c"
+          },
+          {
+            "path": "rt-thread/src/scheduler_up.c"
+          },
+          {
+            "path": "rt-thread/src/thread.c"
+          },
+          {
+            "path": "rt-thread/src/timer.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Legacy",
+        "files": [
+          {
+            "path": "rt-thread/components/legacy/ipc/workqueue_legacy.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Libraries",
+        "files": [
+          {
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_exmc.c"
+          },
+          {
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_syscfg.c"
+          },
+          {
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_exti.c"
+          },
+          {
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_gpio.c"
+          },
+          {
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_rcu.c"
+          },
+          {
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_misc.c"
+          },
+          {
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_usart.c"
+          },
+          {
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_spi.c"
+          },
+          {
+            "path": "libraries/GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/system_gd32f4xx.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "POSIX",
+        "files": [
+          {
+            "path": "rt-thread/components/libc/posix/libdl/arch/arm.c"
+          },
+          {
+            "path": "rt-thread/components/libc/posix/libdl/arch/riscv.c"
+          },
+          {
+            "path": "rt-thread/components/libc/posix/libdl/arch/x86.c"
+          },
+          {
+            "path": "rt-thread/components/libc/posix/libdl/dlclose.c"
+          },
+          {
+            "path": "rt-thread/components/libc/posix/libdl/dlelf.c"
+          },
+          {
+            "path": "rt-thread/components/libc/posix/libdl/dlerror.c"
+          },
+          {
+            "path": "rt-thread/components/libc/posix/libdl/dlmodule.c"
+          },
+          {
+            "path": "rt-thread/components/libc/posix/libdl/dlopen.c"
+          },
+          {
+            "path": "rt-thread/components/libc/posix/libdl/dlsym.c"
+          },
+          {
+            "path": "rt-thread/components/libc/posix/libdl/dlsyms.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Utilities",
+        "files": [
+          {
+            "path": "rt-thread/components/utilities/ymodem/ry_sy.c"
+          },
+          {
+            "path": "rt-thread/components/utilities/ymodem/ymodem.c"
+          }
+        ],
+        "folders": []
+      }
+    ]
+  },
+  "outDir": "build",
+  "deviceName": null,
+  "packDir": null,
+  "miscInfo": {
+    "uid": "dcdab55006e73592449db634f130b8dd"
+  },
+  "targets": {
+    "rt-thread": {
+      "excludeList": [],
+      "toolchain": "AC5",
+      "compileConfig": {
+        "cpuType": "Cortex-M4",
+        "floatingPointHardware": "single",
+        "scatterFilePath": "gd32_rom.ld",
+        "useCustomScatterFile": false,
+        "storageLayout": {
+          "RAM": [
+            {
+              "tag": "RAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x20000000",
+                "size": "0x30000"
+              },
+              "isChecked": true,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x10000000",
+                "size": "0x10000"
+              },
+              "isChecked": true,
+              "noInit": false
+            }
+          ],
+          "ROM": [
+            {
+              "tag": "ROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "IROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x8000000",
+                "size": "0x300000"
+              },
+              "isChecked": true,
+              "isStartup": true
+            },
+            {
+              "tag": "IROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            }
+          ]
+        },
+        "options": "null"
+      },
+      "uploader": "OpenOCD",
+      "uploadConfig": {
+        "bin": "${ExecutableName}.bin",
+        "target": "gd32f450",
+        "interface": "cmsis-dap",
+        "baseAddr": "0x08000000"
+      },
+      "uploadConfigMap": {
+        "JLink": {
+          "bin": "",
+          "baseAddr": "",
+          "cpuInfo": {
+            "vendor": "null",
+            "cpuName": "null"
+          },
+          "proType": 1,
+          "speed": 8000,
+          "otherCmds": ""
+        }
+      },
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Include",
+          "rt-thread/components/libc/compilers/common/extension",
+          "rt-thread/components/legacy",
+          "libraries/GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Include",
+          "rt-thread/libcpu/arm/common",
+          "rt-thread/components/drivers/include",
+          "rt-thread/components/libc/posix/io/poll",
+          "rt-thread/libcpu/arm/cortex-m4",
+          "libraries/GD32F4xx_Firmware_Library/CMSIS",
+          "rt-thread/include",
+          "rt-thread/components/libc/posix/ipc",
+          "rt-thread/components/drivers/spi",
+          "rt-thread/components/libc/posix/libdl",
+          "rt-thread/components/libc/posix/io/stdio",
+          "board",
+          "rt-thread/components/dfs/dfs_v1/filesystems/ramfs",
+          "applications",
+          "rt-thread/components/finsh",
+          "rt-thread/components/dfs/dfs_v1/filesystems/devfs",
+          ".",
+          "packages/CmBacktrace-v1.4.1",
+          "rt-thread/components/dfs/dfs_v1/include",
+          "rt-thread/components/dfs/dfs_v1/filesystems/elmfat",
+          "rt-thread/components/utilities/ymodem",
+          "rt-thread/components/legacy/dfs",
+          "rt-thread/components/libc/compilers/common/include",
+          "libraries/gd32_drivers",
+          "rt-thread/components/libc/compilers/common/extension/fcntl/octal",
+          "rt-thread/components/drivers/spi/sfud/inc",
+          ".cmsis/include",
+          "RTE/_rt-thread"
+        ],
+        "libList": [],
+        "sourceDirList": [],
+        "defineList": [
+          "__STDC_LIMIT_MACROS",
+          "RT_USING_ARMLIBC",
+          "USE_STDPERIPH_DRIVER",
+          "RT_USING_LIBC",
+          "__CLK_TCK=RT_TICK_PER_SECOND",
+          "GD32F450",
+          "__RTTHREAD__"
+        ]
+      }
+    }
+  },
+  "version": "3.3"
+}

@@ -21,8 +21,7 @@ void Error_Handler(void)
 {
     /* USER CODE BEGIN Error_Handler */
     /* User can add his own implementation to report the HAL error return state */
-    while (1)
-    {
+    while (1) {
     }
     /* USER CODE END Error_Handler */
 }
@@ -48,6 +47,21 @@ void SysTick_Handler(void)
 
     /* leave interrupt */
     rt_interrupt_leave();
+}
+
+/*!
+    \brief      this function handles RTC interrupt request
+    \param[in]  none
+    \param[out] none
+    \retval     none
+*/
+void TAMPER_STAMP_IRQHandler(void)
+{
+    rt_kprintf("stamp irq!!!!!!!!!!!\n");
+    if (RESET != rtc_flag_get(RTC_FLAG_TS)) {
+        exti_flag_clear(EXTI_21);
+        rtc_flag_clear(RTC_FLAG_TS | RTC_FLAG_TSOVR);
+    }
 }
 
 /**

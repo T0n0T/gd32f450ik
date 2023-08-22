@@ -205,9 +205,6 @@
             "path": "rt-thread/components/dfs/dfs_v1/filesystems/ramfs/dfs_ramfs.c"
           },
           {
-            "path": "rt-thread/components/dfs/dfs_v1/src/dfs.c"
-          },
-          {
             "path": "rt-thread/components/dfs/dfs_v1/src/dfs_file.c"
           },
           {
@@ -215,6 +212,9 @@
           },
           {
             "path": "rt-thread/components/dfs/dfs_v1/src/dfs_posix.c"
+          },
+          {
+            "path": "rt-thread/components/dfs/dfs_v1/src/dfs.c"
           }
         ],
         "folders": []
@@ -518,7 +518,7 @@
         },
         "proType": 1,
         "speed": 8000,
-        "otherCmds": ""
+        "otherCmds": "ip 192.168.1.2"
       },
       "uploadConfigMap": {},
       "custom_dep": {

@@ -31,58 +31,46 @@ typedef struct {
 
 static gd32_rtc_device g_gd32_rtc_dev;
 
-static uint8_t bcd2dec(uint8_t data)
+static int bcd2dec(uint8_t data)
 {
-    uint8_t temp;
+    int temp;
     temp = ((data >> 4) * 10 + (data & 0x0f));
     return temp;
 }
 
-static uint8_t dec2bcd(uint8_t data)
+static uint8_t dec2bcd(int data)
 {
     uint8_t temp;
     temp = (((data / 10) << 4) + (data % 10));
     return temp;
 }
 
-static time_t gd32_rtctime2stamp(rtc_parameter_struct curtime)
+static time_t gd32_rtctime2stamp(rtc_parameter_struct rtctime)
 {
     struct tm tmp;
-    tmp.tm_year = (int)bcd2dec(curtime.year) + 100;
-    tmp.tm_mon  = (int)bcd2dec(curtime.month) - 1;
-    tmp.tm_mday = (int)bcd2dec(curtime.date);
-    tmp.tm_hour = (int)bcd2dec(curtime.hour);
-    tmp.tm_min  = (int)bcd2dec(curtime.minute);
-    tmp.tm_sec  = (int)bcd2dec(curtime.second);
+    tmp.tm_year = bcd2dec(rtctime.year) + 100;
+    tmp.tm_mon  = bcd2dec(rtctime.month) - 1;
+    tmp.tm_mday = bcd2dec(rtctime.date);
+    tmp.tm_hour = bcd2dec(rtctime.hour);
+    tmp.tm_min  = bcd2dec(rtctime.minute);
+    tmp.tm_sec  = bcd2dec(rtctime.second);
     return mktime(&tmp);
 }
 
-static rtc_parameter_struct gd32_stamp2rtctime(time_t stamp)
+static void gd32_stamp2rtctime(time_t *stamp)
 {
     rtc_parameter_struct rtctime;
-    struct tm *tmp = gmtime(&stamp);
-    rtctime.year   = (uint8_t)dec2bcd(tmp->tm_year);
-    rtctime.month  = (uint8_t)dec2bcd(tmp->tm_mon);
-    rtctime.date   = (uint8_t)dec2bcd(tmp->tm_mday);
-    rtctime.hour   = (uint8_t)dec2bcd(tmp->tm_hour);
-    rtctime.minute = (uint8_t)dec2bcd(tmp->tm_min);
-    rtctime.second = (uint8_t)dec2bcd(tmp->tm_sec);
-    rt_kprintf("%d y %d m %d d %d h %d m %d s\n",
-               tmp->tm_year - 100,
-               tmp->tm_mon + 1,
-               tmp->tm_mday,
-               tmp->tm_hour,
-               tmp->tm_min,
-               tmp->tm_sec);
-    rt_kprintf("%0.2x y %0.2x m %0.2x d %0.2x h %0.2x m %0.2x s\n",
-               rtctime.year,
-               rtctime.month,
-               rtctime.date,
-               rtctime.hour,
-               rtctime.minute,
-               rtctime.second);
-    return rtctime;
+
+    struct tm *tmp = localtime(stamp);
+
+    rtc_initpara.year   = dec2bcd(tmp->tm_year - 100);
+    rtc_initpara.month  = dec2bcd(tmp->tm_mon + 1);
+    rtc_initpara.date   = dec2bcd(tmp->tm_mday);
+    rtc_initpara.hour   = dec2bcd(tmp->tm_hour);
+    rtc_initpara.minute = dec2bcd(tmp->tm_min);
+    rtc_initpara.second = dec2bcd(tmp->tm_sec);
 }
+
 /*!
     \brief      display the current time
     \param[in]  none
@@ -116,8 +104,8 @@ static rt_err_t rt_gd32_rtc_control(rt_device_t dev, int cmd, void *args)
             break;
         case RT_DEVICE_CTRL_RTC_SET_TIME:
             printf("set %ld\n", *(long *)args);
-            rtc_parameter_struct newpara = gd32_stamp2rtctime((time_t *)args);
-            if (ERROR == rtc_init(&newpara)) {
+            gd32_stamp2rtctime((time_t *)args);
+            if (ERROR == rtc_init(&rtc_initpara)) {
                 LOG_E("** RTC time configuration failed! **");
             }
             break;
@@ -175,16 +163,13 @@ void rtc_pre_config(void)
 */
 void rtc_setup(void)
 {
-    /* setup RTC time value */
-    uint32_t tmp_hh = 0xFF, tmp_mm = 0xFF, tmp_ss = 0xFF;
-
-    rtc_initpara.factor_asyn    = prescaler_a;
-    rtc_initpara.factor_syn     = prescaler_s;
-    rtc_initpara.year           = 0x20;
-    rtc_initpara.month          = RTC_APR;
-    rtc_initpara.date           = 0x30;
-    rtc_initpara.display_format = RTC_24HOUR;
-    rtc_initpara.hour           = 0x11;
+    rtc_initpara.factor_asyn = prescaler_a;
+    rtc_initpara.factor_syn  = prescaler_s;
+    rtc_initpara.year        = 0x20;
+    rtc_initpara.month       = RTC_APR;
+    rtc_initpara.date        = 0x30;
+    // rtc_initpara.display_format = RTC_24HOUR;
+    rtc_initpara.hour = 0x11;
 
     /* RTC current time configuration */
     if (ERROR == rtc_init(&rtc_initpara)) {

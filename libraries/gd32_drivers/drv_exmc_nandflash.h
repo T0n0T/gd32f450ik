@@ -37,68 +37,68 @@ OF SUCH DAMAGE.
 #ifndef EXMC_NANDFLASH_H
 #define EXMC_NANDFLASH_H
 
-#include "gd32f4xx.h"
+#include <board.h>
 
 /* NAND area definition */
 /* A16 = CLE high command area */
-#define EXMC_CMD_AREA              (uint32_t)(1<<16)
+#define EXMC_CMD_AREA (uint32_t)(1 << 16)
 /* A17 = ALE high address area */
-#define EXMC_ADDR_AREA             (uint32_t)(1<<17)
+#define EXMC_ADDR_AREA (uint32_t)(1 << 17)
 /* data area */
-#define EXMC_DATA_AREA             ((uint32_t)0x00000000)
+#define EXMC_DATA_AREA ((uint32_t)0x00000000)
 
 /* NAND memory command (GD9FU1G8F2AMG\hynix HY27UF081G2A) */
-#define NAND_CMD_READ1_1ST         ((uint8_t)0x00)
-#define NAND_CMD_READ1_2ND         ((uint8_t)0x30)
-#define NAND_CMD_WRITE_1ST         ((uint8_t)0x80)
-#define NAND_CMD_WRITE_2ND         ((uint8_t)0x10)
-#define NAND_CMD_ERASE_1ST         ((uint8_t)0x60)
-#define NAND_CMD_ERASE_2ND         ((uint8_t)0xD0)
-#define NAND_CMD_READID            ((uint8_t)0x90)
-#define NAND_CMD_STATUS            ((uint8_t)0x70)
-#define NAND_CMD_LOCK_STATUS       ((uint8_t)0x7A)
-#define NAND_CMD_RESET             ((uint8_t)0xFF)
+#define NAND_CMD_READ1_1ST   ((uint8_t)0x00)
+#define NAND_CMD_READ1_2ND   ((uint8_t)0x30)
+#define NAND_CMD_WRITE_1ST   ((uint8_t)0x80)
+#define NAND_CMD_WRITE_2ND   ((uint8_t)0x10)
+#define NAND_CMD_ERASE_1ST   ((uint8_t)0x60)
+#define NAND_CMD_ERASE_2ND   ((uint8_t)0xD0)
+#define NAND_CMD_READID      ((uint8_t)0x90)
+#define NAND_CMD_STATUS      ((uint8_t)0x70)
+#define NAND_CMD_LOCK_STATUS ((uint8_t)0x7A)
+#define NAND_CMD_RESET       ((uint8_t)0xFF)
 
 /* NAND memory status */
-#define NAND_BUSY                  ((uint8_t)0x00)
-#define NAND_ERROR                 ((uint8_t)0x01)
-#define NAND_READY                 ((uint8_t)0x40)
-#define NAND_TIMEOUT_ERROR         ((uint8_t)0x80)
+#define NAND_BUSY          ((uint8_t)0x00)
+#define NAND_ERROR         ((uint8_t)0x01)
+#define NAND_READY         ((uint8_t)0x40)
+#define NAND_TIMEOUT_ERROR ((uint8_t)0x80)
 
 /* NAND memory parameters */
 /* NAND zone count */
-#define NAND_ZONE_COUNT            ((uint16_t)0x0001)
+#define NAND_ZONE_COUNT ((uint16_t)0x0001)
 
 /* 1024 block per zone */
-#define NAND_ZONE_SIZE             ((uint16_t)0x0400)
+#define NAND_ZONE_SIZE ((uint16_t)0x0400)
 
 /* 64 pages per block */
-#define NAND_BLOCK_SIZE            ((uint16_t)0x0040)
+#define NAND_BLOCK_SIZE ((uint16_t)0x0040)
 
 /* 2 * 1024 bytes per page */
-#define NAND_PAGE_SIZE             ((uint16_t)0x0800)
+#define NAND_PAGE_SIZE ((uint16_t)0x0800)
 
 /* last 128 bytes as spare area */
-#define NAND_SPARE_AREA_SIZE       ((uint16_t)0x0080)
+#define NAND_SPARE_AREA_SIZE ((uint16_t)0x0080)
 
-/* total page size = page size + spare are size */
-#define NAND_PAGE_TOTAL_SIZE       (NAND_PAGE_SIZE + NAND_SPARE_AREA_SIZE)
+/* total page size = page size + spare area size */
+#define NAND_PAGE_TOTAL_SIZE (NAND_PAGE_SIZE + NAND_SPARE_AREA_SIZE)
 
 /* max read and write address */
-#define NAND_MAX_ADDRESS           (((NAND_ZONE_COUNT*NAND_ZONE_SIZE)*NAND_BLOCK_SIZE)*NAND_PAGE_SIZE)
+#define NAND_MAX_ADDRESS (((NAND_ZONE_COUNT * NAND_ZONE_SIZE) * NAND_BLOCK_SIZE) * NAND_PAGE_SIZE)
 
 /* block count */
-#define NAND_BLOCK_COUNT            1024
+#define NAND_BLOCK_COUNT 1024
 
 /* NAND memory address computation */
-#define ADDR_1ST_CYCLE(ADDR)       (uint8_t)((ADDR)& 0xFF)
-#define ADDR_2ND_CYCLE(ADDR)       (uint8_t)(((ADDR)& 0xFF00) >> 8)
-#define ADDR_3RD_CYCLE(ADDR)       (uint8_t)(((ADDR)& 0xFF0000) >> 16)
-#define ADDR_4TH_CYCLE(ADDR)       (uint8_t)(((ADDR)& 0xFF000000) >> 24)
+#define ADDR_1ST_CYCLE(ADDR) (uint8_t)((ADDR)&0xFF)
+#define ADDR_2ND_CYCLE(ADDR) (uint8_t)(((ADDR)&0xFF00) >> 8)
+#define ADDR_3RD_CYCLE(ADDR) (uint8_t)(((ADDR)&0xFF0000) >> 16)
+#define ADDR_4TH_CYCLE(ADDR) (uint8_t)(((ADDR)&0xFF000000) >> 24)
 
 /* define return value of functions */
-#define NAND_OK                    0
-#define NAND_FAIL                  1
+#define NAND_OK   0
+#define NAND_FAIL 1
 
 /* NAND id structure */
 typedef struct {

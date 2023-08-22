@@ -12,7 +12,7 @@
 #ifndef EXMC_SDRAM_H
 #define EXMC_SDRAM_H
 
-#include "gd32f4xx.h"
+#include <board.h>
 
 /* initialize sdram peripheral */
 void exmc_synchronous_dynamic_ram_init(uint32_t sdram_device);
@@ -23,7 +23,7 @@ void sdram_writebuffer_8(uint32_t sdram_device, uint8_t *pbuffer, uint32_t write
 /* read a block of 8-bit data from the EXMC SDRAM memory */
 void sdram_readbuffer_8(uint32_t sdram_device, uint8_t *pbuffer, uint32_t readaddr, uint32_t numbytetoread);
 
-#define SDRAM_DEVICE0_ADDR                         ((uint32_t)0xC0000000)
-#define SDRAM_DEVICE1_ADDR                         ((uint32_t)0xD0000000)
+#define SDRAM_DEVICE0_ADDR ((uint32_t)0xC0000000)
+#define SDRAM_DEVICE1_ADDR ((uint32_t)0xD0000000)
 
 #endif /* EXMC_SDRAM_H */

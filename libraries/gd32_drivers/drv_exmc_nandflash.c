@@ -2,6 +2,7 @@
 #include "drv_exmc_nandflash.h"
 #include <rtthread.h>
 
+#define delay_1ms(count) rt_thread_mdelay(count)
 /* defines the physical address of nand flash, and it is determined by the hardware */
 #define BANK1_NAND_ADDR ((uint32_t)0x70000000)
 #define BANK_NAND_ADDR  BANK1_NAND_ADDR
@@ -101,7 +102,7 @@ int rt_hw_nandflash_init(void)
     printf("nandflash init OK\n");
     return 0;
 }
-INIT_COMPONENT_EXPORT(rt_hw_nandflash_init);
+INIT_DEVICE_EXPORT(rt_hw_nandflash_init);
 
 /*!
     \brief      read NAND flash ID
@@ -564,3 +565,121 @@ void fill_buffer_nand(uint8_t *pbuffer, uint16_t buffer_lenght, uint32_t value)
         pbuffer[index] = value + index;
     }
 }
+
+#define BUFFER_SIZE     (0x100U)
+#define NAND_GD_MAKERID (0xC8U)
+#define NAND_HY_MAKERID (0xADU)
+#define NAND_DEVICEID   (0xF1U)
+
+static void nandflash_test(void)
+{
+    nand_id_struct nand_id;
+    uint8_t txbuffer[BUFFER_SIZE], rxbuffer[BUFFER_SIZE];
+    __IO uint32_t writereadstatus = 0, status = 0;
+    uint32_t writereadaddr;
+    uint16_t zone, block, page, pageoffset;
+    /* read NAND ID */
+    nand_read_id(&nand_id);
+
+    printf("\r\nRead NAND ID!");
+    delay_1ms(1000);
+    /* print NAND ID */
+    printf("\r\nNand flash ID:0x%X 0x%X 0x%X 0x%X\r\n", nand_id.maker_id, nand_id.device_id,
+           nand_id.third_id, nand_id.fourth_id);
+    delay_1ms(1000);
+
+    if (((NAND_GD_MAKERID == nand_id.maker_id) || (NAND_HY_MAKERID == nand_id.maker_id)) && (NAND_DEVICEID == nand_id.device_id)) {
+        /* set the read and write the address */
+        zone          = 0;
+        block         = 10;
+        page          = 0;
+        pageoffset    = 1200;
+        writereadaddr = ((zone * NAND_ZONE_SIZE + block) * NAND_BLOCK_SIZE + page) * NAND_PAGE_SIZE + pageoffset;
+
+        /* whether address cross-border */
+        if ((writereadaddr + BUFFER_SIZE) > NAND_MAX_ADDRESS) {
+            printf("\r\nAddress cross-border!");
+        }
+
+        /* fill writebuffer with 0x00.. */
+        fill_buffer_nand(txbuffer, BUFFER_SIZE, 0x00);
+
+        /* write data to nand flash */
+        status = nand_write(writereadaddr, txbuffer, BUFFER_SIZE);
+        if (NAND_OK == status) {
+            printf("\r\nWrite data successfully!");
+            delay_1ms(1000);
+        } else {
+            printf("\r\nWrite data failure!");
+        }
+
+        /* read data from nand flash */
+        status = nand_read(writereadaddr, rxbuffer, BUFFER_SIZE);
+        if (NAND_OK == status) {
+            printf("\r\nRead data successfully!");
+            delay_1ms(1000);
+        } else {
+            printf("\r\nRead data failure!");
+        }
+
+        printf("\r\nCheck the data!");
+        delay_1ms(1000);
+        /* read and write data comparison for equality */
+        writereadstatus = 0;
+        for (uint32_t j = 0; j < BUFFER_SIZE; j++) {
+            if (txbuffer[j] != rxbuffer[j]) {
+                writereadstatus++;
+                break;
+            }
+        }
+
+        if (writereadstatus == 0) {
+            printf("\r\nAccess NAND flash successfully!");
+            delay_1ms(1000);
+        } else {
+            printf("\r\nAccess NAND flash failure!");
+        }
+        printf("\r\nThe data to be read:\r\n");
+        delay_1ms(1000);
+        for (uint32_t k = 0; k < BUFFER_SIZE; k++) {
+            printf("%5x ", rxbuffer[k]);
+            if (((k + 1) % 16) == 0) {
+                printf("\r\n");
+            }
+        }
+    } else {
+        printf("\r\nRead NAND ID failure!");
+    }
+}
+MSH_CMD_EXPORT(nandflash_test, test);
+
+#if defined(RT_USING_FAL)
+
+#include "fal.h"
+static int fal_flash_read(long offset, rt_uint8_t *buf, size_t size);
+static int fal_flash_write(long offset, const rt_uint8_t *buf, size_t size);
+
+static int fal_flash_read(long offset, rt_uint8_t *buf, size_t size)
+{
+    return (int)nand_read(nand_flash.addr + offset, buf, size);
+}
+
+static int fal_flash_write(long offset, const rt_uint8_t *buf, size_t size)
+{
+    return (int)nand_write(nand_flash.addr + offset, buf, size);
+}
+
+static int fal_flash_erase(long offset, size_t size)
+{
+    return 0;
+}
+
+const struct fal_flash_dev nand_flash =
+    {
+        .name       = NAND_FLASH_DEV_NAME,
+        .addr       = 0,
+        .len        = NAND_MAX_ADDRESS,
+        .blk_size   = NAND_PAGE_SIZE,
+        .ops        = {NULL, fal_flash_read, fal_flash_write, fal_flash_erase},
+        .write_gran = 0};
+#endif

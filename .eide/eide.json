@@ -145,6 +145,9 @@
             "path": "board/board.c"
           },
           {
+            "path": "libraries/gd32_drivers/drv_exmc_nandflash.c"
+          },
+          {
             "path": "libraries/gd32_drivers/drv_exmc_sdram.c"
           },
           {
@@ -391,9 +394,7 @@
   },
   "targets": {
     "rt-thread": {
-      "excludeList": [
-        "<virtual_root>/Fal"
-      ],
+      "excludeList": [],
       "toolchain": "AC5",
       "compileConfig": {
         "cpuType": "Cortex-M4",

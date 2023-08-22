@@ -48,6 +48,9 @@ if GetDepend('RT_USING_ADC'):
 if GetDepend('BSP_USING_SDRAM'):
     src += ['drv_exmc_sdram.c']
 
+if GetDepend('BSP_USING_NANDFLASH'):
+    src += ['drv_exmc_nandflash.c']
+
 if GetDepend('RT_USING_LWIP'):
     src += ['drv_enet.c', 'synopsys_emac.c']
 

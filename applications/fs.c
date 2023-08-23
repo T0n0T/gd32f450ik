@@ -60,7 +60,11 @@ static int rt_hw_file_system_mount(void)
         LOG_D("Create a block device on the %s partition of flash successful.", FS_PARTITION_NAME);
     }
     // 注册块设备，这一步可以将外部flash抽象为系统的块设备
-    dfs_mkfs("elm", FS_PARTITION_NAME);
+    int mkfs_res = dfs_mkfs("elm", FS_PARTITION_NAME);
+    if (mkfs_res != 0) {
+        LOG_E("dfs_mkfs error, errno = %d", mkfs_res);
+        return -1;
+    }
     if (dfs_mount(FS_PARTITION_NAME, "/", "elm", 0, 0) == RT_EOK) {
         LOG_D("elm filesystem mount to '/'");
     } else {

@@ -161,6 +161,7 @@ __err:
     f_mount(RT_NULL, (const TCHAR *)logic_nbr, 1);
     disk[index] = RT_NULL;
     rt_free(fat);
+    rt_kprintf("mount error, result=%d\n", result);
     return elm_result_to_dfs(result);
 }
 

@@ -661,17 +661,26 @@ static int fal_flash_write(long offset, const rt_uint8_t *buf, size_t size);
 
 static int fal_flash_read(long offset, rt_uint8_t *buf, size_t size)
 {
-    return (int)nand_read(nand_flash.addr + offset, buf, size);
+    if (nand_read(nand_flash.addr + offset, buf, size) != NAND_OK) {
+        printf("nand_read failed.\n");
+        return -1;
+    }
+
+    return (int)size;
 }
 
 static int fal_flash_write(long offset, const rt_uint8_t *buf, size_t size)
 {
-    return (int)nand_write(nand_flash.addr + offset, buf, size);
+    if (nand_write(nand_flash.addr + offset, buf, size) != NAND_OK) {
+        printf("nand_write failed.\n");
+        return -1;
+    }
+    return (int)size;
 }
 
 static int fal_flash_erase(long offset, size_t size)
 {
-    return 0;
+    return size;
 }
 
 const struct fal_flash_dev nand_flash =

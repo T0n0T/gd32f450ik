@@ -42,7 +42,7 @@ INIT_ENV_EXPORT(sdram_heap_init);
 int main(void)
 {
     rt_pin_mode(LED1_PIN, PIN_MODE_OUTPUT);
-    // sdram_heap_init();
+
     while (1) {
         rt_pin_write(LED1_PIN, PIN_HIGH);
         rt_thread_mdelay(500);

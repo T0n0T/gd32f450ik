@@ -6284,7 +6284,15 @@ FRESULT f_mkfs(
             nsect -= n;
         } while (nsect);
     }
-
+    // memset(buf, 0, 2048);
+    // disk_read(pdrv, buf, 0, 1);
+    // printf("=========FAT DBR begin=====sector size: %d======\n", ss);
+    // for (size_t i = 0; i < ss; i++) {
+    //     printf("%02X", *(buf + i));
+    //     if (i % 64 == 63) {
+    //         printf("\n");
+    //     }
+    // }
     /* A FAT volume has been created here */
 
     /* Determine system ID in the MBR partition table */

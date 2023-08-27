@@ -595,7 +595,7 @@ static void nandflash_test(void)
         page          = 0;
         pageoffset    = 1200;
         writereadaddr = ((zone * NAND_ZONE_SIZE + block) * NAND_BLOCK_SIZE + page) * NAND_PAGE_SIZE + pageoffset;
-
+        printf("%ld\n", writereadaddr);
         /* whether address cross-border */
         if ((writereadaddr + BUFFER_SIZE) > NAND_MAX_ADDRESS) {
             printf("\r\nAddress cross-border!");
@@ -656,24 +656,28 @@ MSH_CMD_EXPORT(nandflash_test, test);
 #if defined(RT_USING_FAL)
 
 #include "fal.h"
-static int fal_flash_read(long offset, rt_uint8_t *buf, size_t size);
-static int fal_flash_write(long offset, const rt_uint8_t *buf, size_t size);
-
 static int fal_flash_read(long offset, rt_uint8_t *buf, size_t size)
 {
-    if (nand_read(nand_flash.addr + offset, buf, size) != NAND_OK) {
+    rt_kprintf("read\n");
+    if (nand_read(nand_flash.addr + (uint32_t)offset, buf, (uint16_t)size) != NAND_OK) {
         printf("nand_read failed.\n");
         return -1;
     }
-
     return (int)size;
 }
 
 static int fal_flash_write(long offset, const rt_uint8_t *buf, size_t size)
 {
-    if (nand_write(nand_flash.addr + offset, buf, size) != NAND_OK) {
+    rt_kprintf("write\n");
+    if (nand_write(nand_flash.addr + (uint32_t)offset, buf, (uint16_t)size) != NAND_OK) {
         printf("nand_write failed.\n");
         return -1;
+    }
+    for (size_t i = 0; i < size; i++) {
+        printf("%02x", *(buf + i));
+        if (i % 64 == 63) {
+            printf("\n");
+        }
     }
     return (int)size;
 }
@@ -687,8 +691,8 @@ const struct fal_flash_dev nand_flash =
     {
         .name       = NAND_FLASH_DEV_NAME,
         .addr       = 0,
-        .len        = NAND_MAX_ADDRESS,
-        .blk_size   = NAND_PAGE_SIZE,
+        .len        = NAND_MAX_ADDRESS, /* 1*1024*64*2048 */
+        .blk_size   = NAND_PAGE_SIZE,   /* 2048 */
         .ops        = {NULL, fal_flash_read, fal_flash_write, fal_flash_erase},
         .write_gran = 0};
 #endif

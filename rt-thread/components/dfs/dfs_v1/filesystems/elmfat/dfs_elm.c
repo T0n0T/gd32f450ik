@@ -264,13 +264,23 @@ int dfs_elm_mkfs(rt_device_t dev_id, const char *fs_name)
     result  = f_mkfs(logic_nbr, &opt, work, FF_MAX_SS);
     rt_free(work);
     work = RT_NULL;
-
+    // memset(work, 0, 2048);
+    // rt_device_read(dev_id, 0, 2048, 1);
+    // printf("=========FAT DBR begin==========\n");
+    // for (size_t i = 0; i < FF_MAX_SS; i++) {
+    //     printf("%02X", *(work + i));
+    //     if (i % 64 == 63) {
+    //         printf("\n");
+    //     }
+    // }
+    // printf("=========FAT DBR end=============\n");
     /* check flag status, we need clear the temp driver stored in disk[] */
     if (flag == FSM_STATUS_USE_TEMP_DRIVER) {
         rt_free(fat);
         f_mount(RT_NULL, logic_nbr, (BYTE)index);
         disk[index] = RT_NULL;
         /* close device */
+
         rt_device_close(dev_id);
     }
 

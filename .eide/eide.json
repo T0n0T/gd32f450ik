@@ -13,10 +13,10 @@
         "name": "Applications",
         "files": [
           {
-            "path": "applications/fs.c"
+            "path": "applications/main.c"
           },
           {
-            "path": "applications/main.c"
+            "path": "applications/fs.c"
           }
         ],
         "folders": []
@@ -25,13 +25,13 @@
         "name": "cm_backtrace",
         "files": [
           {
+            "path": "packages/CmBacktrace-v1.4.1/cmb_port.c"
+          },
+          {
             "path": "packages/CmBacktrace-v1.4.1/cm_backtrace.c"
           },
           {
             "path": "packages/CmBacktrace-v1.4.1/cmb_flash_log.c"
-          },
-          {
-            "path": "packages/CmBacktrace-v1.4.1/cmb_port.c"
           }
         ],
         "folders": []
@@ -145,7 +145,7 @@
             "path": "board/board.c"
           },
           {
-            "path": "libraries/gd32_drivers/drv_exmc_nandflash.c"
+            "path": "libraries/GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/ARM/startup_gd32f4xx.s"
           },
           {
             "path": "libraries/gd32_drivers/drv_exmc_sdram.c"
@@ -157,16 +157,13 @@
             "path": "libraries/gd32_drivers/drv_rtc.c"
           },
           {
-            "path": "libraries/gd32_drivers/drv_spi_flash.c"
-          },
-          {
             "path": "libraries/gd32_drivers/drv_spi.c"
           },
           {
-            "path": "libraries/gd32_drivers/drv_usart.c"
+            "path": "libraries/gd32_drivers/drv_spi_flash.c"
           },
           {
-            "path": "libraries/GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/ARM/startup_gd32f4xx.s"
+            "path": "libraries/gd32_drivers/drv_usart.c"
           }
         ],
         "folders": []
@@ -175,16 +172,16 @@
         "name": "Fal",
         "files": [
           {
-            "path": "rt-thread/components/fal/src/fal_flash.c"
-          },
-          {
-            "path": "rt-thread/components/fal/src/fal_partition.c"
-          },
-          {
             "path": "rt-thread/components/fal/src/fal_rtt.c"
           },
           {
+            "path": "rt-thread/components/fal/src/fal_flash.c"
+          },
+          {
             "path": "rt-thread/components/fal/src/fal.c"
+          },
+          {
+            "path": "rt-thread/components/fal/src/fal_partition.c"
           }
         ],
         "folders": []
@@ -208,6 +205,9 @@
             "path": "rt-thread/components/dfs/dfs_v1/filesystems/ramfs/dfs_ramfs.c"
           },
           {
+            "path": "rt-thread/components/dfs/dfs_v1/src/dfs.c"
+          },
+          {
             "path": "rt-thread/components/dfs/dfs_v1/src/dfs_file.c"
           },
           {
@@ -215,9 +215,6 @@
           },
           {
             "path": "rt-thread/components/dfs/dfs_v1/src/dfs_posix.c"
-          },
-          {
-            "path": "rt-thread/components/dfs/dfs_v1/src/dfs.c"
           }
         ],
         "folders": []
@@ -226,19 +223,19 @@
         "name": "Finsh",
         "files": [
           {
-            "path": "rt-thread/components/finsh/cmd.c"
-          },
-          {
-            "path": "rt-thread/components/finsh/msh_file.c"
-          },
-          {
-            "path": "rt-thread/components/finsh/msh_parse.c"
+            "path": "rt-thread/components/finsh/shell.c"
           },
           {
             "path": "rt-thread/components/finsh/msh.c"
           },
           {
-            "path": "rt-thread/components/finsh/shell.c"
+            "path": "rt-thread/components/finsh/msh_parse.c"
+          },
+          {
+            "path": "rt-thread/components/finsh/cmd.c"
+          },
+          {
+            "path": "rt-thread/components/finsh/msh_file.c"
           }
         ],
         "folders": []
@@ -301,10 +298,10 @@
         "name": "Libraries",
         "files": [
           {
-            "path": "libraries/GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/system_gd32f4xx.c"
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_exmc.c"
           },
           {
-            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_exmc.c"
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_syscfg.c"
           },
           {
             "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_exti.c"
@@ -313,25 +310,25 @@
             "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_gpio.c"
           },
           {
-            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_misc.c"
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_rcu.c"
           },
           {
             "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_pmu.c"
           },
           {
-            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_rcu.c"
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_misc.c"
           },
           {
-            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_rtc.c"
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_usart.c"
           },
           {
             "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_spi.c"
           },
           {
-            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_syscfg.c"
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_rtc.c"
           },
           {
-            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_usart.c"
+            "path": "libraries/GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/system_gd32f4xx.c"
           }
         ],
         "folders": []
@@ -383,6 +380,84 @@
           }
         ],
         "folders": []
+      },
+      {
+        "name": "yaffs",
+        "files": [
+          {
+            "path": "yaffs2_rtt_port/dfs_yaffs_s.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs_flashif.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs_osglue.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/direct/yaffs_attribs.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/direct/yaffs_error.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/direct/yaffs_hweight.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/direct/yaffsfs.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/yaffs_allocator.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/yaffs_bitmap.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/yaffs_cache.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/yaffs_checkptrw.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/yaffs_ecc.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/yaffs_endian.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/yaffs_guts.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/yaffs_nameval.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/yaffs_nand.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/yaffs_packedtags1.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/yaffs_packedtags2.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/yaffs_summary.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/yaffs_tagscompat.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/yaffs_tagsmarshall.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/yaffs_verify.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/yaffs_yaffs1.c"
+          },
+          {
+            "path": "yaffs2_rtt_port/yaffs/yaffs_yaffs2.c"
+          }
+        ],
+        "folders": []
       }
     ]
   },
@@ -394,7 +469,9 @@
   },
   "targets": {
     "rt-thread": {
-      "excludeList": [],
+      "excludeList": [
+        "<virtual_root>/yaffs"
+      ],
       "toolchain": "AC5",
       "compileConfig": {
         "cpuType": "Cortex-M4",
@@ -519,7 +596,7 @@
         },
         "proType": 1,
         "speed": 8000,
-        "otherCmds": "ip 192.168.1.2"
+        "otherCmds": ""
       },
       "uploadConfigMap": {},
       "custom_dep": {
@@ -536,11 +613,13 @@
           "libraries/GD32F4xx_Firmware_Library/CMSIS",
           "rt-thread/include",
           "rt-thread/components/libc/posix/ipc",
+          "yaffs2_rtt_port/yaffs/direct",
           "rt-thread/components/drivers/spi",
           "rt-thread/components/libc/posix/libdl",
           "rt-thread/components/fal/inc",
           "board",
           "rt-thread/components/dfs/dfs_v1/filesystems/ramfs",
+          "yaffs2_rtt_port/yaffs",
           "applications",
           "rt-thread/components/finsh",
           "rt-thread/components/dfs/dfs_v1/filesystems/devfs",
@@ -555,9 +634,7 @@
           "libraries/gd32_drivers",
           "rt-thread/components/libc/compilers/common/extension/fcntl/octal",
           "rt-thread/components/drivers/spi/sfud/inc",
-          ".cmsis/include",
-          "RTE/_rt-thread",
-          ".eide/deps"
+          "RTE/_rt-thread"
         ],
         "libList": [],
         "sourceDirList": [],
@@ -568,8 +645,7 @@
           "RT_USING_LIBC",
           "__CLK_TCK=RT_TICK_PER_SECOND",
           "GD32F450",
-          "__RTTHREAD__",
-          "__STDC_NO_ATOMICS__"
+          "__RTTHREAD__"
         ]
       }
     }

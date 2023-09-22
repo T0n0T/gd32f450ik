@@ -1,0 +1,481 @@
+{
+  "name": "liteos",
+  "type": "ARM",
+  "dependenceList": [],
+  "srcDirs": [
+    ".eide/deps"
+  ],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": [
+      {
+        "name": "application",
+        "files": [
+          {
+            "path": "application/main.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "arch",
+        "files": [
+          {
+            "path": "liteos/arch/arm/common/los_common_interrupt.c"
+          },
+          {
+            "path": "liteos/arch/arm/cortex-m4/gcc/los_context.c"
+          },
+          {
+            "path": "liteos/arch/arm/cortex-m4/gcc/los_dispatch.S"
+          },
+          {
+            "path": "liteos/arch/arm/cortex-m4/gcc/los_exc.S"
+          },
+          {
+            "path": "liteos/arch/arm/cortex-m4/gcc/los_interrupt.c"
+          },
+          {
+            "path": "liteos/arch/arm/cortex-m4/gcc/los_mpu.c"
+          },
+          {
+            "path": "liteos/arch/arm/cortex-m4/gcc/los_timer.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "board",
+        "files": [
+          {
+            "path": "board/gd32f450i_eval.c"
+          },
+          {
+            "path": "board/gd32f4xx_it.c"
+          },
+          {
+            "path": "board/systick.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "components",
+        "files": [],
+        "folders": [
+          {
+            "name": "shell",
+            "files": [
+              {
+                "path": "liteos/components/shell/src/base/shcmd.c"
+              },
+              {
+                "path": "liteos/components/shell/src/base/shcmdparse.c"
+              },
+              {
+                "path": "liteos/components/shell/src/base/shmsg.c"
+              },
+              {
+                "path": "liteos/components/shell/src/base/show.c"
+              },
+              {
+                "path": "liteos/components/shell/src/cmds/date_shell.c"
+              },
+              {
+                "path": "liteos/components/shell/src/cmds/fullpath.c"
+              },
+              {
+                "path": "liteos/components/shell/src/cmds/mempt_shellcmd.c"
+              },
+              {
+                "path": "liteos/components/shell/src/cmds/shell_shellcmd.c"
+              },
+              {
+                "path": "liteos/components/shell/src/cmds/task_shellcmd.c"
+              },
+              {
+                "path": "liteos/components/shell/src/cmds/vfs_shellcmd.c"
+              }
+            ],
+            "folders": []
+          }
+        ]
+      },
+      {
+        "name": "hal",
+        "files": [
+          {
+            "path": "GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/Gcc/startup_gd32f450_470.S"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/system_gd32f4xx.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_adc.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_can.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_crc.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_ctc.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_dac.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_dbg.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_dci.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_dma.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_enet.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_exmc.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_exti.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_fmc.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_fwdgt.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_gpio.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_i2c.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_ipa.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_iref.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_misc.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_pmu.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_rcu.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_rtc.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_sdio.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_spi.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_syscfg.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_timer.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_tli.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_trng.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_usart.c"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_wwdgt.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "kal",
+        "files": [
+          {
+            "path": "liteos/kal/cmsis/cmsis_liteos2.c"
+          },
+          {
+            "path": "liteos/kal/libc/newlib/porting/src/hook_adapt.c"
+          },
+          {
+            "path": "liteos/kal/libc/newlib/porting/src/network/htonl.c"
+          },
+          {
+            "path": "liteos/kal/libc/newlib/porting/src/network/htons.c"
+          },
+          {
+            "path": "liteos/kal/libc/newlib/porting/src/network/ntohl.c"
+          },
+          {
+            "path": "liteos/kal/libc/newlib/porting/src/network/ntohs.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "kernel",
+        "files": [
+          {
+            "path": "liteos/kernel/src/los_event.c"
+          },
+          {
+            "path": "liteos/kernel/src/los_init.c"
+          },
+          {
+            "path": "liteos/kernel/src/los_mux.c"
+          },
+          {
+            "path": "liteos/kernel/src/los_queue.c"
+          },
+          {
+            "path": "liteos/kernel/src/los_sched.c"
+          },
+          {
+            "path": "liteos/kernel/src/los_sem.c"
+          },
+          {
+            "path": "liteos/kernel/src/los_sortlink.c"
+          },
+          {
+            "path": "liteos/kernel/src/los_swtmr.c"
+          },
+          {
+            "path": "liteos/kernel/src/los_task.c"
+          },
+          {
+            "path": "liteos/kernel/src/los_tick.c"
+          },
+          {
+            "path": "liteos/kernel/src/mm/los_membox.c"
+          },
+          {
+            "path": "liteos/kernel/src/mm/los_memory.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "third_party",
+        "files": [],
+        "folders": [
+          {
+            "name": "bounds_checking_function",
+            "files": [
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/fscanf_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/fwscanf_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/gets_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/memcpy_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/memmove_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/memset_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/scanf_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/securecutil.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/secureinput_a.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/secureinput_w.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/secureprintoutput_a.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/secureprintoutput_w.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/snprintf_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/sprintf_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/sscanf_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/strcat_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/strcpy_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/strncat_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/strncpy_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/strtok_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/swprintf_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/swscanf_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/vfscanf_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/vfwscanf_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/vscanf_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/vsnprintf_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/vsprintf_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/vsscanf_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/vswprintf_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/vswscanf_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/vwscanf_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/wcscat_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/wcscpy_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/wcsncat_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/wcsncpy_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/wcstok_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/wmemcpy_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/wmemmove_s.c"
+              },
+              {
+                "path": "liteos/third_party/bounds_checking_function/src/wscanf_s.c"
+              }
+            ],
+            "folders": []
+          }
+        ]
+      },
+      {
+        "name": "utils",
+        "files": [
+          {
+            "path": "liteos/utils/los_debug.c"
+          },
+          {
+            "path": "liteos/utils/los_error.c"
+          },
+          {
+            "path": "liteos/utils/los_hook.c"
+          }
+        ],
+        "folders": []
+      }
+    ]
+  },
+  "outDir": "build",
+  "deviceName": null,
+  "packDir": null,
+  "miscInfo": {
+    "uid": "f7d258326c8a0f81debfb1661941acc3"
+  },
+  "targets": {
+    "Debug": {
+      "excludeList": [],
+      "toolchain": "GCC",
+      "compileConfig": {
+        "cpuType": "Cortex-M3",
+        "floatingPointHardware": "none",
+        "scatterFilePath": "<YOUR_LINKER_SCRIPT>.lds",
+        "useCustomScatterFile": true,
+        "storageLayout": {
+          "RAM": [],
+          "ROM": []
+        },
+        "options": "null"
+      },
+      "uploader": "JLink",
+      "uploadConfig": {
+        "bin": "",
+        "baseAddr": "",
+        "cpuInfo": {
+          "vendor": "null",
+          "cpuName": "null"
+        },
+        "proType": 1,
+        "speed": 8000,
+        "otherCmds": ""
+      },
+      "uploadConfigMap": {},
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          ".eide/deps",
+          "application",
+          "board",
+          "GD32F4xx_Firmware_Library/CMSIS",
+          "GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Include",
+          "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Include",
+          "liteos/arch/include",
+          "liteos/arch/arm/include",
+          "liteos/arch/arm/cortex-m4/gcc",
+          "liteos/components/shell/include",
+          "liteos/kal/cmsis",
+          "liteos/kal/libc/newlib/porting/include",
+          "liteos/kal/libc/newlib/porting/include/sys",
+          "liteos/kernel/include",
+          "liteos/utils",
+          "liteos/utils/internal",
+          "liteos/third_party/bounds_checking_function/include",
+          "liteos/third_party/cmsis/CMSIS/RTOS2/Include"
+        ],
+        "libList": [],
+        "sourceDirList": [],
+        "defineList": [
+          "GD32F450"
+        ]
+      }
+    }
+  },
+  "version": "3.3"
+}

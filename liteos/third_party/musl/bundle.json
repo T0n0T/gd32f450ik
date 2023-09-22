@@ -1,0 +1,39 @@
+{
+    "name": "@ohos/musl",
+    "description": "musl is an MIT-licensed implementation of the standard C library",
+    "version": "3.1",
+    "license": "MIT",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "third_party/musl"
+    },
+    "dirs": {},
+    "scripts": {},
+    "licensePath": "COPYRIGHT",
+    "readmePath": {
+        "en": "README"
+    },
+    "component": {
+        "name": "musl",
+        "subsystem": "thirdparty",
+        "syscap": [],
+        "features": [],
+        "adapted_system_type": ["mini", "small", "standard"],
+        "rom": "",
+        "ram": "",
+        "deps": {
+            "components": [],
+            "third_party": [
+                "benchmark",
+                "cJSON"
+            ]
+        },
+        "build": {
+            "sub_component": [],
+            "inner_kits": [],
+            "test": [
+                "//third_party/musl/fuzztest:fuzztest"
+            ]
+        }
+    }
+}

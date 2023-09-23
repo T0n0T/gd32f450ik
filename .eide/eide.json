@@ -106,7 +106,10 @@
         "name": "hal",
         "files": [
           {
-            "path": "GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/Gcc/startup_gd32f450_470.S"
+            "path": "GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/ARM/startup_gd32f450_470.s"
+          },
+          {
+            "path": "GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/GCC/startup_gd32f4xx.S"
           },
           {
             "path": "GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/system_gd32f4xx.c"
@@ -421,12 +424,20 @@
   },
   "targets": {
     "Debug": {
-      "excludeList": [],
+      "excludeList": [
+        "<virtual_root>/components/shell",
+        "<virtual_root>/kal",
+        "<virtual_root>/kernel",
+        "<virtual_root>/third_party",
+        "<virtual_root>/utils",
+        "<virtual_root>/arch",
+        "<virtual_root>/hal/startup_gd32f450_470.s"
+      ],
       "toolchain": "GCC",
       "compileConfig": {
         "cpuType": "Cortex-M3",
         "floatingPointHardware": "none",
-        "scatterFilePath": "<YOUR_LINKER_SCRIPT>.lds",
+        "scatterFilePath": "gd32_rom.ld",
         "useCustomScatterFile": true,
         "storageLayout": {
           "RAM": [],
@@ -439,11 +450,11 @@
         "bin": "",
         "baseAddr": "",
         "cpuInfo": {
-          "vendor": "null",
-          "cpuName": "null"
+          "vendor": "GigaDevice",
+          "cpuName": "GD32F450IK"
         },
         "proType": 1,
-        "speed": 8000,
+        "speed": 4000,
         "otherCmds": ""
       },
       "uploadConfigMap": {},
@@ -457,6 +468,7 @@
           "GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Include",
           "GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Include",
           "liteos/arch/include",
+          "liteos/arch/arm/common",
           "liteos/arch/arm/include",
           "liteos/arch/arm/cortex-m4/gcc",
           "liteos/components/shell/include",

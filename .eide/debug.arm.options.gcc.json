@@ -15,7 +15,9 @@
         "one-elf-section-per-function": true,
         "one-elf-section-per-data": true
     },
-    "asm-compiler": {},
+    "asm-compiler": {
+        "ASM_FLAGS": "-x assembler-with-cpp"
+    },
     "linker": {
         "output-format": "elf",
         "remove-unused-input-sections": true,

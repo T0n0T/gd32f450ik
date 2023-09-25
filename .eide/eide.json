@@ -14,6 +14,9 @@
         "files": [
           {
             "path": "application/main.c"
+          },
+          {
+            "path": "application/task_sample.c"
           }
         ],
         "folders": []
@@ -64,6 +67,45 @@
         "name": "components",
         "files": [],
         "folders": [
+          {
+            "name": "backtrace",
+            "files": [
+              {
+                "path": "liteos/components/backtrace/los_backtrace.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "cpup",
+            "files": [
+              {
+                "path": "liteos/components/cpup/los_cpup.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "exchook",
+            "files": [
+              {
+                "path": "liteos/components/exchook/los_exc_info.c"
+              },
+              {
+                "path": "liteos/components/exchook/los_exchook.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "power",
+            "files": [
+              {
+                "path": "liteos/components/power/los_pm.c"
+              }
+            ],
+            "folders": []
+          },
           {
             "name": "shell",
             "files": [
@@ -426,11 +468,6 @@
     "Debug": {
       "excludeList": [
         "<virtual_root>/components/shell",
-        "<virtual_root>/kal",
-        "<virtual_root>/kernel",
-        "<virtual_root>/third_party",
-        "<virtual_root>/utils",
-        "<virtual_root>/arch",
         "<virtual_root>/hal/startup_gd32f450_470.s"
       ],
       "toolchain": "GCC",
@@ -455,7 +492,7 @@
         },
         "proType": 1,
         "speed": 4000,
-        "otherCmds": ""
+        "otherCmds": "ip 192.168.1.2"
       },
       "uploadConfigMap": {},
       "custom_dep": {
@@ -479,7 +516,11 @@
           "liteos/utils",
           "liteos/utils/internal",
           "liteos/third_party/bounds_checking_function/include",
-          "liteos/third_party/cmsis/CMSIS/RTOS2/Include"
+          "liteos/third_party/cmsis/CMSIS/RTOS2/Include",
+          "liteos/components/backtrace",
+          "liteos/components/cpup",
+          "liteos/components/exchook",
+          "liteos/components/power"
         ],
         "libList": [],
         "sourceDirList": [],

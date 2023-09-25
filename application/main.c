@@ -64,7 +64,7 @@ int main(void)
     /* configure TAMPER key */
     gd_eval_key_init(KEY_TAMPER, KEY_MODE_GPIO);
 
-    /* output a message on hyperterminal using printf function */
+    TaskSample();
 
     /* wait for completion of USART transmission */
     while (RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TC)) {
@@ -79,7 +79,7 @@ int main(void)
                     /* turn on LED3 */
                     gd_eval_led_on(LED3);
                     /* output a message on hyperterminal using printf function */
-                    printf("\r\n USART printf example \r\n");
+                    // printf("\r\n USART printf example \r\n");
                     /* wait for completion of USART transmission */
                     while (RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TC)) {
                     }
@@ -139,10 +139,10 @@ void led_flash(int times)
 }
 
 /* retarget the C library printf function to the USART */
-int fputc(int ch, FILE *f)
-{
-    usart_data_transmit(EVAL_COM0, (uint8_t)ch);
-    while (RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TBE))
-        ;
-    return ch;
-}
+// int fputc(int ch, FILE *f)
+// {
+//     usart_data_transmit(EVAL_COM0, (uint8_t)ch);
+//     while (RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TBE))
+//         ;
+//     return ch;
+// }

@@ -163,7 +163,7 @@ loop_fill_bss:
 
 startup_enter:
     bl SystemInit
-    bl Reset_Handler
+    bl main 
 
     /* Exception Handlers */
     .weak   NMI_Handler

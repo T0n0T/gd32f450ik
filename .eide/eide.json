@@ -13,10 +13,13 @@
         "name": "application",
         "files": [
           {
+            "path": "application/io.c"
+          },
+          {
             "path": "application/main.c"
           },
           {
-            "path": "application/task_sample.c"
+            "path": "application/task.c"
           }
         ],
         "folders": []
@@ -138,6 +141,15 @@
               },
               {
                 "path": "liteos/components/shell/src/cmds/vfs_shellcmd.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "signal",
+            "files": [
+              {
+                "path": "liteos/components/signal/los_signal.c"
               }
             ],
             "folders": []
@@ -467,13 +479,12 @@
   "targets": {
     "Debug": {
       "excludeList": [
-        "<virtual_root>/components/shell",
         "<virtual_root>/hal/startup_gd32f450_470.s"
       ],
       "toolchain": "GCC",
       "compileConfig": {
-        "cpuType": "Cortex-M3",
-        "floatingPointHardware": "none",
+        "cpuType": "Cortex-M4",
+        "floatingPointHardware": "single",
         "scatterFilePath": "gd32_rom.ld",
         "useCustomScatterFile": true,
         "storageLayout": {
@@ -492,7 +503,7 @@
         },
         "proType": 1,
         "speed": 4000,
-        "otherCmds": "ip 192.168.1.2"
+        "otherCmds": ""
       },
       "uploadConfigMap": {},
       "custom_dep": {
@@ -520,7 +531,8 @@
           "liteos/components/backtrace",
           "liteos/components/cpup",
           "liteos/components/exchook",
-          "liteos/components/power"
+          "liteos/components/power",
+          "liteos/components/signal"
         ],
         "libList": [],
         "sourceDirList": [],

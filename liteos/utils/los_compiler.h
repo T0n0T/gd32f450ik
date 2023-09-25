@@ -47,11 +47,11 @@ extern "C" {
 #ifdef __ICCARM__
 
 #ifndef ASM
-#define ASM           __asm
+#define ASM __asm
 #endif
 
 #ifndef INLINE
-#define INLINE        inline
+#define INLINE inline
 #endif
 
 #ifndef STATIC_INLINE
@@ -59,34 +59,34 @@ extern "C" {
 #endif
 
 #ifndef USED
-#define USED          __root
+#define USED __root
 #endif
 
 #ifndef WEAK
-#define WEAK          __weak
+#define WEAK __weak
 #endif
 
 #ifndef CLZ
-#define CLZ           __iar_builtin_CLZ
+#define CLZ __iar_builtin_CLZ
 #endif
 
 #ifndef NORETURN
-#define NORETURN      __attribute__ ((__noreturn__))
+#define NORETURN __attribute__((__noreturn__))
 #endif
 
 #ifndef UNREACHABLE
-#define UNREACHABLE   while (1)
+#define UNREACHABLE while (1)
 #endif
 
 /* for ARM Compiler */
 #elif defined(__CC_ARM)
 
 #ifndef ASM
-#define ASM           __asm
+#define ASM __asm
 #endif
 
 #ifndef INLINE
-#define INLINE        __inline
+#define INLINE __inline
 #endif
 
 #ifndef STATIC_INLINE
@@ -94,23 +94,23 @@ extern "C" {
 #endif
 
 #ifndef USED
-#define USED          __attribute__((used))
+#define USED __attribute__((used))
 #endif
 
 #ifndef WEAK
-#define WEAK          __attribute__((weak))
+#define WEAK __attribute__((weak))
 #endif
 
 #ifndef CLZ
-#define CLZ           __clz
+#define CLZ __clz
 #endif
 
 #ifndef NORETURN
-#define NORETURN      __declspec(noreturn)
+#define NORETURN __declspec(noreturn)
 #endif
 
 #ifndef UNREACHABLE
-#define UNREACHABLE   while (1)
+#define UNREACHABLE while (1)
 #endif
 
 #pragma anon_unions
@@ -119,11 +119,11 @@ extern "C" {
 #elif defined(__GNUC__)
 
 #ifndef ASM
-#define ASM           __asm
+#define ASM __asm
 #endif
 
 #ifndef INLINE
-#define INLINE        inline
+#define INLINE inline
 #endif
 
 #ifndef STATIC_INLINE
@@ -131,23 +131,23 @@ extern "C" {
 #endif
 
 #ifndef USED
-#define USED          __attribute__((used))
+#define USED __attribute__((used))
 #endif
 
 #ifndef WEAK
-#define WEAK          __attribute__((weak))
+#define WEAK __attribute__((weak))
 #endif
 
 #ifndef CLZ
-#define CLZ           __builtin_clz
+#define CLZ __builtin_clz
 #endif
 
 #ifndef NORETURN
-#define NORETURN      __attribute__ ((__noreturn__))
+#define NORETURN __attribute__((__noreturn__))
 #endif
 
 #ifndef UNREACHABLE
-#define UNREACHABLE   __builtin_unreachable()
+#define UNREACHABLE __builtin_unreachable()
 #endif
 
 #else
@@ -155,7 +155,7 @@ extern "C" {
 #endif
 
 #ifndef STATIC
-#define STATIC       static
+#define STATIC static
 #endif
 
 /**
@@ -163,27 +163,27 @@ extern "C" {
  * Define inline keyword
  */
 #ifndef INLINE
-#define INLINE                                              static inline
+#define INLINE static inline
 #endif
 
 /**
  * @ingroup los_builddef
  * Little endian
  */
-#define OS_LITTLE_ENDIAN                                    0x1234
+#define OS_LITTLE_ENDIAN 0x1234
 
 /**
  * @ingroup los_builddef
  * Big endian
  */
-#define OS_BIG_ENDIAN                                       0x4321
+#define OS_BIG_ENDIAN 0x4321
 
 /**
  * @ingroup los_builddef
  * Byte order
  */
 #ifndef OS_BYTE_ORDER
-#define OS_BYTE_ORDER                                       OS_LITTLE_ENDIAN
+#define OS_BYTE_ORDER OS_LITTLE_ENDIAN
 #endif
 
 /* Define OS code data sections */
@@ -194,7 +194,7 @@ extern "C" {
  * Allow inline sections
  */
 #ifndef LITE_OS_SEC_ALW_INLINE
-#define LITE_OS_SEC_ALW_INLINE      // __attribute__((always_inline))
+#define LITE_OS_SEC_ALW_INLINE // __attribute__((always_inline))
 #endif
 
 /**
@@ -202,7 +202,7 @@ extern "C" {
  * Vector table section
  */
 #ifndef LITE_OS_SEC_VEC
-#define LITE_OS_SEC_VEC          __attribute__ ((section(".vector")))
+#define LITE_OS_SEC_VEC __attribute__((section(".vector")))
 #endif
 
 /**
@@ -210,7 +210,7 @@ extern "C" {
  * .Text section (Code section)
  */
 #ifndef LITE_OS_SEC_TEXT
-#define LITE_OS_SEC_TEXT            // __attribute__((section(".sram.text")))
+#define LITE_OS_SEC_TEXT // __attribute__((section(".sram.text")))
 #endif
 
 /**
@@ -218,7 +218,7 @@ extern "C" {
  * .Text.ddr section
  */
 #ifndef LITE_OS_SEC_TEXT_MINOR
-#define LITE_OS_SEC_TEXT_MINOR      // __attribute__((section(".dyn.text")))
+#define LITE_OS_SEC_TEXT_MINOR // __attribute__((section(".dyn.text")))
 #endif
 
 /**
@@ -226,7 +226,7 @@ extern "C" {
  * .Text.init section
  */
 #ifndef LITE_OS_SEC_TEXT_INIT
-#define LITE_OS_SEC_TEXT_INIT       // __attribute__((section(".dyn.text")))
+#define LITE_OS_SEC_TEXT_INIT // __attribute__((section(".dyn.text")))
 #endif
 
 /**
@@ -234,7 +234,7 @@ extern "C" {
  * .Data section
  */
 #ifndef LITE_OS_SEC_DATA
-#define LITE_OS_SEC_DATA            // __attribute__((section(".dyn.data")))
+#define LITE_OS_SEC_DATA // __attribute__((section(".dyn.data")))
 #endif
 
 /**
@@ -242,7 +242,7 @@ extern "C" {
  * .Data.init section
  */
 #ifndef LITE_OS_SEC_DATA_INIT
-#define LITE_OS_SEC_DATA_INIT       // __attribute__((section(".dyn.data")))
+#define LITE_OS_SEC_DATA_INIT // __attribute__((section(".dyn.data")))
 #endif
 
 /**
@@ -250,7 +250,7 @@ extern "C" {
  * Not initialized variable section
  */
 #ifndef LITE_OS_SEC_BSS
-#define LITE_OS_SEC_BSS             // __attribute__((section(".sym.bss")))
+#define LITE_OS_SEC_BSS // __attribute__((section(".sym.bss")))
 #endif
 
 /**
@@ -270,34 +270,33 @@ extern "C" {
 #endif
 
 #ifndef LITE_OS_SEC_TEXT_DATA
-#define LITE_OS_SEC_TEXT_DATA       // __attribute__((section(".dyn.data")))
-#define LITE_OS_SEC_TEXT_BSS        // __attribute__((section(".dyn.bss")))
-#define LITE_OS_SEC_TEXT_RODATA     // __attribute__((section(".dyn.rodata")))
+#define LITE_OS_SEC_TEXT_DATA   // __attribute__((section(".dyn.data")))
+#define LITE_OS_SEC_TEXT_BSS    // __attribute__((section(".dyn.bss")))
+#define LITE_OS_SEC_TEXT_RODATA // __attribute__((section(".dyn.rodata")))
 #endif
 
 #ifndef LITE_OS_SEC_SYMDATA
-#define LITE_OS_SEC_SYMDATA         // __attribute__((section(".sym.data")))
+#define LITE_OS_SEC_SYMDATA // __attribute__((section(".sym.data")))
 #endif
 
 #ifndef LITE_OS_SEC_SYMBSS
-#define LITE_OS_SEC_SYMBSS          // __attribute__((section(".sym.bss")))
+#define LITE_OS_SEC_SYMBSS // __attribute__((section(".sym.bss")))
 #endif
 
-
 #ifndef LITE_OS_SEC_KEEP_DATA_DDR
-#define LITE_OS_SEC_KEEP_DATA_DDR   // __attribute__((section(".keep.data.ddr")))
+#define LITE_OS_SEC_KEEP_DATA_DDR // __attribute__((section(".keep.data.ddr")))
 #endif
 
 #ifndef LITE_OS_SEC_KEEP_TEXT_DDR
-#define LITE_OS_SEC_KEEP_TEXT_DDR   // __attribute__((section(".keep.text.ddr")))
+#define LITE_OS_SEC_KEEP_TEXT_DDR // __attribute__((section(".keep.text.ddr")))
 #endif
 
 #ifndef LITE_OS_SEC_KEEP_DATA_SRAM
-#define LITE_OS_SEC_KEEP_DATA_SRAM  // __attribute__((section(".keep.data.sram")))
+#define LITE_OS_SEC_KEEP_DATA_SRAM // __attribute__((section(".keep.data.sram")))
 #endif
 
 #ifndef LITE_OS_SEC_KEEP_TEXT_SRAM
-#define LITE_OS_SEC_KEEP_TEXT_SRAM  // __attribute__((section(".keep.text.sram")))
+#define LITE_OS_SEC_KEEP_TEXT_SRAM // __attribute__((section(".keep.text.sram")))
 #endif
 
 #ifndef LITE_OS_SEC_BSS_MINOR
@@ -305,46 +304,46 @@ extern "C" {
 #endif
 
 /* type definitions */
-typedef unsigned char          UINT8;
-typedef unsigned short         UINT16;
-typedef unsigned int           UINT32;
-typedef signed char            INT8;
-typedef signed short           INT16;
-typedef signed int             INT32;
-typedef float                  FLOAT;
-typedef double                 DOUBLE;
-typedef char                   CHAR;
+typedef unsigned char UINT8;
+typedef unsigned short UINT16;
+typedef unsigned int UINT32;
+typedef signed char INT8;
+typedef signed short INT16;
+typedef signed int INT32;
+typedef float FLOAT;
+typedef double DOUBLE;
+typedef char CHAR;
 
-typedef unsigned long long     UINT64;
-typedef signed long long       INT64;
-typedef unsigned int           UINTPTR;
-typedef signed int             INTPTR;
+typedef unsigned long long UINT64;
+typedef signed long long INT64;
+typedef unsigned int UINTPTR;
+typedef signed int INTPTR;
 
 typedef volatile INT32 Atomic;
 typedef volatile INT64 Atomic64;
 
 #ifndef DEFINED_BOOL
-typedef unsigned int           BOOL;
+typedef unsigned int BOOL;
 #define DEFINED_BOOL
 #endif
 
 #ifndef VOID
-#define VOID          void
+#define VOID void
 #endif
 
 #ifndef FALSE
-#define FALSE         ((BOOL)0)
+#define FALSE ((BOOL)0)
 #endif
 
 #ifndef TRUE
-#define TRUE          ((BOOL)1)
+#define TRUE ((BOOL)1)
 #endif
 
 #ifndef NULL
 #ifdef __cplusplus
-#define NULL          0L
+#define NULL 0L
 #else
-#define NULL          ((void*)0)
+#define NULL ((void *)0)
 #endif
 #endif
 
@@ -353,23 +352,23 @@ typedef unsigned int           BOOL;
 #define OS_NULL_INT   ((UINT32)0xFFFFFFFF)
 
 #ifndef LOS_OK
-#define LOS_OK        0U
+#define LOS_OK 0U
 #endif
 
 #ifndef LOS_NOK
-#define LOS_NOK       (UINT32)(-1)
+#define LOS_NOK (UINT32)(-1)
 #endif
 
-#define OS_FAIL       1
-#define OS_ERROR      (UINT32)(-1)
-#define OS_INVALID    (UINT32)(-1)
-#define OS_64BIT_MAX  (0xFFFFFFFFFFFFFFFFULL)
+#define OS_FAIL      1
+#define OS_ERROR     (UINT32)(-1)
+#define OS_INVALID   (UINT32)(-1)
+#define OS_64BIT_MAX (0xFFFFFFFFFFFFFFFFULL)
 
-#define asm           __asm
+#define asm          __asm
 #ifdef typeof
 #undef typeof
 #endif
-#define typeof        __typeof__
+#define typeof  __typeof__
 
 #define SIZE(a) (a)
 
@@ -381,14 +380,13 @@ typedef unsigned int           BOOL;
  * with boundary bytes being the smallest unit of alignment.
  */
 #ifndef ALIGN
-#define ALIGN(addr, boundary)        LOS_Align(addr, boundary)
+#define ALIGN(addr, boundary) LOS_Align(addr, boundary)
 #endif
 /**
  * @ingroup los_base
  * Align the tail of the object with the base address addr, with size bytes being the smallest unit of alignment.
  */
-#define TRUNCATE(addr, size)         ((addr) & ~((size) - 1))
-
+#define TRUNCATE(addr, size) ((addr) & ~((size)-1))
 
 /**
  * @ingroup los_base
@@ -416,9 +414,9 @@ static inline UINT32 LOS_Align(UINT32 addr, UINT32 boundary)
 }
 
 #define OS_GOTO_ERREND() \
-        do {                 \
-            goto LOS_ERREND; \
-        } while (0)
+    do {                 \
+        goto LOS_ERREND; \
+    } while (0)
 
 #ifndef UNUSED
 #define UNUSED(X) (void)X
@@ -430,13 +428,13 @@ static inline void maybe_release_fence(int model)
 {
     switch (model) {
         case __ATOMIC_RELEASE:
-            __atomic_thread_fence (__ATOMIC_RELEASE);
+            __atomic_thread_fence(__ATOMIC_RELEASE);
             break;
         case __ATOMIC_ACQ_REL:
-            __atomic_thread_fence (__ATOMIC_ACQ_REL);
+            __atomic_thread_fence(__ATOMIC_ACQ_REL);
             break;
         case __ATOMIC_SEQ_CST:
-            __atomic_thread_fence (__ATOMIC_SEQ_CST);
+            __atomic_thread_fence(__ATOMIC_SEQ_CST);
             break;
         default:
             break;
@@ -447,30 +445,30 @@ static inline void maybe_acquire_fence(int model)
 {
     switch (model) {
         case __ATOMIC_ACQUIRE:
-            __atomic_thread_fence (__ATOMIC_ACQUIRE);
+            __atomic_thread_fence(__ATOMIC_ACQUIRE);
             break;
         case __ATOMIC_ACQ_REL:
-            __atomic_thread_fence (__ATOMIC_ACQ_REL);
+            __atomic_thread_fence(__ATOMIC_ACQ_REL);
             break;
         case __ATOMIC_SEQ_CST:
-            __atomic_thread_fence (__ATOMIC_SEQ_CST);
+            __atomic_thread_fence(__ATOMIC_SEQ_CST);
             break;
         default:
             break;
     }
 }
 
-#define __LIBATOMIC_N_LOCKS	(1 << 4) /* 4, 1<<4 locks num */
+#define __LIBATOMIC_N_LOCKS (1 << 4) /* 4, 1<<4 locks num */
 static inline BOOL *__libatomic_flag_for_address(void *addr)
 {
     static BOOL flag_table[__LIBATOMIC_N_LOCKS] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    UINTPTR p = (UINTPTR)(UINTPTR *)addr;
-    p += (p >> 2) + (p << 4); /* 2, 4, hash data */
-    p += (p >> 7) + (p << 5); /* 7, 5, hash data */
+    UINTPTR p                                   = (UINTPTR)(UINTPTR *)addr;
+    p += (p >> 2) + (p << 4);   /* 2, 4, hash data */
+    p += (p >> 7) + (p << 5);   /* 7, 5, hash data */
     p += (p >> 17) + (p << 13); /* 17, 13, hash data */
 
     if (sizeof(void *) > 4) { /* 4, sizeof int in 32bit system */
-        p += (p >> 31); /* 31, for hash high bits data */
+        p += (p >> 31);       /* 31, for hash high bits data */
     }
 
     p &= (__LIBATOMIC_N_LOCKS - 1);
@@ -479,39 +477,39 @@ static inline BOOL *__libatomic_flag_for_address(void *addr)
 
 static inline void get_lock(void *addr, int model)
 {
-    BOOL *lock_ptr = __libatomic_flag_for_address (addr);
+    BOOL *lock_ptr = __libatomic_flag_for_address(addr);
 
-    maybe_release_fence (model);
-    while (__atomic_test_and_set (lock_ptr, __ATOMIC_ACQUIRE) == 1) {
+    maybe_release_fence(model);
+    while (__atomic_test_and_set(lock_ptr, __ATOMIC_ACQUIRE) == 1) {
         ;
     }
 }
 
 static inline void free_lock(void *addr, int model)
 {
-    BOOL *lock_ptr = __libatomic_flag_for_address (addr);
+    BOOL *lock_ptr = __libatomic_flag_for_address(addr);
 
-    __atomic_clear (lock_ptr, __ATOMIC_RELEASE);
-    maybe_acquire_fence (model);
+    __atomic_clear(lock_ptr, __ATOMIC_RELEASE);
+    maybe_acquire_fence(model);
 }
 
-static inline UINT64  __atomic_load_8(const volatile void *mem, int model)
+static inline UINT64 __atomic_load_8(const volatile void *mem, int model)
 {
     UINT64 ret;
 
     void *memP = (void *)mem;
-    get_lock (memP, model);
+    get_lock(memP, model);
     ret = *(UINT64 *)mem;
-    free_lock (memP, model);
+    free_lock(memP, model);
     return ret;
 }
 
 static inline void __atomic_store_8(volatile void *mem, UINT64 val, int model)
 {
     void *memP = (void *)mem;
-    get_lock (memP, model);
+    get_lock(memP, model);
     *(UINT64 *)mem = val;
-    free_lock (memP, model);
+    free_lock(memP, model);
 }
 
 static inline UINT64 __atomic_exchange_8(volatile void *mem, UINT64 val, int model)
@@ -519,10 +517,10 @@ static inline UINT64 __atomic_exchange_8(volatile void *mem, UINT64 val, int mod
     UINT64 ret;
 
     void *memP = (void *)mem;
-    get_lock (memP, model);
-    ret = *(UINT64 *)mem;
+    get_lock(memP, model);
+    ret            = *(UINT64 *)mem;
     *(UINT64 *)mem = val;
-    free_lock (memP, model);
+    free_lock(memP, model);
     return ret;
 }
 #endif /* __XTENSA_LX6__ */

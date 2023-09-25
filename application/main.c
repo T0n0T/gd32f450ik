@@ -63,39 +63,12 @@ int main(void)
 
     /* configure TAMPER key */
     gd_eval_key_init(KEY_TAMPER, KEY_MODE_GPIO);
+    printf("\r\nHELLO!!! OpenHARMONY\r\n");
+    extern void RunTaskSample(void);
+    RunTaskSample();
 
-    TaskSample();
-
-    /* wait for completion of USART transmission */
-    while (RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TC)) {
-    }
-    while (1) {
-        /* check if the tamper key is pressed */
-        if (RESET == gd_eval_key_state_get(KEY_TAMPER)) {
-            delay_1ms(50);
-            if (RESET == gd_eval_key_state_get(KEY_TAMPER)) {
-                delay_1ms(50);
-                if (RESET == gd_eval_key_state_get(KEY_TAMPER)) {
-                    /* turn on LED3 */
-                    gd_eval_led_on(LED3);
-                    /* output a message on hyperterminal using printf function */
-                    // printf("\r\n USART printf example \r\n");
-                    /* wait for completion of USART transmission */
-                    while (RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TC)) {
-                    }
-                } else {
-                    /* turn off LED3 */
-                    gd_eval_led_off(LED3);
-                }
-            } else {
-                /* turn off LED3 */
-                gd_eval_led_off(LED3);
-            }
-        } else {
-            /* turn off LED3 */
-            gd_eval_led_off(LED3);
-        }
-    }
+    /* never return here*/
+    return 0;
 }
 
 /*!
@@ -137,12 +110,3 @@ void led_flash(int times)
         gd_eval_led_off(LED3);
     }
 }
-
-/* retarget the C library printf function to the USART */
-// int fputc(int ch, FILE *f)
-// {
-//     usart_data_transmit(EVAL_COM0, (uint8_t)ch);
-//     while (RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TBE))
-//         ;
-//     return ch;
-// }

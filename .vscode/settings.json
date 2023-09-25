@@ -1,3 +1,4 @@
 {
-    "C_Cpp.default.configurationProvider": "cl.eide"
+    "C_Cpp.default.configurationProvider": "cl.eide",
+    "C_Cpp.default.compilerPath": "F:\\code\\Embedded\\tool\\arm-gnu-toolchain-12.3.rel1-mingw-w64-i686-arm-none-eabi\\bin\\arm-none-eabi-gcc.exe"
 }

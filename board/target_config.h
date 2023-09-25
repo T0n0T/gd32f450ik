@@ -60,6 +60,7 @@ extern "C" {
 #define LOSCFG_PLATFORM_HWI                 1
 #define LOSCFG_USE_SYSTEM_DEFINED_INTERRUPT 1
 #define LOSCFG_PLATFORM_HWI_LIMIT           128
+// #define LOSCFG_KERNEL_SIGNAL                1
 /*=============================================================================
                                        Task module configuration
 =============================================================================*/
@@ -95,6 +96,12 @@ extern "C" {
 =============================================================================*/
 #define LOSCFG_MEM_MUL_POOL 1
 #define OS_SYS_MEM_NUM      20
+/*=============================================================================
+                                       shell module configuration
+=============================================================================*/
+#define LOSCFG_USE_SHELL        1
+#define LOSCFG_SHELL_PRIO       5
+#define LOSCFG_SHELL_STACK_SIZE 0x800
 /*=============================================================================
                                        Exception module configuration
 =============================================================================*/

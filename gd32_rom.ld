@@ -80,6 +80,7 @@ SECTIONS
 
     .stack : 
     {
+        _sstack = .;
         . = . + _system_stack_size;
         . = ALIGN(4);
         _estack = .;
@@ -104,8 +105,8 @@ SECTIONS
     } > DATA
     __bss_end = .;
 
-    _end = .;
-
+    _end = .;    
+    PROVIDE(end = .);
     /* Stabs debugging sections.  */
     .stab          0 : { *(.stab) }
     .stabstr       0 : { *(.stabstr) }

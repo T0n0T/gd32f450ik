@@ -1,5 +1,16 @@
 #include <stdio.h>
 #include "gd32f450i_eval.h"
+#include "uart.h"
+
+// void USART0_IRQHandler(void)
+// {
+//     printf("%c");
+// }
+
+UINT8 UartGetc(void)
+{
+    return (UINT8)usart_data_receive(EVAL_COM0);
+}
 
 /* retarget the C library printf function to the USART */
 #if defined(__CC_ARM)

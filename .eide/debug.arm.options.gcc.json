@@ -5,7 +5,7 @@
     "global": {
         "$float-abi-type": "softfp",
         "output-debug-info": "enable",
-        "misc-control": "--specs=nosys.specs --specs=nano.specs"
+        "misc-control": "--specs=nano.specs --specs=nosys.specs"
     },
     "c/cpp-compiler": {
         "language-c": "c11",

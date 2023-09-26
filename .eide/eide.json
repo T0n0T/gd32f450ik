@@ -479,7 +479,10 @@
   "targets": {
     "Debug": {
       "excludeList": [
-        "<virtual_root>/hal/startup_gd32f450_470.s"
+        "<virtual_root>/hal/startup_gd32f450_470.s",
+        "<virtual_root>/components/cpup",
+        "<virtual_root>/components/power",
+        "<virtual_root>/components/shell"
       ],
       "toolchain": "GCC",
       "compileConfig": {
@@ -503,7 +506,7 @@
         },
         "proType": 1,
         "speed": 4000,
-        "otherCmds": ""
+        "otherCmds": "ip 192.168.1.2"
       },
       "uploadConfigMap": {},
       "custom_dep": {

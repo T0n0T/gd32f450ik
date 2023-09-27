@@ -44,7 +44,19 @@
             "name": "cli",
             "files": [
               {
+                "path": "../packages/FreeRTOS-Plus-CLI/CLI-commands.c"
+              },
+              {
+                "path": "../packages/FreeRTOS-Plus-CLI/File-Related-CLI-commands.c"
+              },
+              {
                 "path": "../packages/FreeRTOS-Plus-CLI/FreeRTOS_CLI.c"
+              },
+              {
+                "path": "../packages/FreeRTOS-Plus-CLI/UARTCommandConsole.c"
+              },
+              {
+                "path": "../packages/FreeRTOS-Plus-CLI/UDP-Related-CLI-commands.c"
               }
             ],
             "folders": []

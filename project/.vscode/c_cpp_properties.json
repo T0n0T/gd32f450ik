@@ -5,7 +5,7 @@
       "includePath": [
         "${workspaceFolder}/**"
       ],
-      "compilerPath": "C:/desktop/tools/w64devkit/bin/gcc.exe",
+      "compilerPath": "d:\\keil\\ARM\\ARMCLANG\\bin\\armclang.exe",
       "cStandard": "${default}",
       "cppStandard": "${default}",
       "intelliSenseMode": "windows-gcc-x64",

@@ -34,15 +34,26 @@
 #include "semphr.h"
 
 /* Library includes. */
-#include "gd32f450i_eval.h"
+#include "gd32f4xx.h"
 
 /* Demo application includes. */
 #include "serial.h"
 /*-----------------------------------------------------------*/
+/* board defines. */
+#define CONSOLE_COM           USART0
+#define CONSOLE_COM_IRQ       USART0_IRQn
+#define CONSOLE_COM_CLK       RCU_USART0
+
+#define CONSOLE_COM_TX_PIN    GPIO_PIN_9
+#define CONSOLE_COM_RX_PIN    GPIO_PIN_10
+
+#define CONSOLE_COM_GPIO_PORT GPIOA
+#define CONSOLE_COM_GPIO_CLK  RCU_GPIOA
+#define CONSOLE_COM_AF        GPIO_AF_7
 
 /* Misc defines. */
 #define serINVALID_QUEUE ((QueueHandle_t)0)
-#define serNO_BLOCK ((TickType_t)0)
+#define serNO_BLOCK      ((TickType_t)0)
 #define serTX_BLOCK_TIME (40 / portTICK_PERIOD_MS)
 
 /*-----------------------------------------------------------*/
@@ -56,7 +67,64 @@ static QueueHandle_t xCharsForTx;
 /* UART interrupt handler. */
 void vUARTInterruptHandler(void);
 
-signed portBASE_TYPE xSerialGetChar(xComPortHandle pxPort, signed char* pcRxedChar, TickType_t xBlockTime)
+/*-----------------------------------------------------------*/
+
+/*
+ * See the serial2.h header file.
+ */
+xComPortHandle xSerialPortInitMinimal(unsigned long ulWantedBaud, unsigned portBASE_TYPE uxQueueLength)
+{
+    xComPortHandle xReturn;
+
+    /* Create the queues used to hold Rx/Tx characters. */
+    xRxedChars  = xQueueCreate(uxQueueLength, (unsigned portBASE_TYPE)sizeof(signed char));
+    xCharsForTx = xQueueCreate(uxQueueLength + 1, (unsigned portBASE_TYPE)sizeof(signed char));
+
+    /* If the queue/semaphore was created correctly then setup the serial port
+    hardware. */
+    if ((xRxedChars != serINVALID_QUEUE) && (xCharsForTx != serINVALID_QUEUE)) {
+        /* Enable USART1 clock */
+        rcu_periph_clock_enable(CONSOLE_COM_GPIO_CLK);
+
+        /* enable USART clock */
+        rcu_periph_clock_enable(CONSOLE_COM_CLK);
+
+        /* connect port to USARTx_Tx */
+        gpio_af_set(CONSOLE_COM_GPIO_PORT, CONSOLE_COM_AF, CONSOLE_COM_TX_PIN);
+
+        /* connect port to USARTx_Rx */
+        gpio_af_set(CONSOLE_COM_GPIO_PORT, CONSOLE_COM_AF, CONSOLE_COM_RX_PIN);
+
+        /* configure USART Tx as alternate function push-pull */
+        gpio_mode_set(CONSOLE_COM_GPIO_PORT, GPIO_MODE_AF, GPIO_PUPD_PULLUP, CONSOLE_COM_TX_PIN);
+        gpio_output_options_set(CONSOLE_COM_GPIO_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, CONSOLE_COM_TX_PIN);
+
+        /* configure USART Rx as alternate function push-pull */
+        gpio_mode_set(CONSOLE_COM_GPIO_PORT, GPIO_MODE_AF, GPIO_PUPD_PULLUP, CONSOLE_COM_RX_PIN);
+        gpio_output_options_set(CONSOLE_COM_GPIO_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, CONSOLE_COM_RX_PIN);
+
+        /* USART configure */
+        usart_deinit(CONSOLE_COM);
+        usart_baudrate_set(CONSOLE_COM, ulWantedBaud);
+        usart_receive_config(CONSOLE_COM, USART_RECEIVE_ENABLE);
+        usart_transmit_config(CONSOLE_COM, USART_TRANSMIT_ENABLE);
+        usart_enable(CONSOLE_COM);
+
+        /* USART interrupt configuration */
+        nvic_irq_enable(CONSOLE_COM_IRQ, 0, 0);
+        usart_interrupt_enable(CONSOLE_COM, USART_INT_RBNE);
+        usart_interrupt_enable(CONSOLE_COM, USART_INT_TBE);
+    } else {
+        xReturn = (xComPortHandle)0;
+    }
+
+    /* This demo file only supports a single port but we have to return
+    something to comply with the standard demo header file. */
+    return xReturn;
+}
+/*-----------------------------------------------------------*/
+
+signed portBASE_TYPE xSerialGetChar(xComPortHandle pxPort, signed char *pcRxedChar, TickType_t xBlockTime)
 {
     /* The port handle is not required as this driver only supports one port. */
     (void)pxPort;
@@ -71,9 +139,9 @@ signed portBASE_TYPE xSerialGetChar(xComPortHandle pxPort, signed char* pcRxedCh
 }
 /*-----------------------------------------------------------*/
 
-void vSerialPutString(xComPortHandle pxPort, const signed char* const pcString, unsigned short usStringLength)
+void vSerialPutString(xComPortHandle pxPort, const signed char *const pcString, unsigned short usStringLength)
 {
-    signed char* pxNext;
+    signed char *pxNext;
 
     /* A couple of parameters that this port does not use. */
     (void)usStringLength;
@@ -86,7 +154,7 @@ void vSerialPutString(xComPortHandle pxPort, const signed char* const pcString, 
     (void)pxPort;
 
     /* Send each character in the string, one at a time. */
-    pxNext = (signed char*)pcString;
+    pxNext = (signed char *)pcString;
     while (*pxNext) {
         xSerialPutChar(pxPort, *pxNext, serNO_BLOCK);
         pxNext++;
@@ -100,7 +168,7 @@ signed portBASE_TYPE xSerialPutChar(xComPortHandle pxPort, signed char cOutChar,
 
     if (xQueueSend(xCharsForTx, &cOutChar, xBlockTime) == pdPASS) {
         xReturn = pdPASS;
-        USART_ITConfig(USART1, USART_IT_TXE, ENABLE);
+        usart_interrupt_enable(CONSOLE_COM, USART_INT_TBE);
     } else {
         xReturn = pdFAIL;
     }
@@ -120,20 +188,20 @@ void vUARTInterruptHandler(void)
     portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
     char cChar;
 
-    if (USART_GetITStatus(USART1, USART_IT_TXE) == SET) {
+    if (usart_interrupt_flag_get(CONSOLE_COM, USART_INT_FLAG_TBE) == SET) {
         /* The interrupt was caused by the THR becoming empty.  Are there any
         more characters to transmit? */
         if (xQueueReceiveFromISR(xCharsForTx, &cChar, &xHigherPriorityTaskWoken) == pdTRUE) {
             /* A character was retrieved from the queue so can be sent to the
             THR now. */
-            USART_SendData(USART1, cChar);
+            usart_data_transmit(CONSOLE_COM, cChar);
         } else {
-            USART_ITConfig(USART1, USART_IT_TXE, DISABLE);
+            usart_interrupt_disable(CONSOLE_COM, USART_INT_TBE);
         }
     }
 
-    if (USART_GetITStatus(USART1, USART_IT_RXNE) == SET) {
-        cChar = USART_ReceiveData(USART1);
+    if (usart_interrupt_flag_get(CONSOLE_COM, USART_INT_FLAG_RBNE) == SET) {
+        cChar = usart_data_receive(CONSOLE_COM);
         xQueueSendFromISR(xRxedChars, &cChar, &xHigherPriorityTaskWoken);
     }
 

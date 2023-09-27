@@ -68,6 +68,9 @@
         "files": [
           {
             "path": "../driver/gd32f4xx_enet_eval.c"
+          },
+          {
+            "path": "../driver/serial.c"
           }
         ],
         "folders": []
@@ -215,8 +218,9 @@
   "targets": {
     "freertos": {
       "excludeList": [
-        "<virtual_root>/driver",
-        "<virtual_root>/driver/gd32f4xx_enet_eval.c"
+        "<virtual_root>/driver/gd32f4xx_enet_eval.c",
+        "<virtual_root>/components/cli/UDP-Related-CLI-commands.c",
+        "<virtual_root>/components/cli/File-Related-CLI-commands.c"
       ],
       "toolchain": "AC6",
       "compileConfig": {
@@ -257,8 +261,8 @@
         "bin": "",
         "baseAddr": "",
         "cpuInfo": {
-          "vendor": "null",
-          "cpuName": "null"
+          "vendor": "GigaDevice",
+          "cpuName": "GD32F450IK"
         },
         "proType": 1,
         "speed": 8000,

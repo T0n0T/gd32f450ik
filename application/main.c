@@ -38,7 +38,10 @@ OF SUCH DAMAGE.
 #include "FreeRTOS.h"
 #include "task.h"
 
+extern void vUARTCommandConsoleStart(uint16_t usStackSize, UBaseType_t uxPriority);
+
 void run_entry(void *p);
+
 /*!
     \brief      main function
     \param[in]  none
@@ -70,13 +73,13 @@ void run_entry(void *p)
     gd_eval_led_init(LED3);
 
     systick_config();
-    gd_eval_com_init(EVAL_COM0);
+    // gd_eval_com_init(EVAL_COM0);
+    vUARTCommandConsoleStart(512, 2);
     gd_eval_key_init(KEY_TAMPER, KEY_MODE_GPIO);
 
-    printf("\r\n ------------- FreeRTOS ------------- \r\n");
+    // printf("\r\n ------------- FreeRTOS ------------- \r\n");
 
-    while (1)
-    {
+    while (1) {
         gd_eval_led_toggle(LED1);
         vTaskDelay(1000);
     }

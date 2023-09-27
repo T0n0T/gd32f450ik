@@ -27,7 +27,7 @@
 #ifndef SERIAL_COMMS_H
 #define SERIAL_COMMS_H
 
-typedef void* xComPortHandle;
+typedef void *xComPortHandle;
 
 typedef enum {
     serCOM1,
@@ -80,15 +80,18 @@ typedef enum {
     ser115200
 } eBaud;
 
+xComPortHandle xSerialPortInitMinimal(unsigned long ulWantedBaud,
+                                      unsigned portBASE_TYPE uxQueueLength);
+
 void vSerialPutString(xComPortHandle pxPort,
-    const signed char* const pcString,
-    unsigned short usStringLength);
+                      const signed char *const pcString,
+                      unsigned short usStringLength);
 signed portBASE_TYPE xSerialGetChar(xComPortHandle pxPort,
-    signed char* pcRxedChar,
-    TickType_t xBlockTime);
+                                    signed char *pcRxedChar,
+                                    TickType_t xBlockTime);
 signed portBASE_TYPE xSerialPutChar(xComPortHandle pxPort,
-    signed char cOutChar,
-    TickType_t xBlockTime);
+                                    signed char cOutChar,
+                                    TickType_t xBlockTime);
 portBASE_TYPE xSerialWaitForSemaphore(xComPortHandle xPort);
 void vSerialClose(xComPortHandle xPort);
 

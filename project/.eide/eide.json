@@ -37,6 +37,21 @@
         "folders": []
       },
       {
+        "name": "components",
+        "files": [],
+        "folders": [
+          {
+            "name": "cli",
+            "files": [
+              {
+                "path": "../packages/FreeRTOS-Plus-CLI/FreeRTOS_CLI.c"
+              }
+            ],
+            "folders": []
+          }
+        ]
+      },
+      {
         "name": "driver",
         "files": [
           {
@@ -251,7 +266,8 @@
           "../freertos/portable/GCC/ARM_CM4F",
           "../driver",
           ".cmsis/include",
-          "RTE/_freertos"
+          "RTE/_freertos",
+          "../packages/FreeRTOS-Plus-CLI"
         ],
         "libList": [],
         "sourceDirList": [],

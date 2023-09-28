@@ -30,7 +30,8 @@
 
 /* Scheduler includes. */
 #include "FreeRTOS.h"
-#include "queue.h"
+#include "ring_buffer.h"
+#include "stream_buffer.h"
 #include "semphr.h"
 
 /* Library includes. */
@@ -59,9 +60,8 @@
 /*-----------------------------------------------------------*/
 
 /* The queue used to hold received characters. */
-static QueueHandle_t xRxedChars;
-static QueueHandle_t xCharsForTx;
-
+static ring_buffer rx_buf;
+static char buffer[256] = {0};
 /*-----------------------------------------------------------*/
 
 /* UART interrupt handler. */
@@ -72,17 +72,11 @@ void vUARTInterruptHandler(void);
 /*
  * See the serial2.h header file.
  */
-xComPortHandle xSerialPortInitMinimal(unsigned long ulWantedBaud, unsigned portBASE_TYPE uxQueueLength)
+xComPortHandle xSerialPortInitMinimal(unsigned long ulWantedBaud, unsigned portBASE_TYPE buffer_len)
 {
     xComPortHandle xReturn;
 
-    /* Create the queues used to hold Rx/Tx characters. */
-    xRxedChars  = xQueueCreate(uxQueueLength, (unsigned portBASE_TYPE)sizeof(signed char));
-    xCharsForTx = xQueueCreate(uxQueueLength + 1, (unsigned portBASE_TYPE)sizeof(signed char));
-
-    /* If the queue/semaphore was created correctly then setup the serial port
-    hardware. */
-    if ((xRxedChars != serINVALID_QUEUE) && (xCharsForTx != serINVALID_QUEUE)) {
+    if (RB_Init(&rx_buf, (uint8_t *)buffer, sizeof(buffer)) == RING_BUFFER_SUCCESS) {
         /* Enable USART1 clock */
         rcu_periph_clock_enable(CONSOLE_COM_GPIO_CLK);
 
@@ -112,10 +106,8 @@ xComPortHandle xSerialPortInitMinimal(unsigned long ulWantedBaud, unsigned portB
 
         /* USART interrupt configuration */
         nvic_irq_enable(CONSOLE_COM_IRQ, 3, 0);
-        usart_interrupt_flag_clear(CONSOLE_COM, USART_INT_FLAG_RBNE);
-        usart_interrupt_flag_clear(CONSOLE_COM, USART_INT_FLAG_TBE);
         usart_interrupt_enable(CONSOLE_COM, USART_INT_RBNE);
-        usart_interrupt_enable(CONSOLE_COM, USART_INT_TBE);
+        // usart_interrupt_enable(CONSOLE_COM, USART_INT_TBE);
     } else {
         xReturn = (xComPortHandle)0;
     }
@@ -130,10 +122,8 @@ signed portBASE_TYPE xSerialGetChar(xComPortHandle pxPort, signed char *pcRxedCh
 {
     /* The port handle is not required as this driver only supports one port. */
     (void)pxPort;
-
-    /* Get the next character from the buffer.  Return false if no characters
-    are available, or arrive before xBlockTime expires. */
-    if (xQueueReceive(xRxedChars, pcRxedChar, xBlockTime)) {
+    if (RB_Get_Length(&rx_buf) > 0) {
+        RB_Read_Byte(&rx_buf, (uint8_t *)pcRxedChar);
         return pdTRUE;
     } else {
         return pdFALSE;
@@ -157,7 +147,7 @@ void vSerialPutString(xComPortHandle pxPort, const signed char *const pcString, 
 
     /* Send each character in the string, one at a time. */
     pxNext = (signed char *)pcString;
-    while (*pxNext) {
+    while (*pxNext > 0) {
         xSerialPutChar(pxPort, *pxNext, serNO_BLOCK);
         pxNext++;
     }
@@ -166,16 +156,11 @@ void vSerialPutString(xComPortHandle pxPort, const signed char *const pcString, 
 
 signed portBASE_TYPE xSerialPutChar(xComPortHandle pxPort, signed char cOutChar, TickType_t xBlockTime)
 {
-    signed portBASE_TYPE xReturn;
+    usart_data_transmit(CONSOLE_COM, (uint8_t)cOutChar);
+    while (RESET == usart_flag_get(CONSOLE_COM, USART_FLAG_TBE))
+        ;
 
-    if (xQueueSend(xCharsForTx, &cOutChar, xBlockTime) == pdPASS) {
-        xReturn = pdPASS;
-        usart_interrupt_enable(CONSOLE_COM, USART_INT_TBE);
-    } else {
-        xReturn = pdFAIL;
-    }
-
-    return xReturn;
+    return pdPASS;
 }
 /*-----------------------------------------------------------*/
 
@@ -187,33 +172,15 @@ void vSerialClose(xComPortHandle xPort)
 
 void vUARTInterruptHandler(void)
 {
-    portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
-    char cChar;
-
-    if (usart_interrupt_flag_get(CONSOLE_COM, USART_INT_FLAG_TBE) != RESET &&
-        usart_flag_get(CONSOLE_COM, USART_FLAG_TBE) != RESET) {
-        /* The interrupt was caused by the THR becoming empty.  Are there any
-        more characters to transmit? */
-        if (xQueueReceiveFromISR(xCharsForTx, &cChar, &xHigherPriorityTaskWoken) == pdTRUE) {
-            /* A character was retrieved from the queue so can be sent to the
-            THR now. */
-            usart_data_transmit(CONSOLE_COM, cChar);
-
-        } else {
-            usart_interrupt_disable(CONSOLE_COM, USART_INT_TBE);
-        }
-        // usart_flag_clear(CONSOLE_COM, USART_FLAG_RBNE);
-    }
-
+    // taskDISABLE_INTERRUPTS();
+    char ch;
     if ((usart_interrupt_flag_get(CONSOLE_COM, USART_INT_FLAG_RBNE) != RESET) &&
         (usart_flag_get(CONSOLE_COM, USART_FLAG_RBNE) != RESET)) {
         /* The interrupt was caused by the RXNE flag becoming set.  A character
         has been received. */
-        cChar = usart_data_receive(CONSOLE_COM);
-        xQueueSendFromISR(xRxedChars, &cChar, &xHigherPriorityTaskWoken);
-        // usart_flag_clear(CONSOLE_COM, USART_FLAG_RBNE);
-        
+        ch = usart_data_receive(CONSOLE_COM);
+        RB_Write_Byte(&rx_buf, (uint8_t)ch);
+        usart_flag_clear(CONSOLE_COM, USART_FLAG_RBNE);
     }
-
-    portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);
+    // taskENABLE_INTERRUPTS();
 }

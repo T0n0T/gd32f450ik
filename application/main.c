@@ -36,9 +36,11 @@ OF SUCH DAMAGE.
 #include "gd32f450i_eval.h"
 #include "systick.h"
 #include "FreeRTOS.h"
+#include "shell_port.h"
 #include "task.h"
 
 extern void vUARTCommandConsoleStart(uint16_t usStackSize, UBaseType_t uxPriority);
+extern void vRegisterSampleCLICommands(void);
 
 void run_entry(void *p);
 
@@ -74,10 +76,10 @@ void run_entry(void *p)
 
     systick_config();
     // gd_eval_com_init(EVAL_COM0);
-    vUARTCommandConsoleStart(512, 2);
+    // vUARTCommandConsoleStart(512, 2);
+    // vRegisterSampleCLICommands();
+    userShellInit();
     gd_eval_key_init(KEY_TAMPER, KEY_MODE_GPIO);
-
-    // printf("\r\n ------------- FreeRTOS ------------- \r\n");
 
     while (1) {
         gd_eval_led_toggle(LED1);

@@ -92,7 +92,6 @@ signed portBASE_TYPE xSerialGetChar(xComPortHandle pxPort,
 signed portBASE_TYPE xSerialPutChar(xComPortHandle pxPort,
                                     signed char cOutChar,
                                     TickType_t xBlockTime);
-portBASE_TYPE xSerialWaitForSemaphore(xComPortHandle xPort);
 void vSerialClose(xComPortHandle xPort);
 
 #endif /* ifndef SERIAL_COMMS_H */

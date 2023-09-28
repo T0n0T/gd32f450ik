@@ -60,6 +60,56 @@
               }
             ],
             "folders": []
+          },
+          {
+            "name": "letter-shell",
+            "files": [
+              {
+                "path": "../packages/letter-shell/extensions/game/2048/2048.c"
+              },
+              {
+                "path": "../packages/letter-shell/extensions/game/game.c"
+              },
+              {
+                "path": "../packages/letter-shell/extensions/game/pushbox/pushbox.c"
+              },
+              {
+                "path": "../packages/letter-shell/extensions/shell_enhance/shell_cmd_group.c"
+              },
+              {
+                "path": "../packages/letter-shell/extensions/shell_enhance/shell_passthrough.c"
+              },
+              {
+                "path": "../packages/letter-shell/extensions/shell_enhance/shell_secure_user.c"
+              },
+              {
+                "path": "../packages/letter-shell/src/shell_cmd_list.c"
+              },
+              {
+                "path": "../packages/letter-shell/src/shell_companion.c"
+              },
+              {
+                "path": "../packages/letter-shell/src/shell_ext.c"
+              },
+              {
+                "path": "../packages/letter-shell/src/shell.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "lwip",
+            "files": [],
+            "folders": []
+          },
+          {
+            "name": "ringbuf",
+            "files": [
+              {
+                "path": "../packages/ringbuf/ring_buffer.c"
+              }
+            ],
+            "folders": []
           }
         ]
       },
@@ -206,6 +256,26 @@
           }
         ],
         "folders": []
+      },
+      {
+        "name": "port",
+        "files": [],
+        "folders": [
+          {
+            "name": "letter-shell",
+            "files": [
+              {
+                "path": "../board/port/letter-shell/shell_port.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "lwip",
+            "files": [],
+            "folders": []
+          }
+        ]
       }
     ]
   },
@@ -282,8 +352,14 @@
           "../freertos/portable/GCC/ARM_CM4F",
           "../driver",
           ".cmsis/include",
-          "RTE/_freertos",
-          "../packages/FreeRTOS-Plus-CLI"
+          "../packages/FreeRTOS-Plus-CLI",
+          "../packages/letter-shell/src",
+          "../packages/letter-shell/extensions/shell_enhance",
+          "../packages/lwip-2.2.0/src/include/lwip",
+          "../packages/lwip-2.2.0/src/include/netif",
+          "../board/port/letter-shell",
+          "../board/port/lwip",
+          "../packages/ringbuf"
         ],
         "libList": [],
         "sourceDirList": [],

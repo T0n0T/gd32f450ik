@@ -1,0 +1,5 @@
+{
+    "C_Cpp.default.compilerPath": "c:\\Keil\\ARM\\ARMCLANG\\bin\\armclang.exe",
+    "C_Cpp.default.configurationProvider": "${workspaceFolder}/project/build/project/build/freertos/compile_commands.json",
+    "cmake.configureOnOpen": false,
+}

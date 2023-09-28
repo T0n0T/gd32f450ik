@@ -111,7 +111,9 @@ xComPortHandle xSerialPortInitMinimal(unsigned long ulWantedBaud, unsigned portB
         usart_enable(CONSOLE_COM);
 
         /* USART interrupt configuration */
-        nvic_irq_enable(CONSOLE_COM_IRQ, 0, 0);
+        nvic_irq_enable(CONSOLE_COM_IRQ, 3, 0);
+        usart_interrupt_flag_clear(CONSOLE_COM, USART_INT_FLAG_RBNE);
+        usart_interrupt_flag_clear(CONSOLE_COM, USART_INT_FLAG_TBE);
         usart_interrupt_enable(CONSOLE_COM, USART_INT_RBNE);
         usart_interrupt_enable(CONSOLE_COM, USART_INT_TBE);
     } else {
@@ -188,21 +190,29 @@ void vUARTInterruptHandler(void)
     portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
     char cChar;
 
-    if (usart_interrupt_flag_get(CONSOLE_COM, USART_INT_FLAG_TBE) == SET) {
+    if (usart_interrupt_flag_get(CONSOLE_COM, USART_INT_FLAG_TBE) != RESET &&
+        usart_flag_get(CONSOLE_COM, USART_FLAG_TBE) != RESET) {
         /* The interrupt was caused by the THR becoming empty.  Are there any
         more characters to transmit? */
         if (xQueueReceiveFromISR(xCharsForTx, &cChar, &xHigherPriorityTaskWoken) == pdTRUE) {
             /* A character was retrieved from the queue so can be sent to the
             THR now. */
             usart_data_transmit(CONSOLE_COM, cChar);
+
         } else {
             usart_interrupt_disable(CONSOLE_COM, USART_INT_TBE);
         }
+        // usart_flag_clear(CONSOLE_COM, USART_FLAG_RBNE);
     }
 
-    if (usart_interrupt_flag_get(CONSOLE_COM, USART_INT_FLAG_RBNE) == SET) {
+    if ((usart_interrupt_flag_get(CONSOLE_COM, USART_INT_FLAG_RBNE) != RESET) &&
+        (usart_flag_get(CONSOLE_COM, USART_FLAG_RBNE) != RESET)) {
+        /* The interrupt was caused by the RXNE flag becoming set.  A character
+        has been received. */
         cChar = usart_data_receive(CONSOLE_COM);
         xQueueSendFromISR(xRxedChars, &cChar, &xHigherPriorityTaskWoken);
+        // usart_flag_clear(CONSOLE_COM, USART_FLAG_RBNE);
+        
     }
 
     portEND_SWITCHING_ISR(xHigherPriorityTaskWoken);

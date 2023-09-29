@@ -4,6 +4,11 @@
             "path": "."
         }
     ],
-    "settings": {},
+    "settings": {
+        "clangd.arguments": [
+            "--compile-commands-dir=build/rt-thread",
+            "--query-driver=d:/keil/ARM/ARMCLANG/bin/armclang.exe",
+        ],
+    },
     "extensions": {}
 }

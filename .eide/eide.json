@@ -13,10 +13,10 @@
         "name": "Applications",
         "files": [
           {
-            "path": "applications/main.c"
+            "path": "applications/fs.c"
           },
           {
-            "path": "applications/fs.c"
+            "path": "applications/main.c"
           }
         ],
         "folders": []
@@ -25,13 +25,13 @@
         "name": "cm_backtrace",
         "files": [
           {
-            "path": "packages/CmBacktrace-v1.4.1/cmb_port.c"
-          },
-          {
             "path": "packages/CmBacktrace-v1.4.1/cm_backtrace.c"
           },
           {
             "path": "packages/CmBacktrace-v1.4.1/cmb_flash_log.c"
+          },
+          {
+            "path": "packages/CmBacktrace-v1.4.1/cmb_port.c"
           }
         ],
         "folders": []
@@ -145,9 +145,6 @@
             "path": "board/board.c"
           },
           {
-            "path": "libraries/GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/ARM/startup_gd32f4xx.s"
-          },
-          {
             "path": "libraries/gd32_drivers/drv_exmc_sdram.c"
           },
           {
@@ -157,13 +154,16 @@
             "path": "libraries/gd32_drivers/drv_rtc.c"
           },
           {
-            "path": "libraries/gd32_drivers/drv_spi.c"
-          },
-          {
             "path": "libraries/gd32_drivers/drv_spi_flash.c"
           },
           {
+            "path": "libraries/gd32_drivers/drv_spi.c"
+          },
+          {
             "path": "libraries/gd32_drivers/drv_usart.c"
+          },
+          {
+            "path": "libraries/GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/ARM/startup_gd32f4xx.s"
           }
         ],
         "folders": []
@@ -205,9 +205,6 @@
             "path": "rt-thread/components/dfs/dfs_v1/filesystems/ramfs/dfs_ramfs.c"
           },
           {
-            "path": "rt-thread/components/dfs/dfs_v1/src/dfs.c"
-          },
-          {
             "path": "rt-thread/components/dfs/dfs_v1/src/dfs_file.c"
           },
           {
@@ -215,6 +212,9 @@
           },
           {
             "path": "rt-thread/components/dfs/dfs_v1/src/dfs_posix.c"
+          },
+          {
+            "path": "rt-thread/components/dfs/dfs_v1/src/dfs.c"
           }
         ],
         "folders": []
@@ -223,19 +223,19 @@
         "name": "Finsh",
         "files": [
           {
-            "path": "rt-thread/components/finsh/shell.c"
+            "path": "rt-thread/components/finsh/cmd.c"
           },
           {
-            "path": "rt-thread/components/finsh/msh.c"
+            "path": "rt-thread/components/finsh/msh_file.c"
           },
           {
             "path": "rt-thread/components/finsh/msh_parse.c"
           },
           {
-            "path": "rt-thread/components/finsh/cmd.c"
+            "path": "rt-thread/components/finsh/msh.c"
           },
           {
-            "path": "rt-thread/components/finsh/msh_file.c"
+            "path": "rt-thread/components/finsh/shell.c"
           }
         ],
         "folders": []
@@ -298,10 +298,10 @@
         "name": "Libraries",
         "files": [
           {
-            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_exmc.c"
+            "path": "libraries/GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/system_gd32f4xx.c"
           },
           {
-            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_syscfg.c"
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_exmc.c"
           },
           {
             "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_exti.c"
@@ -310,25 +310,25 @@
             "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_gpio.c"
           },
           {
-            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_rcu.c"
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_misc.c"
           },
           {
             "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_pmu.c"
           },
           {
-            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_misc.c"
-          },
-          {
-            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_usart.c"
-          },
-          {
-            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_spi.c"
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_rcu.c"
           },
           {
             "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_rtc.c"
           },
           {
-            "path": "libraries/GD32F4xx_Firmware_Library/CMSIS/GD/GD32F4xx/Source/system_gd32f4xx.c"
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_spi.c"
+          },
+          {
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_syscfg.c"
+          },
+          {
+            "path": "libraries/GD32F4xx_Firmware_Library/GD32F4xx_standard_peripheral/Source/gd32f4xx_usart.c"
           }
         ],
         "folders": []
@@ -470,46 +470,18 @@
   "targets": {
     "rt-thread": {
       "excludeList": [
-        "<virtual_root>/yaffs"
+        "<virtual_root>/yaffs",
+        "<virtual_root>/Applications/fs.c",
+        "<virtual_root>/Fal"
       ],
-      "toolchain": "AC5",
+      "toolchain": "AC6",
       "compileConfig": {
         "cpuType": "Cortex-M4",
         "floatingPointHardware": "single",
-        "scatterFilePath": "gd32_rom.ld",
-        "useCustomScatterFile": false,
+        "useCustomScatterFile": true,
+        "scatterFilePath": "board\\linker_scripts\\link.sct",
         "storageLayout": {
           "RAM": [
-            {
-              "tag": "RAM",
-              "id": 1,
-              "mem": {
-                "startAddr": "0x0",
-                "size": "0x0"
-              },
-              "isChecked": false,
-              "noInit": false
-            },
-            {
-              "tag": "RAM",
-              "id": 2,
-              "mem": {
-                "startAddr": "0x0",
-                "size": "0x0"
-              },
-              "isChecked": false,
-              "noInit": false
-            },
-            {
-              "tag": "RAM",
-              "id": 3,
-              "mem": {
-                "startAddr": "0x0",
-                "size": "0x0"
-              },
-              "isChecked": false,
-              "noInit": false
-            },
             {
               "tag": "IRAM",
               "id": 1,
@@ -519,68 +491,18 @@
               },
               "isChecked": true,
               "noInit": false
-            },
-            {
-              "tag": "IRAM",
-              "id": 2,
-              "mem": {
-                "startAddr": "0x10000000",
-                "size": "0x10000"
-              },
-              "isChecked": true,
-              "noInit": false
             }
           ],
           "ROM": [
             {
-              "tag": "ROM",
-              "id": 1,
-              "mem": {
-                "startAddr": "0x0",
-                "size": "0x0"
-              },
-              "isChecked": false,
-              "isStartup": false
-            },
-            {
-              "tag": "ROM",
-              "id": 2,
-              "mem": {
-                "startAddr": "0x0",
-                "size": "0x0"
-              },
-              "isChecked": false,
-              "isStartup": false
-            },
-            {
-              "tag": "ROM",
-              "id": 3,
-              "mem": {
-                "startAddr": "0x0",
-                "size": "0x0"
-              },
-              "isChecked": false,
-              "isStartup": false
-            },
-            {
               "tag": "IROM",
               "id": 1,
               "mem": {
-                "startAddr": "0x8000000",
+                "startAddr": "0x08000000",
                 "size": "0x300000"
               },
               "isChecked": true,
               "isStartup": true
-            },
-            {
-              "tag": "IROM",
-              "id": 2,
-              "mem": {
-                "startAddr": "0x0",
-                "size": "0x0"
-              },
-              "isChecked": false,
-              "isStartup": false
             }
           ]
         },
@@ -645,7 +567,8 @@
           "RT_USING_LIBC",
           "__CLK_TCK=RT_TICK_PER_SECOND",
           "GD32F450",
-          "__RTTHREAD__"
+          "__RTTHREAD__",
+          "__STDC_NO_ATOMICS__"
         ]
       }
     }

@@ -808,22 +808,22 @@ rt_uint32_t dlmodule_symbol_find(const char *sym_str)
 
 int rt_system_dlmodule_init(void)
 {
-#if defined(__GNUC__) && !defined(__CC_ARM)
-    extern int __rtmsymtab_start;
-    extern int __rtmsymtab_end;
+// #if defined(__GNUC__) && !defined(__CC_ARM)
+//     extern int __rtmsymtab_start;
+//     extern int __rtmsymtab_end;
 
-    _rt_module_symtab_begin = (struct rt_module_symtab *)&__rtmsymtab_start;
-    _rt_module_symtab_end   = (struct rt_module_symtab *)&__rtmsymtab_end;
-#elif defined (__CC_ARM)
+//     _rt_module_symtab_begin = (struct rt_module_symtab *)&__rtmsymtab_start;
+//     _rt_module_symtab_end   = (struct rt_module_symtab *)&__rtmsymtab_end;
+// #elif defined (__CC_ARM)
     extern int RTMSymTab$$Base;
     extern int RTMSymTab$$Limit;
 
     _rt_module_symtab_begin = (struct rt_module_symtab *)&RTMSymTab$$Base;
     _rt_module_symtab_end   = (struct rt_module_symtab *)&RTMSymTab$$Limit;
-#elif defined (__IAR_SYSTEMS_ICC__)
-    _rt_module_symtab_begin = __section_begin("RTMSymTab");
-    _rt_module_symtab_end   = __section_end("RTMSymTab");
-#endif
+// #elif defined (__IAR_SYSTEMS_ICC__)
+//     _rt_module_symtab_begin = __section_begin("RTMSymTab");
+//     _rt_module_symtab_end   = __section_end("RTMSymTab");
+// #endif
 
     return 0;
 }

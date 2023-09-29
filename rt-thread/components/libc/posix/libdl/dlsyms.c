@@ -49,5 +49,5 @@ RTM_EXPORT(abort);
 
 RTM_EXPORT(rand);
 
-//#include <assert.h>
-//RTM_EXPORT(__assert_func);
+#include <assert.h>
+RTM_EXPORT(__aeabi_assert);

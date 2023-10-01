@@ -1,5 +1,5 @@
 {
-    "C_Cpp.default.compilerPath": "c:\\Keil\\ARM\\ARMCLANG\\bin\\armclang.exe",
+    "C_Cpp.default.compilerPath": "d:\\keil\\ARM\\ARMCLANG\\bin\\armclang.exe",
     "C_Cpp.default.configurationProvider": "cl.eide",
     "cmake.configureOnOpen": false,
 }

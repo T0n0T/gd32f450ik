@@ -1,0 +1,33 @@
+CompileFlags:
+  Add:
+    [
+      -xc,
+      -std=gnu11,
+      -Wall,
+      -Wno-missing-prototypes,
+      "--include-directory=D:/keil/ARM/ARMCLANG/include",
+    ]
+  Remove: -W*
+  Compiler: clang
+Diagnostics:
+  ClangTidy:
+    # Add: [performance*, modernize*, readability*]
+    Remove:
+      [
+        abseil*,
+        fuchsia*,
+        llvmlib*,
+        zircon*,
+        altera*,
+        google-readability-todo,
+        readability-braces-around-statements,
+        hicpp-braces-around-statements,
+        modernize-use-trailing-return-type,
+      ]
+Index:
+  Background: Build
+
+InlayHints:
+  Enabled: Yes
+  ParameterNames: Yes
+  DeducedTypes: Yes

@@ -5,9 +5,10 @@
       "includePath": [
         "${workspaceFolder}/**"
       ],
-      "compilerPath": "c:\\keil\\ARM\\ARMCLANG\\bin\\armclang.exe",
+      "compilerPath": "d:\\keil\\ARM\\ARMCLANG\\bin\\armclang.exe",
       "cStandard": "${default}",
       "cppStandard": "${default}",
+      "configurationProvider": "${workspaceFolder}/project/build/freertos",
       "compilerArgs": [
         ""
       ]

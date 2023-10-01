@@ -14,6 +14,10 @@
         "C_Cpp.clang_format_style": "file:${workspaceFolder}/project/.clang-format",
         "C_Cpp.errorSquiggles": "disabled",
         "files.associations": {
+            "*.cpp": "cpp",
+            "*.html": "html",
+            "*.env": "dotenv",
+            "*.go": "go",
             ".eideignore": "ignore",
             "*.a51": "a51",
             "*.h": "c",
@@ -21,9 +25,9 @@
             "*.hxx": "cpp",
             "*.hpp": "cpp",
             "*.c++": "cpp",
-            "*.cpp": "cpp",
             "*.cxx": "cpp",
-            "*.cc": "cpp"
+            "*.cc": "cpp",
+            "__config": "c"
         },
         "[yaml]": {
             "editor.insertSpaces": true,
@@ -40,6 +44,11 @@
             "**/freertos/portable/RVDS/ARM_CM4F": true,
             "**/packages/lwip-2.2.0/contrib": true,
         },
+        "clangd.arguments": [
+            "--compile-commands-dir=build/freertos",
+            "--query-driver=D:/keil/ARM/ARMCLANG/bin/armclang.exe",
+            "--background-index",
+        ],
     },
     "extensions": {
         "recommendations": [

@@ -449,7 +449,8 @@
       "excludeList": [
         "<virtual_root>/driver/gd32f4xx_enet_eval.c",
         "<virtual_root>/components/cli/UDP-Related-CLI-commands.c",
-        "<virtual_root>/components/cli/File-Related-CLI-commands.c"
+        "<virtual_root>/components/cli/File-Related-CLI-commands.c",
+        "<virtual_root>/components/cli"
       ],
       "toolchain": "AC6",
       "compileConfig": {
@@ -476,7 +477,7 @@
               "id": 1,
               "mem": {
                 "startAddr": "0x08000000",
-                "size": "0x10000"
+                "size": "0x300000"
               },
               "isChecked": true,
               "isStartup": true
@@ -526,7 +527,8 @@
         "sourceDirList": [],
         "defineList": [
           "GD32F450",
-          "USE_STDPERIPH_DRIVER"
+          "USE_STDPERIPH_DRIVER",
+          "USE_DHCP"
         ]
       }
     }

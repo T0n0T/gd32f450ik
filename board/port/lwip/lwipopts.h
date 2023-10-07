@@ -40,6 +40,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define IP_REASSEMBLY 0
 #define IP_FRAG 0
 #define ARP_QUEUEING 0
+#define LWIP_TCPIP_CORE_LOCKING 0
 
 #define SYS_LIGHTWEIGHT_PROT                                                   \
   1 /* SYS_LIGHTWEIGHT_PROT==1: if you want inter-task protection              \

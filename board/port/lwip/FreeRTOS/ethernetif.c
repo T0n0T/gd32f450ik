@@ -45,15 +45,14 @@
 #include "lwip/timeouts.h"
 #include "netif/etharp.h"
 
-
 #include "enet_conf.h"
 #include "gd32f4xx_enet.h"
 #include "semphr.h"
 #include <string.h>
 
 #define ETHERNETIF_INPUT_TASK_STACK_SIZE (350)
-#define ETHERNETIF_INPUT_TASK_PRIO (configMAX_PRIORITIES - 1)
-#define LOWLEVEL_OUTPUT_WAITING_TIME (250)
+#define ETHERNETIF_INPUT_TASK_PRIO       (configMAX_PRIORITIES - 1)
+#define LOWLEVEL_OUTPUT_WAITING_TIME     (250)
 /* The time to block waiting for input */
 #define LOWLEVEL_INPUT_WAITING_TIME ((portTickType)100)
 
@@ -79,7 +78,7 @@ extern enet_descriptors_struct *dma_current_rxdesc;
 enet_descriptors_struct ptp_txstructure[ENET_TXBUF_NUM];
 enet_descriptors_struct ptp_rxstructure[ENET_RXBUF_NUM];
 
-static struct netif *low_netif = NULL;
+static struct netif *low_netif  = NULL;
 xSemaphoreHandle g_rx_semaphore = NULL;
 
 /**
@@ -89,74 +88,75 @@ xSemaphoreHandle g_rx_semaphore = NULL;
  * @param netif the already initialized lwip network interface structure
  *        for this ethernetif
  */
-static void low_level_init(struct netif *netif) {
-  uint32_t i;
+static void low_level_init(struct netif *netif)
+{
+    uint32_t i;
 
-  /* set netif MAC hardware address length */
-  netif->hwaddr_len = ETHARP_HWADDR_LEN;
+    /* set netif MAC hardware address length */
+    netif->hwaddr_len = ETHARP_HWADDR_LEN;
 
-  /* set netif MAC hardware address */
-  netif->hwaddr[0] = MAC_ADDR0;
-  netif->hwaddr[1] = MAC_ADDR1;
-  netif->hwaddr[2] = MAC_ADDR2;
-  netif->hwaddr[3] = MAC_ADDR3;
-  netif->hwaddr[4] = MAC_ADDR4;
-  netif->hwaddr[5] = MAC_ADDR5;
+    /* set netif MAC hardware address */
+    netif->hwaddr[0] = MAC_ADDR0;
+    netif->hwaddr[1] = MAC_ADDR1;
+    netif->hwaddr[2] = MAC_ADDR2;
+    netif->hwaddr[3] = MAC_ADDR3;
+    netif->hwaddr[4] = MAC_ADDR4;
+    netif->hwaddr[5] = MAC_ADDR5;
 
-  /* set netif maximum transfer unit */
-  netif->mtu = 1500;
+    /* set netif maximum transfer unit */
+    netif->mtu = 1500;
 
-  /* accept broadcast address and ARP traffic */
-  netif->flags = NETIF_FLAG_BROADCAST | NETIF_FLAG_ETHARP | NETIF_FLAG_LINK_UP;
+    /* accept broadcast address and ARP traffic */
+    netif->flags = NETIF_FLAG_BROADCAST | NETIF_FLAG_ETHARP | NETIF_FLAG_LINK_UP;
 
-  low_netif = netif;
+    low_netif = netif;
 
-  /* create binary semaphore used for informing ethernetif of frame reception */
-  if (g_rx_semaphore == NULL) {
-    vSemaphoreCreateBinary(g_rx_semaphore);
-    xSemaphoreTake(g_rx_semaphore, 0);
-  }
+    /* create binary semaphore used for informing ethernetif of frame reception */
+    if (g_rx_semaphore == NULL) {
+        vSemaphoreCreateBinary(g_rx_semaphore);
+        xSemaphoreTake(g_rx_semaphore, 0);
+    }
 
-  /* initialize MAC address in ethernet MAC */
-  enet_mac_address_set(ENET_MAC_ADDRESS0, netif->hwaddr);
+    /* initialize MAC address in ethernet MAC */
+    enet_mac_address_set(ENET_MAC_ADDRESS0, netif->hwaddr);
 
-  /* initialize descriptors list: chain/ring mode */
+    /* initialize descriptors list: chain/ring mode */
 #ifdef SELECT_DESCRIPTORS_ENHANCED_MODE
-  enet_ptp_enhanced_descriptors_chain_init(ENET_DMA_TX);
-  enet_ptp_enhanced_descriptors_chain_init(ENET_DMA_RX);
+    enet_ptp_enhanced_descriptors_chain_init(ENET_DMA_TX);
+    enet_ptp_enhanced_descriptors_chain_init(ENET_DMA_RX);
 #else
 
-  enet_descriptors_chain_init(ENET_DMA_TX);
-  enet_descriptors_chain_init(ENET_DMA_RX);
+    enet_descriptors_chain_init(ENET_DMA_TX);
+    enet_descriptors_chain_init(ENET_DMA_RX);
 
-  //    enet_descriptors_ring_init(ENET_DMA_TX);
-  //    enet_descriptors_ring_init(ENET_DMA_RX);
+    //    enet_descriptors_ring_init(ENET_DMA_TX);
+    //    enet_descriptors_ring_init(ENET_DMA_RX);
 
 #endif /* SELECT_DESCRIPTORS_ENHANCED_MODE */
 
-  /* enable ethernet Rx interrrupt */
-  {
-    int i;
-    for (i = 0; i < ENET_RXBUF_NUM; i++) {
-      enet_rx_desc_immediate_receive_complete_interrupt(&rxdesc_tab[i]);
+    /* enable ethernet Rx interrrupt */
+    {
+        int i;
+        for (i = 0; i < ENET_RXBUF_NUM; i++) {
+            enet_rx_desc_immediate_receive_complete_interrupt(&rxdesc_tab[i]);
+        }
     }
-  }
 
 #ifdef CHECKSUM_BY_HARDWARE
-  /* enable the TCP, UDP and ICMP checksum insertion for the Tx frames */
-  for (i = 0; i < ENET_TXBUF_NUM; i++) {
-    enet_transmit_checksum_config(&txdesc_tab[i],
-                                  ENET_CHECKSUM_TCPUDPICMP_FULL);
-  }
+    /* enable the TCP, UDP and ICMP checksum insertion for the Tx frames */
+    for (i = 0; i < ENET_TXBUF_NUM; i++) {
+        enet_transmit_checksum_config(&txdesc_tab[i],
+                                      ENET_CHECKSUM_TCPUDPICMP_FULL);
+    }
 #endif /* CHECKSUM_BY_HARDWARE */
 
-  /* create the task that handles the ETH_MAC */
-  xTaskCreate(ethernetif_input, "ETHERNETIF_INPUT",
-              ETHERNETIF_INPUT_TASK_STACK_SIZE, NULL,
-              ETHERNETIF_INPUT_TASK_PRIO, NULL);
+    /* create the task that handles the ETH_MAC */
+    xTaskCreate(ethernetif_input, "ETHERNETIF_INPUT",
+                ETHERNETIF_INPUT_TASK_STACK_SIZE, NULL,
+                ETHERNETIF_INPUT_TASK_PRIO, NULL);
 
-  /* enable MAC and DMA transmission and reception */
-  enet_enable();
+    /* enable MAC and DMA transmission and reception */
+    enet_enable();
 }
 
 /**
@@ -176,51 +176,52 @@ static void low_level_init(struct netif *netif) {
  *       dropped because of memory failure (except for the TCP timers).
  */
 
-static err_t low_level_output(struct netif *netif, struct pbuf *p) {
-  static xSemaphoreHandle s_tx_semaphore = NULL;
-  struct pbuf *q;
-  uint8_t *buffer;
-  uint16_t framelength = 0;
-  ErrStatus reval = ERROR;
+static err_t low_level_output(struct netif *netif, struct pbuf *p)
+{
+    static xSemaphoreHandle s_tx_semaphore = NULL;
+    struct pbuf *q;
+    uint8_t *buffer;
+    uint16_t framelength = 0;
+    ErrStatus reval      = ERROR;
 
-  SYS_ARCH_DECL_PROTECT(sr);
+    SYS_ARCH_DECL_PROTECT(sr);
 
-  if (s_tx_semaphore == NULL) {
-    vSemaphoreCreateBinary(s_tx_semaphore);
-  }
-
-  if (xSemaphoreTake(s_tx_semaphore, LOWLEVEL_OUTPUT_WAITING_TIME)) {
-    SYS_ARCH_PROTECT(sr);
-
-    while ((uint32_t)RESET != (dma_current_txdesc->status & ENET_TDES0_DAV)) {
-    }
-    buffer = (uint8_t *)(enet_desc_information_get(dma_current_txdesc,
-                                                   TXDESC_BUFFER_1_ADDR));
-
-    for (q = p; q != NULL; q = q->next) {
-      memcpy((uint8_t *)&buffer[framelength], q->payload, q->len);
-      framelength = framelength + q->len;
+    if (s_tx_semaphore == NULL) {
+        vSemaphoreCreateBinary(s_tx_semaphore);
     }
 
-    /* transmit descriptors to give to DMA */
+    if (xSemaphoreTake(s_tx_semaphore, LOWLEVEL_OUTPUT_WAITING_TIME)) {
+        SYS_ARCH_PROTECT(sr);
+
+        while ((uint32_t)RESET != (dma_current_txdesc->status & ENET_TDES0_DAV)) {
+        }
+        buffer = (uint8_t *)(enet_desc_information_get(dma_current_txdesc,
+                                                       TXDESC_BUFFER_1_ADDR));
+
+        for (q = p; q != NULL; q = q->next) {
+            memcpy((uint8_t *)&buffer[framelength], q->payload, q->len);
+            framelength = framelength + q->len;
+        }
+
+        /* transmit descriptors to give to DMA */
 #ifdef SELECT_DESCRIPTORS_ENHANCED_MODE
-    reval = ENET_NOCOPY_PTPFRAME_TRANSMIT_ENHANCED_MODE(framelength, NULL);
+        reval = ENET_NOCOPY_PTPFRAME_TRANSMIT_ENHANCED_MODE(framelength, NULL);
 #else
-    reval = ENET_NOCOPY_FRAME_TRANSMIT(framelength);
+        reval = ENET_NOCOPY_FRAME_TRANSMIT(framelength);
 #endif /* SELECT_DESCRIPTORS_ENHANCED_MODE */
 
-    SYS_ARCH_UNPROTECT(sr);
+        SYS_ARCH_UNPROTECT(sr);
 
-    /* give semaphore and exit */
-    xSemaphoreGive(s_tx_semaphore);
-  }
-
-  if (SUCCESS == reval) {
-    return ERR_OK;
-  } else {
-    while (1) {
+        /* give semaphore and exit */
+        xSemaphoreGive(s_tx_semaphore);
     }
-  }
+
+    if (SUCCESS == reval) {
+        return ERR_OK;
+    } else {
+        while (1) {
+        }
+    }
 }
 
 /**
@@ -231,37 +232,38 @@ static err_t low_level_output(struct netif *netif, struct pbuf *p) {
  * @return a pbuf filled with the received packet (including MAC header)
  *         NULL on memory error
  */
-static struct pbuf *low_level_input(struct netif *netif) {
-  struct pbuf *p = NULL, *q;
-  uint32_t l = 0;
-  u16_t len;
-  uint8_t *buffer;
+static struct pbuf *low_level_input(struct netif *netif)
+{
+    struct pbuf *p = NULL, *q;
+    uint32_t l     = 0;
+    u16_t len;
+    uint8_t *buffer;
 
-  /* obtain the size of the packet and put it into the "len" variable. */
-  len = enet_desc_information_get(dma_current_rxdesc, RXDESC_FRAME_LENGTH);
-  buffer = (uint8_t *)(enet_desc_information_get(dma_current_rxdesc,
-                                                 RXDESC_BUFFER_1_ADDR));
+    /* obtain the size of the packet and put it into the "len" variable. */
+    len    = enet_desc_information_get(dma_current_rxdesc, RXDESC_FRAME_LENGTH);
+    buffer = (uint8_t *)(enet_desc_information_get(dma_current_rxdesc,
+                                                   RXDESC_BUFFER_1_ADDR));
 
-  if (len > 0) {
-    /* We allocate a pbuf chain of pbufs from the Lwip buffer pool */
-    p = pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
-  }
-
-  if (p != NULL) {
-    for (q = p; q != NULL; q = q->next) {
-      memcpy((uint8_t *)q->payload, (u8_t *)&buffer[l], q->len);
-      l = l + q->len;
+    if (len > 0) {
+        /* We allocate a pbuf chain of pbufs from the Lwip buffer pool */
+        p = pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
     }
-  }
+
+    if (p != NULL) {
+        for (q = p; q != NULL; q = q->next) {
+            memcpy((uint8_t *)q->payload, (u8_t *)&buffer[l], q->len);
+            l = l + q->len;
+        }
+    }
 #ifdef SELECT_DESCRIPTORS_ENHANCED_MODE
-  ENET_NOCOPY_PTPFRAME_RECEIVE_ENHANCED_MODE(NULL);
+    ENET_NOCOPY_PTPFRAME_RECEIVE_ENHANCED_MODE(NULL);
 
 #else
 
-  ENET_NOCOPY_FRAME_RECEIVE();
+    ENET_NOCOPY_FRAME_RECEIVE();
 #endif /* SELECT_DESCRIPTORS_ENHANCED_MODE */
 
-  return p;
+    return p;
 }
 
 /**
@@ -273,26 +275,27 @@ static struct pbuf *low_level_input(struct netif *netif) {
  *
  * @param netif the lwip network interface structure for this ethernetif
  */
-void ethernetif_input(void *pvParameters) {
-  struct pbuf *p;
-  SYS_ARCH_DECL_PROTECT(sr);
+void ethernetif_input(void *pvParameters)
+{
+    struct pbuf *p;
+    SYS_ARCH_DECL_PROTECT(sr);
 
-  for (;;) {
-    if (pdTRUE == xSemaphoreTake(g_rx_semaphore, LOWLEVEL_INPUT_WAITING_TIME)) {
-    TRY_GET_NEXT_FRAME:
-      SYS_ARCH_PROTECT(sr);
-      p = low_level_input(low_netif);
-      SYS_ARCH_UNPROTECT(sr);
+    for (;;) {
+        if (pdTRUE == xSemaphoreTake(g_rx_semaphore, LOWLEVEL_INPUT_WAITING_TIME)) {
+        TRY_GET_NEXT_FRAME:
+            SYS_ARCH_PROTECT(sr);
+            p = low_level_input(low_netif);
+            SYS_ARCH_UNPROTECT(sr);
 
-      if (p != NULL) {
-        if (ERR_OK != low_netif->input(p, low_netif)) {
-          pbuf_free(p);
-        } else {
-          goto TRY_GET_NEXT_FRAME;
+            if (p != NULL) {
+                if (ERR_OK != low_netif->input(p, low_netif)) {
+                    pbuf_free(p);
+                } else {
+                    goto TRY_GET_NEXT_FRAME;
+                }
+            }
         }
-      }
     }
-  }
 }
 
 /**
@@ -307,22 +310,23 @@ void ethernetif_input(void *pvParameters) {
  *         ERR_MEM if private data couldn't be allocated
  *         any other err_t on error
  */
-err_t ethernetif_init(struct netif *netif) {
-  LWIP_ASSERT("netif != NULL", (netif != NULL));
+err_t ethernetif_init(struct netif *netif)
+{
+    LWIP_ASSERT("netif != NULL", (netif != NULL));
 
 #if LWIP_NETIF_HOSTNAME
-  /* initialize interface hostname */
-  netif->hostname = "lwip";
+    /* initialize interface hostname */
+    netif->hostname = "lwip";
 #endif /* LWIP_NETIF_HOSTNAME */
 
-  netif->name[0] = IFNAME0;
-  netif->name[1] = IFNAME1;
+    netif->name[0] = IFNAME0;
+    netif->name[1] = IFNAME1;
 
-  netif->output = etharp_output;
-  netif->linkoutput = low_level_output;
+    netif->output     = etharp_output;
+    netif->linkoutput = low_level_output;
 
-  /* initialize the hardware */
-  low_level_init(netif);
+    /* initialize the hardware */
+    low_level_init(netif);
 
-  return ERR_OK;
+    return ERR_OK;
 }

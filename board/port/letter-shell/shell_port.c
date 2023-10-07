@@ -87,5 +87,5 @@ void userShellInit(void)
     shell.lock   = userShellLock;
     shell.unlock = userShellUnlock;
     shellInit(&shell, shellBuffer, 512);
-    xTaskCreate(shellTask, "shell", 256, &shell, 5, NULL);
+    xTaskCreate(shellTask, "shell", 256, &shell, 1, NULL);
 }

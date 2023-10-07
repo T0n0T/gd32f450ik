@@ -127,7 +127,6 @@ void dhcp_task(void *pvParameters)
     struct dhcp *dhcp_client;
     printf("come into lwip!\r\n");
     for (;;) {
-        printf("current status is %d\r\n", dhcp_state);
         switch (dhcp_state) {
             case DHCP_START:
                 dhcp_start(&g_mynetif);

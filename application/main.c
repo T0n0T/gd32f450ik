@@ -63,6 +63,10 @@ int main(void)
 
     enet_system_setup();
     lwip_stack_init();
+#ifdef USE_DHCP
+    /* start DHCP client */
+    xTaskCreate(dhcp_task, "DHCP", configMINIMAL_STACK_SIZE * 2, NULL, 4, NULL);
+#endif /* USE_DHCP */
     /* start scheduler */
     vTaskStartScheduler();
     return 0;

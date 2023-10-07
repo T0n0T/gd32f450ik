@@ -46,7 +46,7 @@
         },
         "clangd.arguments": [
             "--compile-commands-dir=build/freertos",
-            "--query-driver=D:/keil/ARM/ARMCLANG/bin/armclang.exe",
+            "--query-driver=C:/keil/ARM/ARMCLANG/bin/armclang.exe",
             "--background-index",
         ],
     },

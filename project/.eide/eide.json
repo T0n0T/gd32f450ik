@@ -28,6 +28,9 @@
             "path": "../board/gd32f450i_eval.c"
           },
           {
+            "path": "../board/gd32f4xx_enet_eval.c"
+          },
+          {
             "path": "../board/gd32f4xx_it.c"
           },
           {
@@ -100,7 +103,150 @@
           {
             "name": "lwip",
             "files": [],
-            "folders": []
+            "folders": [
+              {
+                "name": "api",
+                "files": [
+                  {
+                    "path": "../packages/lwip-2.2.0/src/api/api_lib.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/api/api_msg.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/api/err.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/api/if_api.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/api/netbuf.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/api/netdb.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/api/netifapi.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/api/sockets.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/api/tcpip.c"
+                  }
+                ],
+                "folders": []
+              },
+              {
+                "name": "core",
+                "files": [
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/altcp_alloc.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/altcp_tcp.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/altcp.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/def.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/dns.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/inet_chksum.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/init.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/ip.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/mem.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/memp.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/netif.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/pbuf.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/raw.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/stats.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/sys.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/tcp_in.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/tcp_out.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/tcp.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/timeouts.c"
+                  },
+                  {
+                    "path": "../packages/lwip-2.2.0/src/core/udp.c"
+                  }
+                ],
+                "folders": [
+                  {
+                    "name": "ipv4",
+                    "files": [
+                      {
+                        "path": "../packages/lwip-2.2.0/src/core/ipv4/acd.c"
+                      },
+                      {
+                        "path": "../packages/lwip-2.2.0/src/core/ipv4/autoip.c"
+                      },
+                      {
+                        "path": "../packages/lwip-2.2.0/src/core/ipv4/dhcp.c"
+                      },
+                      {
+                        "path": "../packages/lwip-2.2.0/src/core/ipv4/etharp.c"
+                      },
+                      {
+                        "path": "../packages/lwip-2.2.0/src/core/ipv4/icmp.c"
+                      },
+                      {
+                        "path": "../packages/lwip-2.2.0/src/core/ipv4/igmp.c"
+                      },
+                      {
+                        "path": "../packages/lwip-2.2.0/src/core/ipv4/ip4_addr.c"
+                      },
+                      {
+                        "path": "../packages/lwip-2.2.0/src/core/ipv4/ip4_frag.c"
+                      },
+                      {
+                        "path": "../packages/lwip-2.2.0/src/core/ipv4/ip4.c"
+                      }
+                    ],
+                    "folders": []
+                  }
+                ]
+              },
+              {
+                "name": "netif",
+                "files": [
+                  {
+                    "path": "../packages/lwip-2.2.0/src/netif/ethernet.c"
+                  }
+                ],
+                "folders": []
+              }
+            ]
           },
           {
             "name": "ringbuf",
@@ -272,7 +418,20 @@
           },
           {
             "name": "lwip",
-            "files": [],
+            "files": [
+              {
+                "path": "../board/port/lwip/arch/sys_arch.c"
+              },
+              {
+                "path": "../board/port/lwip/FreeRTOS/ethernetif.c"
+              },
+              {
+                "path": "../board/port/lwip/netconf.c"
+              },
+              {
+                "path": "../board/port/lwip/tcp_client.c"
+              }
+            ],
             "folders": []
           }
         ]
@@ -355,10 +514,12 @@
           "../packages/FreeRTOS-Plus-CLI",
           "../packages/letter-shell/src",
           "../packages/letter-shell/extensions/shell_enhance",
+          "../packages/lwip-2.2.0/src/include",
           "../packages/lwip-2.2.0/src/include/lwip",
           "../packages/lwip-2.2.0/src/include/netif",
           "../board/port/letter-shell",
           "../board/port/lwip",
+          "../board/port/lwip/FreeRTOS",
           "../packages/ringbuf"
         ],
         "libList": [],

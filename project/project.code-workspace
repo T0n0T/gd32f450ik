@@ -50,6 +50,7 @@
             "--query-driver=C:/keil/ARM/ARMCLANG/bin/armclang.exe",
             "--background-index",
         ],
+        "clang-format.assumeFilename": "${workspaceFolder}/project/.clang-format"
     },
     "extensions": {
         "recommendations": [

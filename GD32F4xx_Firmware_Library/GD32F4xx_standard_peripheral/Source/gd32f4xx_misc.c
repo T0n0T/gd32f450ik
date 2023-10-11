@@ -66,19 +66,19 @@ void nvic_irq_enable(uint8_t nvic_irq, uint8_t nvic_irq_pre_priority,
 {
     uint32_t temp_priority = 0x00U, temp_pre = 0x00U, temp_sub = 0x00U;
     /* use the priority group value to get the temp_pre and the temp_sub */
-    if(((SCB->AIRCR) & (uint32_t)0x700U) == NVIC_PRIGROUP_PRE0_SUB4) {
+    if (((SCB->AIRCR) & (uint32_t)0x700U) == NVIC_PRIGROUP_PRE0_SUB4) {
         temp_pre = 0U;
         temp_sub = 0x4U;
-    } else if(((SCB->AIRCR) & (uint32_t)0x700U) == NVIC_PRIGROUP_PRE1_SUB3) {
+    } else if (((SCB->AIRCR) & (uint32_t)0x700U) == NVIC_PRIGROUP_PRE1_SUB3) {
         temp_pre = 1U;
         temp_sub = 0x3U;
-    } else if(((SCB->AIRCR) & (uint32_t)0x700U) == NVIC_PRIGROUP_PRE2_SUB2) {
+    } else if (((SCB->AIRCR) & (uint32_t)0x700U) == NVIC_PRIGROUP_PRE2_SUB2) {
         temp_pre = 2U;
         temp_sub = 0x2U;
-    } else if(((SCB->AIRCR) & (uint32_t)0x700U) == NVIC_PRIGROUP_PRE3_SUB1) {
+    } else if (((SCB->AIRCR) & (uint32_t)0x700U) == NVIC_PRIGROUP_PRE3_SUB1) {
         temp_pre = 3U;
         temp_sub = 0x1U;
-    } else if(((SCB->AIRCR) & (uint32_t)0x700U) == NVIC_PRIGROUP_PRE4_SUB0) {
+    } else if (((SCB->AIRCR) & (uint32_t)0x700U) == NVIC_PRIGROUP_PRE4_SUB0) {
         temp_pre = 4U;
         temp_sub = 0x0U;
     } else {
@@ -89,7 +89,7 @@ void nvic_irq_enable(uint8_t nvic_irq, uint8_t nvic_irq_pre_priority,
     /* get the temp_priority to fill the NVIC->IP register */
     temp_priority = (uint32_t)nvic_irq_pre_priority << (0x4U - temp_pre);
     temp_priority |= nvic_irq_sub_priority & (0x0FU >> (0x4U - temp_sub));
-    temp_priority = temp_priority << 0x04U;
+    temp_priority      = temp_priority << 0x04U;
     NVIC->IP[nvic_irq] = (uint8_t)temp_priority;
     /* enable the selected IRQ */
     NVIC->ISER[nvic_irq >> 0x05U] = (uint32_t)0x01U << (nvic_irq & (uint8_t)0x1FU);
@@ -165,7 +165,7 @@ void system_lowpower_reset(uint8_t lowpower_mode)
 
 void systick_clksource_set(uint32_t systick_clksource)
 {
-    if(SYSTICK_CLKSOURCE_HCLK == systick_clksource) {
+    if (SYSTICK_CLKSOURCE_HCLK == systick_clksource) {
         /* set the systick clock source from HCLK */
         SysTick->CTRL |= SYSTICK_CLKSOURCE_HCLK;
     } else {

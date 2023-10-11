@@ -5,7 +5,7 @@ CompileFlags:
       -std=gnu11,
       -Wall,
       -Wno-missing-prototypes,
-      "--include-directory=C:/keil/ARM/ARMCLANG/include",
+      "--include-directory=D:/keil/ARM/ARMCLANG/include",
     ]
   Remove: -W*
   Compiler: clang

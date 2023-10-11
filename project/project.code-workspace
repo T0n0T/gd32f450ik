@@ -47,13 +47,17 @@
         },
         "clangd.arguments": [
             "--compile-commands-dir=build/freertos",
-            "--query-driver=C:/keil/ARM/ARMCLANG/bin/armclang.exe",
+            "--query-driver=D:/keil/ARM/ARMCLANG/bin/armclang.exe",
             "--background-index",
             "--all-scopes-completion",
             "--completion-style=detailed",
             "--header-insertion=iwyu"
         ],
-        "clang-format.assumeFilename": "${workspaceFolder}/project/.clang-format"
+        "clang-format.assumeFilename": "${workspaceFolder}/project/.clang-format",
+        "[python]": {
+            "editor.defaultFormatter": "ms-python.black-formatter"
+        },
+        "python.formatting.provider": "none"
     },
     "extensions": {
         "recommendations": [

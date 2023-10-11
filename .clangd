@@ -25,6 +25,7 @@ Diagnostics:
         readability-braces-around-statements,
         readability-function-cognitive-complexity,
         modernize-use-trailing-return-type,
+        readability-isolate-declaration,
       ]
 Index:
   Background: Build

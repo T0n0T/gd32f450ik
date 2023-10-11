@@ -49,6 +49,9 @@
             "--compile-commands-dir=build/freertos",
             "--query-driver=C:/keil/ARM/ARMCLANG/bin/armclang.exe",
             "--background-index",
+            "--all-scopes-completion",
+            "--completion-style=detailed",
+            "--header-insertion=iwyu"
         ],
         "clang-format.assumeFilename": "${workspaceFolder}/project/.clang-format"
     },

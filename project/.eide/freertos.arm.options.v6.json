@@ -1,7 +1,14 @@
 {
     "version": 3,
     "beforeBuildTasks": [],
-    "afterBuildTasks": [],
+    "afterBuildTasks": [
+        {
+            "name": "Slash conversion",
+            "disable": false,
+            "abortAfterFailed": false,
+            "command": "powershell -Command \"(gc -encoding utf8 ${OutDir}/compile_commands.json) -replace '\\\\\\\\', '/' -replace 'c:', 'C:' | Out-File -encoding utf8 ${OutDir}/compile_commands.json\""
+        }
+    ],
     "global": {
         "use-microLIB": true,
         "output-debug-info": "enable"

@@ -10,6 +10,7 @@
     ],
     "settings": {
         "files.autoGuessEncoding": true,
+        "C_Cpp.intelliSenseEngine": "disabled",
         "C_Cpp.default.configurationProvider": "cl.eide",
         "C_Cpp.clang_format_style": "file:${workspaceFolder}/project/.clang-format",
         "C_Cpp.errorSquiggles": "disabled",

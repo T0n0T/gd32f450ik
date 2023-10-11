@@ -11,19 +11,8 @@ CompileFlags:
   Compiler: clang
 Diagnostics:
   ClangTidy:
-    # Add: [performance*, modernize*, readability*]
-    Remove:
-      [
-        abseil*,
-        fuchsia*,
-        llvmlib*,
-        zircon*,
-        altera*,
-        google-readability-todo,
-        readability-braces-around-statements,
-        hicpp-braces-around-statements,
-        modernize-use-trailing-return-type,
-      ]
+    Add: [performance*, modernize*, readability*]
+    Remove: [modernize-use-trailing-return-type]
 Index:
   Background: Build
 

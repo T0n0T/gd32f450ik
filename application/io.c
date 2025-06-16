@@ -2,11 +2,6 @@
 #include "gd32f450i_eval.h"
 #include "uart.h"
 
-// void USART0_IRQHandler(void)
-// {
-//     printf("%c");
-// }
-
 UINT8 UartGetc(void)
 {
     return (UINT8)usart_data_receive(EVAL_COM0);

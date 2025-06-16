@@ -1,0 +1,9 @@
+option('TARGET_USE_LOG',
+  type: 'boolean',
+  value: true,
+  description: 'Enable log')
+
+option('JLINK_REMOTE',
+  type: 'string',
+  value: 'disabled',
+  description: 'Enable JLink remote debug')

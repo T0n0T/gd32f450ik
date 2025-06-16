@@ -1,0 +1,4 @@
+h
+loadfile gd32fxx.hex
+r
+q

@@ -1,5 +1,6 @@
 liteos_c_args = [
     '-DLOSCFG_LIBC_NEWLIB=1',
+    '-DLOSCFG_POSIX_API=1',
 ]
 
 liteos_incdirs = include_directories(

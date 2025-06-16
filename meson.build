@@ -34,12 +34,17 @@ link_args = [
   '-mfpu=fpv4-sp-d16',
   '-mfloat-abi=hard',
   '-Wl,--gc-sections',
-  '-specs=picolibc.specs',
+  '-specs=nano.specs',
   '-Xlinker',
   '-Map=' + meson.current_build_dir() + '/gd32f4xx.map',
   '-T', meson.current_source_dir() + '/gd32f4xx.ld',
   '-Wl,--gc-sections',     # 删除未使用的段
   '-Wl,--print-memory-usage', # 打印内存使用情况
+  '-Wl,--wrap=_malloc_r',
+  '-Wl,--wrap=_realloc_r',
+  '-Wl,--wrap=_free_r',
+  '-Wl,--wrap=_memalign_r',
+  '-Wl,--wrap=_malloc_usable_size_r',
 ]
 
 # 包含子目录构建脚本
@@ -78,7 +83,7 @@ gd32f4xx_elf = executable('gd32f4xx',
     appdep_incdirs,
     liteos_incdirs, 
   ],
-  c_args: c_args,
+  c_args: c_args + liteos_c_args,
   link_args: link_args,
   name_suffix: 'elf'
 )

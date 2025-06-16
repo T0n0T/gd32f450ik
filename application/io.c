@@ -12,12 +12,11 @@ UINT8 UartGetc(void)
 int fputc(int ch, FILE *f)
 {
     usart_data_transmit(EVAL_COM0, (uint8_t)ch);
-    while (RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TBE))
-        ;
+    while (RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TBE));
     return ch;
 }
 #elif defined(__GNUC__)
-int _write(int fd, char *ptr, int len)
+ssize_t _write(int fd, char *ptr, int len)
 {
     int i = 0;
 
@@ -33,12 +32,10 @@ int _write(int fd, char *ptr, int len)
 
     while (*ptr && (i < len)) {
         usart_data_transmit(EVAL_COM0, *(uint8_t *)ptr);
-        while (RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TBE))
-            ;
+        while (RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TBE));
         if (*ptr == '\n') {
             usart_data_transmit(EVAL_COM0, '\r');
-            while (RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TBE))
-                ;
+            while (RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TBE));
         }
 
         i++;
@@ -46,6 +43,46 @@ int _write(int fd, char *ptr, int len)
     }
 
     return i;
+}
+
+int _open(const char *path, int oflag, ...)
+{
+    return -1;
+}
+
+int _close(int fd)
+{
+    return -1;
+}
+
+ssize_t _read(int fd, void *buf, size_t nbyte)
+{
+    return -1;
+}
+
+off_t _lseek(int fd, off_t offset, int whence)
+{
+    return -1;
+}
+
+int _unlink(const char *path)
+{
+    return -1;
+}
+
+int _fstat(int fd, struct stat *buf)
+{
+    return -1;
+}
+
+int _stat(const char *path, struct stat *buf)
+{
+    return -1;
+}
+
+int _sbrk(int incr)
+{
+    return -1;
 }
 
 #endif

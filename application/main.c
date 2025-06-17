@@ -5,7 +5,7 @@
 
 // 定义跳转地址宏，编译时传入
 #ifndef JUMP_ADDRESS
-#define JUMP_ADDRESS 0x08008000 // 默认跳转地址，可根据实际情况修改
+#define JUMP_ADDRESS 0x08010000 // 默认跳转地址，可根据实际情况修改
 #endif
 
 void main(void)
@@ -22,9 +22,6 @@ void main(void)
     }
 
     printf("Jump to application running ... \r\n");
-    delay_1ms(20);
-
-    // __disable_irq();
 
     SysTick->CTRL = 0;
     SysTick->LOAD = 0;
@@ -34,7 +31,7 @@ void main(void)
         NVIC_DisableIRQ((IRQn_Type)i);
         NVIC_ClearPendingIRQ((IRQn_Type)i);
     }
-
+    nvic_vector_table_set(NVIC_VECTTAB_FLASH, 0x10000);
     __set_CONTROL(0);
     __set_MSP(stk_addr);
 

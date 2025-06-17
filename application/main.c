@@ -63,8 +63,8 @@ ssize_t _write(int fd, char *ptr, int len)
     while (*ptr && (i < len)) {
         usart_data_transmit(EVAL_COM0, *(uint8_t *)ptr);
         while (RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TBE));
-        if (*ptr == '\n') {
-            usart_data_transmit(EVAL_COM0, '\r');
+        if (*ptr == '\r') {
+            usart_data_transmit(EVAL_COM0, '\n');
             while (RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TBE));
         }
 

@@ -10,6 +10,7 @@
 
 void main(void)
 {
+    gd_eval_com_init(EVAL_COM0);
     typedef void (*app_func_t)(void);
     uint32_t app_addr   = JUMP_ADDRESS;
     uint32_t stk_addr   = *((__IO uint32_t *)app_addr);

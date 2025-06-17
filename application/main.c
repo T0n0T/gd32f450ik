@@ -50,7 +50,6 @@ void led_flash(int times);
 int main(void)
 {
     /* initialize the LEDs */
-    nvic_vector_table_set(NVIC_VECTTAB_FLASH, 0x10000);
     led_init();
 
     /* configure systick */

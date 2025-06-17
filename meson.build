@@ -1,4 +1,4 @@
-project('gd32fxx_bin', 'c',
+project('gd32boot_bin', 'c',
   version: '1.0.0',
   default_options: [
     'buildtype=debugoptimized',
@@ -19,7 +19,7 @@ c_args = [
   '-mfpu=fpv4-sp-d16',
   '-mfloat-abi=hard',
   '-Wall',
-  '-specs=nano.specs',
+  '-specs=nosys.specs',
   '-ffunction-sections',
   '-fdata-sections',
   '-O0',                    # 优化等级2
@@ -34,24 +34,18 @@ link_args = [
   '-mfpu=fpv4-sp-d16',
   '-mfloat-abi=hard',
   '-Wl,--gc-sections',
-  '-specs=nano.specs',
+  '-specs=nosys.specs',
   '-Xlinker',
-  '-Map=' + meson.current_build_dir() + '/gd32f4xx.map',
+  '-Map=' + meson.current_build_dir() + '/bootloader.map',
   '-T', meson.current_source_dir() + '/gd32f4xx.ld',
   '-Wl,--gc-sections',     # 删除未使用的段
   '-Wl,--print-memory-usage', # 打印内存使用情况
-  '-Wl,--wrap=_malloc_r',
-  '-Wl,--wrap=_realloc_r',
-  '-Wl,--wrap=_free_r',
-  '-Wl,--wrap=_memalign_r',
-  '-Wl,--wrap=_malloc_usable_size_r',
 ]
 
 # 包含子目录构建脚本
 subdir('firmware')
 subdir('application')
 subdir('board')
-subdir('liteos')
 subdir('middlewares/cm_backtrace')
 
 appdep_incdirs = []
@@ -68,22 +62,20 @@ endif
 c_args += '-DUSE_MODBUS'
 
 # 创建最终可执行文件
-gd32f4xx_elf = executable('gd32f4xx',
+bootloader_elf = executable('bootloader',
   sources: [ 
     applications_sources,
     board_sources,
     firmware_sources,
     appdep_sources,
-    liteos_sources,
   ],
   include_directories: [
     applications_incdirs,
     board_incdirs,
     firmware_incdirs, 
     appdep_incdirs,
-    liteos_incdirs, 
   ],
-  c_args: c_args + liteos_c_args,
+  c_args: c_args,
   link_args: link_args,
   name_suffix: 'elf'
 )
@@ -103,8 +95,8 @@ jlink = find_program(jlink_exe)
 
 # 添加hex文件生成目标
 custom_target('hex',
-  input: gd32f4xx_elf,
-  output: 'gd32f4xx.hex',
+  input: bootloader_elf,
+  output: 'bootloader.hex',
   command: [objcopy, '-O', 'ihex', '@INPUT@', '@OUTPUT@'],
   build_by_default: true
 )
@@ -112,8 +104,8 @@ custom_target('hex',
 run_target('disasm',
   command: [
     'sh', '-c',
-    objdump.full_path() + ' -d -S -l -C ' + gd32f4xx_elf.full_path() + ' > ' + 
-    meson.current_build_dir() / 'gd32f4xx.dis'
+    objdump.full_path() + ' -d -S -l -C ' + bootloader_elf.full_path() + ' > ' + 
+    meson.current_build_dir() / 'bootloader.dis'
   ]
 )
 

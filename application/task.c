@@ -44,7 +44,7 @@ VOID TaskSampleEntry2(VOID)
 {
     while (1) {
         LOS_TaskDelay(5000); /* 5 Seconds */
-        printf("TaskSampleEntry2 running...\n");
+        printf("TaskSampleEntry2 running...\r\n");
     }
 }
 
@@ -70,7 +70,7 @@ VOID TaskSample(VOID)
     stTask.usTaskPrio   = 6; /* Os task priority is 6 */
     uwRet               = LOS_TaskCreate(&taskID1, &stTask);
     if (uwRet != LOS_OK) {
-        printf("Task1 create failed\n");
+        printf("Task1 create failed\r\n");
     }
 
     stTask.pfnTaskEntry = (TSK_ENTRY_FUNC)TaskSampleEntry2;
@@ -79,7 +79,7 @@ VOID TaskSample(VOID)
     stTask.usTaskPrio   = 7; /* Os task priority is 7 */
     uwRet               = LOS_TaskCreate(&taskID2, &stTask);
     if (uwRet != LOS_OK) {
-        printf("Task2 create failed\n");
+        printf("Task2 create failed\r\n");
     }
 }
 

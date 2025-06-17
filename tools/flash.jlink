@@ -1,4 +1,4 @@
 h
-loadfile gd32fxx.hex
+loadfile gd32f4xx.hex
 r
 q

@@ -19,7 +19,6 @@ c_args = [
   '-mfpu=fpv4-sp-d16',
   '-mfloat-abi=hard',
   '-Wall',
-  '-specs=nosys.specs',
   '-ffunction-sections',
   '-fdata-sections',
   '-O0',                    # 优化等级2
@@ -34,7 +33,7 @@ link_args = [
   '-mfpu=fpv4-sp-d16',
   '-mfloat-abi=hard',
   '-Wl,--gc-sections',
-  '-specs=nosys.specs',
+  '-nostdlib',
   '-Xlinker',
   '-Map=' + meson.current_build_dir() + '/bootloader.map',
   '-T', meson.current_source_dir() + '/gd32f4xx.ld',
@@ -46,18 +45,9 @@ link_args = [
 subdir('firmware')
 subdir('application')
 subdir('board')
-subdir('middlewares/cm_backtrace')
 
 appdep_incdirs = []
 appdep_sources = []
-if get_option('buildtype').startswith('debug')
-  message('Use debug buildtype' + get_option('buildtype'))
-  appdep_sources += cmb_srcs
-  appdep_incdirs += cmb_incs
-  c_args += '-DCM_BACKTRACE_ENABLE'  # 添加编译宏以启用相关代码
-  c_args += '-DCMB_USER_CFG'
-  c_args += '-DDEBUG'
-endif
 
 c_args += '-DUSE_MODBUS'
 
@@ -65,13 +55,11 @@ c_args += '-DUSE_MODBUS'
 bootloader_elf = executable('bootloader',
   sources: [ 
     applications_sources,
-    board_sources,
     firmware_sources,
     appdep_sources,
   ],
   include_directories: [
     applications_incdirs,
-    board_incdirs,
     firmware_incdirs, 
     appdep_incdirs,
   ],

@@ -6,7 +6,8 @@ MEMORY
 }
 
 /* Entry Point */
-ENTRY(Reset_Handler)
+ENTRY(__start)
+PROVIDE(_reset = SystemInit);
 
 /* Highest address of the user mode stack */
 _estack = ORIGIN(SRAM) + LENGTH(SRAM);    /* end of RAM */
@@ -20,8 +21,10 @@ SECTIONS
   /* The startup code goes first into FLASH */
   .isr_vector :
   {
-    . = ALIGN(4);
-    KEEP(*(.isr_vector)) /* Startup code */
+    . = ALIGN(4);    
+    _vector_start = .;
+    KEEP(*(.vectors))
+    _vector_end = .;
     . = ALIGN(4);
   } >FLASH
 
@@ -57,10 +60,12 @@ SECTIONS
   {
     . = ALIGN(4);
     _sdata = .;        /* create a global symbol at data start */
+    __data_start = _sdata;
     *(.data)           /* .data sections */
     *(.data*)          /* .data* sections */
     . = ALIGN(4);
     _edata = .;        /* define a global symbol at data end */
+    __data_end = _edata;
   } >SRAM AT> FLASH
 
   /* Uninitialized data section */

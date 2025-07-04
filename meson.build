@@ -17,7 +17,7 @@ c_args = [
   '-mcpu=cortex-m4',
   '-mthumb',
   '-mfpu=fpv4-sp-d16',
-  '-mfloat-abi=hard',
+  '-mfloat-abi=hard',    
   '-Wall',
   '-ffunction-sections',
   '-fdata-sections',
@@ -35,7 +35,7 @@ link_args = [
   '-Wl,--gc-sections',
   '-nostdlib',
   '-Xlinker',
-  '-Map=' + meson.current_build_dir() + '/bootloader.map',
+  '-Map=' + meson.current_build_dir() + '/basic.map',
   '-T', meson.current_source_dir() + '/gd32f4xx.ld',
   '-Wl,--gc-sections',     # 删除未使用的段
   '-Wl,--print-memory-usage', # 打印内存使用情况
@@ -49,18 +49,18 @@ subdir('board')
 appdep_incdirs = []
 appdep_sources = []
 
-c_args += '-DUSE_MODBUS'
-
 # 创建最终可执行文件
-bootloader_elf = executable('bootloader',
+bootloader_elf = executable('basic',
   sources: [ 
     applications_sources,
     firmware_sources,
+    board_sources,
     appdep_sources,
   ],
   include_directories: [
     applications_incdirs,
     firmware_incdirs, 
+    board_incdirs,
     appdep_incdirs,
   ],
   c_args: c_args,
@@ -84,7 +84,7 @@ jlink = find_program(jlink_exe)
 # 添加hex文件生成目标
 custom_target('hex',
   input: bootloader_elf,
-  output: 'bootloader.hex',
+  output: 'basic.hex',
   command: [objcopy, '-O', 'ihex', '@INPUT@', '@OUTPUT@'],
   build_by_default: true
 )
@@ -93,7 +93,7 @@ run_target('disasm',
   command: [
     'sh', '-c',
     objdump.full_path() + ' -d -S -l -C ' + bootloader_elf.full_path() + ' > ' + 
-    meson.current_build_dir() / 'bootloader.dis'
+    meson.current_build_dir() / 'basic.dis'
   ]
 )
 

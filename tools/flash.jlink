@@ -1,4 +1,4 @@
 h
-loadfile bootloader.hex
+loadfile basic.hex
 r
 q

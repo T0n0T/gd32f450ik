@@ -6,12 +6,43 @@
 .fpu softvfp
 .thumb
 
+.global _vector_table
+.type _vector_table, %object
+
+.global _main_stack
+.type _main_stack, %object
+
+.global _interrupt_stacks
+.type _interrupt_stacks, %object
+
+.global _reset
+.type _reset, %function
+
+.global _arm_init_arch_hw_at_boot
+.type _arm_init_arch_hw_at_boot, %function
+
+.global _prep_c
+.type _prep_c, %function
+
 /*
  * The entry point is located at the z_arm_reset symbol, which
  * is fetched by a XIP image playing the role of a bootloader, which jumps to
  * it, not through the reset vector mechanism. Such bootloaders might want to
  * search for a __start symbol instead, so create that alias here.
  */
+
+@ Calculate _EXC_IRQ_DEFAULT_PRIO for assembly:
+@ _EXCEPTION_RESERVED_PRIO = 1
+@ _EXC_SVC_PRIO = 1
+@ _IRQ_PRIO_OFFSET = _EXCEPTION_RESERVED_PRIO + _EXC_SVC_PRIO = 1 + 1 = 2
+@ __NVIC_PRIO_BITS = 4 (from core_cm4.h)
+@ _EXC_PRIO(pri) = (((pri) << (8 - __NVIC_PRIO_BITS)) & 0xff)
+@ _EXC_IRQ_DEFAULT_PRIO = _EXC_PRIO(_IRQ_PRIO_OFFSET) = _EXC_PRIO(2)
+@ _EXC_IRQ_DEFAULT_PRIO = ((2 << (8 - 4)) & 0xff) = ((2 << 4) & 0xff) = (32 & 0xff) = 32
+.equ _EXC_IRQ_DEFAULT_PRIO, 32
+
+.global __start
+.type __start, %function
 .section .text._reset_section, "ax"
 .align 4
 __start:
@@ -25,10 +56,10 @@ __start:
     msr MSPLIM, r0
     msr PSPLIM, r0
 
-    ldr r0, =_main_stack + _MAIN_STACK_SIZE
+    ldr r0, =_main_stacks + _MAIN_STACK_SIZE
     msr msp, r0
 
-    bl SystemInit
+    bl _reset
     /* Initialize core architecture registers and system blocks */
     bl _arm_init_arch_hw_at_boot
 

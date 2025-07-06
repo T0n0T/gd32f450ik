@@ -1,8 +1,8 @@
 MEMORY
 {
   FLASH (rx)            : ORIGIN = 0x08000000, LENGTH = 3072K
-  TCMSRAM (rw)          : ORIGIN = 0x10000000, LENGTH = 64K
-  SRAM (rw)             : ORIGIN = 0x20000000, LENGTH = 192K
+  TCMSRAM (rwx)          : ORIGIN = 0x10000000, LENGTH = 64K
+  SRAM (rwx)             : ORIGIN = 0x20000000, LENGTH = 192K
 }
 
 /* Entry Point */
@@ -24,8 +24,8 @@ SECTIONS
     . = ALIGN(4);    
     _vector_start = .;
     KEEP(*(.vectors))
+    KEEP(*(.gnu.linkonce.irq_vector_table*))
     _vector_end = .;
-    . = ALIGN(4);
   } >FLASH
 
   /* The program code and other data goes into FLASH */
@@ -39,6 +39,7 @@ SECTIONS
     *(.glue_7t)        /* glue thumb to arm code */
     *(.eh_frame)
 
+    KEEP(*(.gnu.linkonce.syscall_tables))
     . = ALIGN(4);
     _etext = .;        /* define a global symbols at end of code */
   } >FLASH
@@ -53,7 +54,7 @@ SECTIONS
   } >FLASH
 
   /* used by the startup to initialize data */
-  _sidata = LOADADDR(.data);
+  __data_region_start = LOADADDR(.data);
 
   /* Initialized data sections goes into RAM, load LMA copy after code */
   .data :
@@ -68,10 +69,11 @@ SECTIONS
     __data_end = _edata;
   } >SRAM AT> FLASH
 
-  /* Uninitialized data section */
-  . = ALIGN(4);
+  __data_region_end = .;
+
   .bss :
   {
+    . = ALIGN(4);
     /* This is used by the startup in order to initialize the .bss section */
     _sbss = .;         /* define a global symbol at bss start */
     __bss_start = _sbss;
@@ -83,6 +85,14 @@ SECTIONS
     _ebss = .;         /* define a global symbol at bss end */
     __bss_end = _ebss;
   } >SRAM
+
+  /* No-initialization section for variables that should retain their value across resets */
+  .noinit (NOLOAD) :
+  {
+    . = ALIGN(4);
+    *(.noinit)         /* .noinit sections */
+    . = ALIGN(4);
+  } >TCMSRAM
 
   /* User_heap_stack section, used to check that there is enough RAM left */
   ._user_heap_stack :

@@ -8,5 +8,5 @@
         "format": "c",
         "charconv": "c"
     },
-    "cortex-debug.variableUseNaturalFormat": true
+    "cortex-debug.variableUseNaturalFormat": false
 }

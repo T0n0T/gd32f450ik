@@ -31,15 +31,11 @@
  * search for a __start symbol instead, so create that alias here.
  */
 
-@ Calculate _EXC_IRQ_DEFAULT_PRIO for assembly:
-@ _EXCEPTION_RESERVED_PRIO = 1
-@ _EXC_SVC_PRIO = 1
-@ _IRQ_PRIO_OFFSET = _EXCEPTION_RESERVED_PRIO + _EXC_SVC_PRIO = 1 + 1 = 2
-@ __NVIC_PRIO_BITS = 4 (from core_cm4.h)
-@ _EXC_PRIO(pri) = (((pri) << (8 - __NVIC_PRIO_BITS)) & 0xff)
-@ _EXC_IRQ_DEFAULT_PRIO = _EXC_PRIO(_IRQ_PRIO_OFFSET) = _EXC_PRIO(2)
-@ _EXC_IRQ_DEFAULT_PRIO = ((2 << (8 - 4)) & 0xff) = ((2 << 4) & 0xff) = (32 & 0xff) = 32
-.equ _EXC_IRQ_DEFAULT_PRIO, 32
+.global __reset
+.type __reset, %function
+.section .text._reset_section, "ax"
+.align 4
+__reset:
 
 .global __start
 .type __start, %function
@@ -51,12 +47,12 @@ __start:
     msr CONTROL, r0
     isb
 
-    /* Clear SPLIM registers */
-    movs.n r0, #0
-    msr MSPLIM, r0
-    msr PSPLIM, r0
+    @ /* Clear SPLIM registers */
+    @ movs.n r0, #0
+    @ msr MSPLIM, r0
+    @ msr PSPLIM, r0
 
-    ldr r0, =_main_stacks + _MAIN_STACK_SIZE
+    ldr r0, =_main_stack + _MAIN_STACK_SIZE
     msr msp, r0
 
     bl _reset

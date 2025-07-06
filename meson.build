@@ -11,7 +11,6 @@ cross_file = 'tools/toolchains/arm-none-eabi-gcc.txt'
 
 # 全局编译参数
 c_args = [
-  '-D__FPU_PRESENT',
   '-DGD32F450',
   '-DGD32F450I_EVAL',
   '-mcpu=cortex-m4',
@@ -33,7 +32,7 @@ link_args = [
   '-mfpu=fpv4-sp-d16',
   '-mfloat-abi=hard',
   '-Wl,--gc-sections',
-  '-nostdlib',
+  '-nolibc',
   '-Xlinker',
   '-Map=' + meson.current_build_dir() + '/basic.map',
   '-T', meson.current_source_dir() + '/gd32f4xx.ld',
@@ -44,22 +43,35 @@ link_args = [
 # 包含子目录构建脚本
 subdir('firmware')
 subdir('application')
+subdir('platform')
 subdir('board')
+subdir('middlewares/cm_backtrace')
 
 appdep_incdirs = []
 appdep_sources = []
 
+if get_option('buildtype').startswith('debug')
+  message('Use debug buildtype' + get_option('buildtype'))
+  appdep_sources += cmb_srcs
+  appdep_incdirs += cmb_incs
+  c_args += '-DCM_BACKTRACE_ENABLE'  # 添加编译宏以启用相关代码
+  c_args += '-DCMB_USER_CFG'
+  c_args += '-DDEBUG'
+endif
+
 # 创建最终可执行文件
-bootloader_elf = executable('basic',
+baselayer_elf = executable('basic',
   sources: [ 
     applications_sources,
     firmware_sources,
+    platform_sources, 
     board_sources,
     appdep_sources,
   ],
   include_directories: [
     applications_incdirs,
     firmware_incdirs, 
+    platform_incdirs,
     board_incdirs,
     appdep_incdirs,
   ],
@@ -83,7 +95,7 @@ jlink = find_program(jlink_exe)
 
 # 添加hex文件生成目标
 custom_target('hex',
-  input: bootloader_elf,
+  input: baselayer_elf,
   output: 'basic.hex',
   command: [objcopy, '-O', 'ihex', '@INPUT@', '@OUTPUT@'],
   build_by_default: true
@@ -92,7 +104,7 @@ custom_target('hex',
 run_target('disasm',
   command: [
     'sh', '-c',
-    objdump.full_path() + ' -d -S -l -C ' + bootloader_elf.full_path() + ' > ' + 
+    objdump.full_path() + ' -d -l -C ' + baselayer_elf.full_path() + ' > ' + 
     meson.current_build_dir() / 'basic.dis'
   ]
 )

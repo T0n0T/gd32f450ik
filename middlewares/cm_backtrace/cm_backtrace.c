@@ -722,4 +722,10 @@ void cm_backtrace_fault(uint32_t fault_handler_lr, uint32_t fault_handler_sp) {
 #endif
 
     print_call_stack(stack_pointer);
+
+    while (1)
+    {
+        /* code */
+    }
+    
 }

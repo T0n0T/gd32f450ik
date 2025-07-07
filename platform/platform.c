@@ -1,6 +1,8 @@
 #include <stdint.h>
 #include <string.h>
+#include "stdio.h"
 #include "gd32f4xx.h"
+#include "gd32f450i_eval.h"
 #include "platform.h"
 #ifdef DEBUG
 #include "cm_backtrace.h"
@@ -73,7 +75,7 @@ void _cstart(void)
     SCB->CFSR = SCB_CFSR_USGFAULTSR_Msk | SCB_CFSR_MEMFAULTSR_Msk | SCB_CFSR_BUSFAULTSR_Msk;
     SCB->HFSR = 0xffffffff;
 
-    // log_core_init();
+    gd_eval_com_init(EVAL_COM0);
 #ifdef DEBUG
     cm_backtrace_init("baselayer", "gd32f4xx", "1.0.0");
 #endif
@@ -95,4 +97,10 @@ void _prep_c(void)
     _bss_zero();
 
     _cstart();
+}
+
+void _putchar(char ch)
+{
+    usart_data_transmit(EVAL_COM0, (uint8_t)ch);
+    while (RESET == usart_flag_get(EVAL_COM0, USART_FLAG_TBE));
 }

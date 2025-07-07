@@ -32,7 +32,7 @@ link_args = [
   '-mfpu=fpv4-sp-d16',
   '-mfloat-abi=hard',
   '-Wl,--gc-sections',
-  '-nolibc',
+  '-nostdlib',
   '-Xlinker',
   '-Map=' + meson.current_build_dir() + '/basic.map',
   '-T', meson.current_source_dir() + '/gd32f4xx.ld',
@@ -46,9 +46,10 @@ subdir('application')
 subdir('platform')
 subdir('board')
 subdir('middlewares/cm_backtrace')
+subdir('middlewares/printf')
 
-appdep_incdirs = []
-appdep_sources = []
+appdep_incdirs = [ printf_incs ]
+appdep_sources = [ printf_srcs ]
 
 if get_option('buildtype').startswith('debug')
   message('Use debug buildtype' + get_option('buildtype'))

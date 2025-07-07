@@ -77,7 +77,7 @@ void _cstart(void)
 
     gd_eval_com_init(EVAL_COM0);
 #ifdef DEBUG
-    cm_backtrace_init("baselayer", "gd32f4xx", "1.0.0");
+    cm_backtrace_init("build/baselayer", "gd32f4xx", "1.0.0");
 #endif
 
     extern int main(void);

@@ -42,6 +42,11 @@ __reset:
 .section .text._reset_section, "ax"
 .align 4
 __start:
+    ldr r0, =_main_stack
+    ldr r1, =0xaa
+    ldr r2, =_MAIN_STACK_SIZE
+    bl memset
+
     /* Reset CONTROL register */
     movs.n r0, #0
     msr CONTROL, r0
@@ -63,6 +68,10 @@ __start:
     movs.n r0, #_EXC_IRQ_DEFAULT_PRIO
     msr BASEPRI, r0
 
+    ldr r0, =_interrupt_stacks
+    ldr r1, =0xaa
+    ldr r2, =_ISR_STACK_SIZE
+    bl memset
     /*
      * Set PSP and use it to boot without using MSP, so that it
      * gets set to _interrupt_stacks during initialization.

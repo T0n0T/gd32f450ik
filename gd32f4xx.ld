@@ -86,26 +86,28 @@ SECTIONS
     __bss_end = _ebss;
   } >SRAM
 
+  /* User_heap section, used to check that there is enough RAM left */
+  ._user_heap :
+  {
+    . = ALIGN(8);
+    __heap_start = .;
+    . = . + _Min_Heap_Size;
+    . = ALIGN(8);
+    PROVIDE ( end = . );
+    PROVIDE ( _end = . );
+    __heap_end = .;
+  } >SRAM
+
+
   /* No-initialization section for variables that should retain their value across resets */
   .noinit (NOLOAD) :
   {
     . = ALIGN(4);
-    *(.noinit)         /* .noinit sections */
-    . = ALIGN(4);
-  } >TCMSRAM
-
-  /* User_heap_stack section, used to check that there is enough RAM left */
-  ._user_heap_stack :
-  {
-    . = ALIGN(8);
     _sstack = .;
-    PROVIDE ( end = . );
-    PROVIDE ( _end = . );
-    . = . + _Min_Heap_Size;
-    . = . + _Min_Stack_Size;
-    . = ALIGN(8);
+    *(.noinit)         /* .noinit sections */    
+    . = ALIGN(4);
     _estack = .;
-  } >SRAM
+  } >TCMSRAM
 
   /* Remove information from the standard libraries */
   /DISCARD/ :

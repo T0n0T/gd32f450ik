@@ -61,7 +61,7 @@ if get_option('buildtype').startswith('debug')
 endif
 
 # 创建最终可执行文件
-baselayer_elf = executable('basic',
+baselayer_elf = executable('baselayer',
   sources: [ 
     applications_sources,
     firmware_sources,
@@ -97,7 +97,7 @@ jlink = find_program(jlink_exe)
 # 添加hex文件生成目标
 custom_target('hex',
   input: baselayer_elf,
-  output: 'basic.hex',
+  output: 'baselayer.hex',
   command: [objcopy, '-O', 'ihex', '@INPUT@', '@OUTPUT@'],
   build_by_default: true
 )
@@ -106,7 +106,7 @@ run_target('disasm',
   command: [
     'sh', '-c',
     objdump.full_path() + ' -d -l -C ' + baselayer_elf.full_path() + ' > ' + 
-    meson.current_build_dir() / 'basic.dis'
+    meson.current_build_dir() / 'baselayer.dis'
   ]
 )
 

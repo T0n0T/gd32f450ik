@@ -1,4 +1,5 @@
 h
 loadfile baselayer.hex
+loadfile demo.hex 
 r
 q

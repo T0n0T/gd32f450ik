@@ -47,6 +47,7 @@ subdir('platform')
 subdir('board')
 subdir('middlewares/cm_backtrace')
 subdir('middlewares/printf')
+subdir('demo')
 
 appdep_incdirs = [ printf_incs ]
 appdep_sources = [ printf_srcs ]
@@ -137,3 +138,30 @@ else
   )
 endif
 
+
+# 编译 demo.elf
+demo_elf = executable('demo',
+  sources: demo_sources,
+  include_directories: [
+    demo_incdirs,
+    platform_incdirs, # 包含 platform 目录的头文件
+  ],
+  c_args: demo_c_args,
+  link_args: demo_link_args,
+  name_suffix: 'elf'
+)
+
+custom_target('demo.hex',
+  input: demo_elf,
+  output: 'demo.hex',
+  command: [objcopy, '-O', 'ihex', '@INPUT@', '@OUTPUT@'],
+)
+
+# 生成 demo.dis
+run_target('demo.dis',
+  command: [
+    'sh', '-c',
+    objdump.full_path() + ' -d -l -C ' + demo_elf.full_path() + ' > ' +
+    meson.current_build_dir() / 'demo.dis'
+  ]
+)

@@ -79,7 +79,7 @@ void _cstart(void)
 #ifdef DEBUG
     cm_backtrace_init("build/baselayer", "gd32f4xx", "1.0.0");
 #endif
-
+    printf("\r\nplatform init done\r\n");
     extern int main(void);
     main();
 }

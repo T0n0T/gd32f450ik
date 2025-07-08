@@ -11,7 +11,7 @@ extern "C" {
     {                                                    \
         __asm(                                           \
             "svc %0\n"                                   \
-            "bx r14" : : "I"(number) : "r0");            \
+            "bx lr" : : "I"(number) : "r0");             \
     }
 
 #ifdef __cplusplus

@@ -26,7 +26,7 @@ __svc:
     ldr r4, [r2, r1]                        //load svc handler address
     cbz r4, __svc_invalid                   //check if svc handler address is 0
 
-    ldr	r0, [r5, #0]
+    ldr	r0, [r5, #0]                        
     ldr	r1, [r5, #4]
     ldr	r2, [r5, #8]
     ldr	r3, [r5, #12]
@@ -38,4 +38,5 @@ __svc:
 __svc_invalid:
     mov r0, #0xFFFFFFFF
     str r0, [r5, #0]
+    pop {r4, r5, lr}
     bx lr

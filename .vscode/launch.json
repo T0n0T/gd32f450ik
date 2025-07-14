@@ -10,7 +10,14 @@
             "request": "launch",
             "servertype": "jlink",
             "cwd": "${workspaceRoot}",
-            "executable": "${workspaceRoot}/build/baselayer.elf",
+            "loadFiles": [
+                "${workspaceRoot}/build/baselayer.elf",
+                "${workspaceRoot}/build/demo.elf"
+            ],
+            "symbolFiles": [
+                "${workspaceRoot}/build/baselayer.elf",
+                "${workspaceRoot}/build/demo.elf"
+            ],
             "device": "GD32F450IK",
             "interface": "swd",
             "svdFile": "${workspaceRoot}/tools/svd/GD32F4xx.svd",

@@ -14,7 +14,7 @@ int main(void)
     memcpy(hellobss, hellodata, sizeof(hellobss));
     printf("svc_1 return: %lu\r\n", hello_svc(1, 2, 3));
     int (*entry)(void);
-    entry = (int (*)(void))0x08010000;
+    entry = (int (*)(void))0x08010005;
     entry();
     // NEVER REACH HERE
     while (1) {

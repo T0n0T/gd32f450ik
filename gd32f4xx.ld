@@ -36,7 +36,6 @@ SECTIONS
     *(.glue_7t)        /* glue thumb to arm code */
     *(.eh_frame)
 
-    //cherry usb dependency
     . = ALIGN(4);
     __usbh_class_info_start__ = .;
     KEEP(*(.usbh_class_info))

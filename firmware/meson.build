@@ -11,7 +11,7 @@ firmware_incdirs = include_directories(
 
 # 源文件
 firmware_sources = files(
-  'CMSIS/GD/GD32F4xx/Source/GCC/startup_gd32f4xx.S',
+  # 'CMSIS/GD/GD32F4xx/Source/GCC/startup_gd32f4xx.S',
   'CMSIS/GD/GD32F4xx/Source/system_gd32f4xx.c',
   'GD32F4xx_standard_peripheral/Source/gd32f4xx_wwdgt.c',
   'GD32F4xx_standard_peripheral/Source/gd32f4xx_ctc.c',

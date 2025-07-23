@@ -36,9 +36,6 @@ SECTIONS
     *(.glue_7t)        /* glue thumb to arm code */
     *(.eh_frame)
 
-    KEEP (*(.init))
-    KEEP (*(.fini))
-
     . = ALIGN(4);
     _etext = .;        /* define a global symbols at end of code */
   } >FLASH
@@ -52,34 +49,6 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH
 
-  .ARM.extab   : { *(.ARM.extab* .gnu.linkonce.armextab.*) } >FLASH
-  .ARM : {
-    __exidx_start = .;
-    *(.ARM.exidx*)
-    __exidx_end = .;
-  } >FLASH
-
-  .preinit_array     :
-  {
-    PROVIDE_HIDDEN (__preinit_array_start = .);
-    KEEP (*(.preinit_array*))
-    PROVIDE_HIDDEN (__preinit_array_end = .);
-  } >FLASH
-  .init_array :
-  {
-    PROVIDE_HIDDEN (__init_array_start = .);
-    KEEP (*(SORT(.init_array.*)))
-    KEEP (*(.init_array*))
-    PROVIDE_HIDDEN (__init_array_end = .);
-  } >FLASH
-  .fini_array :
-  {
-    PROVIDE_HIDDEN (__fini_array_start = .);
-    KEEP (*(SORT(.fini_array.*)))
-    KEEP (*(.fini_array*))
-    PROVIDE_HIDDEN (__fini_array_end = .);
-  } >FLASH
-
   /* used by the startup to initialize data */
   _sidata = LOADADDR(.data);
 
@@ -90,13 +59,9 @@ SECTIONS
     _sdata = .;        /* create a global symbol at data start */
     *(.data)           /* .data sections */
     *(.data*)          /* .data* sections */
-    *(.RamFunc)        /* .RamFunc sections */
-    *(.RamFunc*)       /* .RamFunc* sections */
-
     . = ALIGN(4);
     _edata = .;        /* define a global symbol at data end */
   } >SRAM AT> FLASH
-
 
   /* Uninitialized data section */
   . = ALIGN(4);
@@ -124,6 +89,7 @@ SECTIONS
     . = . + _Min_Heap_Size;
     . = . + _Min_Stack_Size;
     . = ALIGN(8);
+    _estack = .;
   } >SRAM
 
   /* Remove information from the standard libraries */

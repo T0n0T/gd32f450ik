@@ -20,7 +20,7 @@
     .type  g_pfnVectors, %object
 
 g_pfnVectors:
-    .word     _estack                       // Top of Stack
+    .word     _estack                           // Top of Stack, start of sp
     .word     Reset_Handler                     // Reset Handler
     .word     NMI_Handler                       // NMI Handler
     .word     HardFault_Handler                 // Hard Fault Handler

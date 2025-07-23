@@ -36,8 +36,11 @@ SECTIONS
     *(.glue_7t)        /* glue thumb to arm code */
     *(.eh_frame)
 
-    KEEP (*(.init))
-    KEEP (*(.fini))
+    //cherry usb dependency
+    . = ALIGN(4);
+    __usbh_class_info_start__ = .;
+    KEEP(*(.usbh_class_info))
+    __usbh_class_info_end__ = .;
 
     . = ALIGN(4);
     _etext = .;        /* define a global symbols at end of code */
@@ -59,26 +62,6 @@ SECTIONS
     __exidx_end = .;
   } >FLASH
 
-  .preinit_array     :
-  {
-    PROVIDE_HIDDEN (__preinit_array_start = .);
-    KEEP (*(.preinit_array*))
-    PROVIDE_HIDDEN (__preinit_array_end = .);
-  } >FLASH
-  .init_array :
-  {
-    PROVIDE_HIDDEN (__init_array_start = .);
-    KEEP (*(SORT(.init_array.*)))
-    KEEP (*(.init_array*))
-    PROVIDE_HIDDEN (__init_array_end = .);
-  } >FLASH
-  .fini_array :
-  {
-    PROVIDE_HIDDEN (__fini_array_start = .);
-    KEEP (*(SORT(.fini_array.*)))
-    KEEP (*(.fini_array*))
-    PROVIDE_HIDDEN (__fini_array_end = .);
-  } >FLASH
 
   /* used by the startup to initialize data */
   _sidata = LOADADDR(.data);
@@ -114,17 +97,25 @@ SECTIONS
     __bss_end = _ebss;
   } >SRAM
 
-  /* User_heap_stack section, used to check that there is enough RAM left */
-  ._user_heap_stack :
+  ._user_heap :
+  {
+    . = ALIGN(8);
+    _sheap = .;
+    . = . + _Min_Heap_Size;
+    . = ALIGN(8);
+    PROVIDE ( end = . );
+    PROVIDE ( _end = . );    
+    _eheap = .;
+  } >SRAM
+
+  ._user_stack :
   {
     . = ALIGN(8);
     _sstack = .;
-    PROVIDE ( end = . );
-    PROVIDE ( _end = . );
-    . = . + _Min_Heap_Size;
-    . = . + _Min_Stack_Size;
+    . = .+ _Min_Stack_Size;
     . = ALIGN(8);
-  } >SRAM
+    _estack = .;
+  } >TCMSRAM
 
   /* Remove information from the standard libraries */
   /DISCARD/ :

@@ -36,7 +36,7 @@ link_args = [
   '-Wl,--gc-sections',
   '-specs=nosys.specs',
   '-Xlinker',
-  '-Map=' + meson.current_build_dir() + '/bootloader.map',
+  '-Map=' + meson.current_build_dir() + '/gd32f4xx.map',
   '-T', meson.current_source_dir() + '/gd32f4xx.ld',
   '-Wl,--gc-sections',     # 删除未使用的段
   '-Wl,--print-memory-usage', # 打印内存使用情况
@@ -47,6 +47,8 @@ subdir('firmware')
 subdir('application')
 subdir('board')
 subdir('middlewares/cm_backtrace')
+subdir('middlewares/SEGGER')
+
 
 appdep_incdirs = []
 appdep_sources = []
@@ -57,12 +59,14 @@ if get_option('buildtype').startswith('debug')
   c_args += '-DCM_BACKTRACE_ENABLE'  # 添加编译宏以启用相关代码
   c_args += '-DCMB_USER_CFG'
   c_args += '-DDEBUG'
+  appdep_sources += segger_srcs
+  appdep_incdirs += segger_incs
 endif
 
 c_args += '-DUSE_MODBUS'
 
 # 创建最终可执行文件
-bootloader_elf = executable('bootloader',
+gd32f4xx_elf = executable('gd32f4xx',
   sources: [ 
     applications_sources,
     board_sources,
@@ -95,8 +99,8 @@ jlink = find_program(jlink_exe)
 
 # 添加hex文件生成目标
 custom_target('hex',
-  input: bootloader_elf,
-  output: 'bootloader.hex',
+  input: gd32f4xx_elf,
+  output: 'gd32f4xx.hex',
   command: [objcopy, '-O', 'ihex', '@INPUT@', '@OUTPUT@'],
   build_by_default: true
 )
@@ -104,8 +108,8 @@ custom_target('hex',
 run_target('disasm',
   command: [
     'sh', '-c',
-    objdump.full_path() + ' -d -S -l -C ' + bootloader_elf.full_path() + ' > ' + 
-    meson.current_build_dir() / 'bootloader.dis'
+    objdump.full_path() + ' -d -S -l -C ' + gd32f4xx_elf.full_path() + ' > ' + 
+    meson.current_build_dir() / 'gd32f4xx.dis'
   ]
 )
 

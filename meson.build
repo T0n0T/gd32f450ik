@@ -34,7 +34,7 @@ link_args = [
   '-Wl,--gc-sections',
   '-nostdlib',
   '-Xlinker',
-  '-Map=' + meson.current_build_dir() + '/basic.map',
+  '-Map=' + meson.current_build_dir() + '/baselayer.map',
   '-T', meson.current_source_dir() + '/gd32f4xx.ld',
   '-Wl,--gc-sections',     # 删除未使用的段
   '-Wl,--print-memory-usage', # 打印内存使用情况

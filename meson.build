@@ -50,8 +50,8 @@ subdir('middlewares/cm_backtrace')
 subdir('middlewares/SEGGER')
 subdir('middlewares/CherryUSB')
 
-appdep_incdirs = [cherryusb_incs]
-appdep_sources = [cherryusb_srcs]
+appdep_incdirs = []
+appdep_sources = []
 if get_option('buildtype').startswith('debug')
   message('Use debug buildtype' + get_option('buildtype'))
   appdep_sources += cmb_srcs
@@ -63,7 +63,8 @@ if get_option('buildtype').startswith('debug')
   appdep_incdirs += segger_incs
 endif
 
-c_args += '-DUSE_MODBUS'
+c_args += '-DUSE_DEVICE_MODE'
+c_args += '-DUSE_USB_FS'
 
 # 创建最终可执行文件
 gd32f4xx_elf = executable('gd32f4xx',

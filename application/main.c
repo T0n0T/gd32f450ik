@@ -1,6 +1,7 @@
 #include "gd32f4xx.h"
 #include "gd32f450i_eval.h"
 #include <stdio.h>
+#include <string.h>
 
 #include "drv_usb_hw.h"
 #include "cdc_acm_core.h"
@@ -31,12 +32,25 @@ void main(void)
     usb_intr_config();
 
     /* main loop */
+    static uint32_t tick = 0;
+    const char *test_string = "Hello from GD32 USB CDC! This is a test message.\r\n";
+    
     while (1) {
         if (USBD_CONFIGURED == cdc_acm.dev.cur_status) {
             if (0U == cdc_acm_check_ready(&cdc_acm)) {
                 cdc_acm_data_receive(&cdc_acm);
             } else {
-                cdc_acm_data_send(&cdc_acm);
+                /* 周期性发送测试字符串 */
+                if (tick++ % 1000000 == 0) {
+                    usb_cdc_handler *cdc = (usb_cdc_handler *)cdc_acm.dev.class_data[0];
+                    if (cdc != NULL) {
+                        strcpy((char *)cdc->data, test_string);
+                        cdc->receive_length = strlen(test_string);
+                        cdc_acm_data_send(&cdc_acm);
+                    }
+                } else {
+                    cdc_acm_data_send(&cdc_acm);
+                }
             }
         }
     }

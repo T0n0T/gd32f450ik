@@ -56,7 +56,11 @@ void usb_rcu_config(void)
 {
 #ifdef USE_USB_FS
     // rcu_pll48m_clock_config(RCU_PLL48MSRC_PLLQ);
+    // rcu_ck48m_clock_config(RCU_CK48MSRC_PLL48M);
+
     rcu_ck48m_clock_config(RCU_CK48MSRC_IRC48M);
+    rcu_osci_on(RCU_IRC48M);    
+    while (SUCCESS != rcu_osci_stab_wait(RCU_IRC48M));
 
     rcu_periph_clock_enable(RCU_USBFS);
 #elif defined(USE_USB_HS)

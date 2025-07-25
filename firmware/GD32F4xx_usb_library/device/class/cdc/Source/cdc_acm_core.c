@@ -360,7 +360,7 @@ static uint8_t cdc_acm_init (usb_dev *udev, uint8_t config_index)
 
     cdc_handler.line_coding = (acm_line){
         .dwDTERate   = 115200U,
-        .bCharFormat = 0U,
+        .bCharFormat = 1U,
         .bParityType = 0U,
         .bDataBits   = 0x08U
     };

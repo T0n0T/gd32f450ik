@@ -1,4 +1,4 @@
 h
-loadfile bootloader.hex
+loadfile gd32f4xx.hex
 r
 q

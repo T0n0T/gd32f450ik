@@ -56,5 +56,6 @@ cherryusb_srcs = files(
   # 'core/usbh_core.c',
   # 'core/usbotg_core.c',
   'port/dwc2/usb_dc_dwc2.c',
+  'port/dwc2/usb_glue_gd.c',
   # 'port/dwc2/usb_hc_dwc2.c',
 )

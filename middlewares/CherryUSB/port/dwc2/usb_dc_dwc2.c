@@ -57,9 +57,9 @@
 #define USB_OTG_GLB      ((DWC2_GlobalTypeDef *)(USBD_BASE))
 #define USB_OTG_DEV      ((DWC2_DeviceTypeDef *)(USBD_BASE + USB_OTG_DEVICE_BASE))
 #define USB_OTG_PCGCCTL  *(__IO uint32_t *)((uint32_t)USBD_BASE + USB_OTG_PCGCCTL_BASE)
-#define USB_OTG_INEP(i)  ((DWC2_INEndpointTypeDef *)(USBD_BASE + USB_OTG_IN_ENDPOINT_BASE + ((i)*USB_OTG_EP_REG_SIZE)))
-#define USB_OTG_OUTEP(i) ((DWC2_OUTEndpointTypeDef *)(USBD_BASE + USB_OTG_OUT_ENDPOINT_BASE + ((i)*USB_OTG_EP_REG_SIZE)))
-#define USB_OTG_FIFO(i)  *(__IO uint32_t *)(USBD_BASE + USB_OTG_FIFO_BASE + ((i)*USB_OTG_FIFO_SIZE))
+#define USB_OTG_INEP(i)  ((DWC2_INEndpointTypeDef *)(USBD_BASE + USB_OTG_IN_ENDPOINT_BASE + ((i) * USB_OTG_EP_REG_SIZE)))
+#define USB_OTG_OUTEP(i) ((DWC2_OUTEndpointTypeDef *)(USBD_BASE + USB_OTG_OUT_ENDPOINT_BASE + ((i) * USB_OTG_EP_REG_SIZE)))
+#define USB_OTG_FIFO(i)  *(__IO uint32_t *)(USBD_BASE + USB_OTG_FIFO_BASE + ((i) * USB_OTG_FIFO_SIZE))
 
 extern uint32_t SystemCoreClock;
 
@@ -502,6 +502,10 @@ int usb_dc_init(uint8_t busid)
     dwc2_get_hwparams(USBD_BASE, &g_dwc2_udc[busid].hw_params);
     dwc2_get_user_params(USBD_BASE, &g_dwc2_udc[busid].user_params);
 
+    USB_LOG_INFO("dwc2 has %d endpoints and dfifo depth(32-bit words) is %d\r\n",
+                 g_dwc2_udc[busid].hw_params.num_dev_ep + 1,
+                 g_dwc2_udc[busid].user_params.total_fifo_size);
+
     if (g_dwc2_udc[busid].user_params.phy_utmi_width == 0) {
         g_dwc2_udc[busid].user_params.phy_utmi_width = 8;
     }
@@ -509,16 +513,12 @@ int usb_dc_init(uint8_t busid)
         g_dwc2_udc[busid].user_params.total_fifo_size = g_dwc2_udc[busid].hw_params.total_fifo_size;
     }
 
-    USB_LOG_INFO("dwc2 has %d endpoints and dfifo depth(32-bit words) is %d\r\n",
-                 g_dwc2_udc[busid].hw_params.num_dev_ep + 1,
-                 g_dwc2_udc[busid].user_params.total_fifo_size);
-
     USB_OTG_GLB->GAHBCFG &= ~USB_OTG_GAHBCFG_GINT;
 
     USB_OTG_DEV->DCTL |= USB_OTG_DCTL_SDIS;
 
     /* This is vendor register */
-    USB_OTG_GLB->GCCFG = g_dwc2_udc[busid].user_params.device_gccfg;
+    USB_OTG_GLB->GCCFG |= g_dwc2_udc[busid].user_params.device_gccfg;
 
     ret = dwc2_core_init(busid);
 
@@ -1031,7 +1031,7 @@ void USBD_IRQHandler(uint8_t busid)
                             usbd_event_ep_out_complete_handler(busid, ep_idx, g_dwc2_udc[busid].out_ep[ep_idx].actual_xfer_len);
                         }
                     }
-                // clang-format off
+                    // clang-format off
 process_setup:
                     // clang-format on
                     if ((epint & USB_OTG_DOEPINT_STUP) == USB_OTG_DOEPINT_STUP) {

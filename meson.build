@@ -50,8 +50,8 @@ subdir('middlewares/cm_backtrace')
 subdir('middlewares/SEGGER')
 subdir('middlewares/CherryUSB')
 
-appdep_incdirs = []
-appdep_sources = []
+appdep_incdirs = [cherryusb_incs]
+appdep_sources = [cherryusb_srcs]
 if get_option('buildtype').startswith('debug')
   message('Use debug buildtype' + get_option('buildtype'))
   appdep_sources += cmb_srcs

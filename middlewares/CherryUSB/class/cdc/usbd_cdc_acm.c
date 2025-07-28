@@ -107,10 +107,10 @@ __WEAK void usbd_cdc_acm_get_line_coding(uint8_t busid, uint8_t intf, struct cdc
     (void)busid;
     (void)intf;
 
-    line_coding->dwDTERate = 2000000;
+    line_coding->dwDTERate = 115200;
     line_coding->bDataBits = 8;
     line_coding->bParityType = 0;
-    line_coding->bCharFormat = 0;
+    line_coding->bCharFormat = 1;
 }
 
 __WEAK void usbd_cdc_acm_set_dtr(uint8_t busid, uint8_t intf, bool dtr)

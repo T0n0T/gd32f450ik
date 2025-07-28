@@ -8,13 +8,14 @@
             "name": "GD32F4xx Launch",
             "type": "cortex-debug",
             "request": "launch",
-            "servertype": "jlink",
+            "servertype": "external",
             "cwd": "${workspaceRoot}",
             "executable": "${workspaceRoot}/build/gd32f4xx.elf",
             "device": "GD32F450IK",
             "interface": "swd",
             "svdFile": "${workspaceRoot}/tools/svd/GD32F4xx.svd",
             "runToEntryPoint": "Reset_Handler",
+            "gdbTarget": "localhost:2331",
         },
         {
             "name": "GD32F4xx Attach",
@@ -27,7 +28,17 @@
             "interface": "swd",
             "svdFile": "${workspaceRoot}/tools/svd/GD32F4xx.svd",
             "runToEntryPoint": "Reset_Handler",
-            "showDevDebugOutput": "raw"
+            "rttConfig": {
+                "enabled": true,
+                "address": "auto",
+                "decoders": [
+                    {
+                        "label": "",
+                        "port": 0,
+                        "type": "console"
+                    }
+                ]
+            }
         },
     ]
 }

@@ -234,10 +234,10 @@ static struct usbd_interface intf1;
 
 void cdc_acm_init(uint8_t busid, uintptr_t reg_base)
 {
-    const uint8_t data[10] = {0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x30};
+    const char* data = "Hello, CherryUSB CDC ACM!\r\n";
 
-    memcpy(&write_buffer[0], data, 10);
-    memset(&write_buffer[10], 'a', 2038);
+    memcpy(&write_buffer[0], data, strlen(data));
+    write_buffer[strlen(data)] = '\0'; // Ensure null-termination
 
 #ifdef CONFIG_USBDEV_ADVANCE_DESC
     usbd_desc_register(busid, &cdc_descriptor);
@@ -251,7 +251,7 @@ void cdc_acm_init(uint8_t busid, uintptr_t reg_base)
     usbd_initialize(busid, reg_base, usbd_event_handler);
 }
 
-volatile uint8_t dtr_enable = 0;
+volatile uint8_t dtr_enable = 1;
 
 void usbd_cdc_acm_set_dtr(uint8_t busid, uint8_t intf, bool dtr)
 {
@@ -265,9 +265,9 @@ void usbd_cdc_acm_set_dtr(uint8_t busid, uint8_t intf, bool dtr)
 void cdc_acm_data_send_with_dtr_test(uint8_t busid)
 {
     if (dtr_enable) {
-        ep_tx_busy_flag = true;
-        usbd_ep_start_write(busid, CDC_IN_EP, write_buffer, 2048);
-        while (ep_tx_busy_flag) {
-        }
+        // ep_tx_busy_flag = true;
+        usbd_ep_start_write(busid, CDC_IN_EP, write_buffer, strlen(write_buffer));
+        // while (ep_tx_busy_flag) {
+        // }
     }
 }

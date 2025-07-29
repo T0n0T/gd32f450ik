@@ -501,6 +501,8 @@ int usb_dc_init(uint8_t busid)
 
     dwc2_get_hwparams(USBD_BASE, &g_dwc2_udc[busid].hw_params);
     dwc2_get_user_params(USBD_BASE, &g_dwc2_udc[busid].user_params);
+    g_dwc2_udc[busid].hw_params.fs_phy_type = 1;
+    g_dwc2_udc[busid].hw_params.num_dev_ep = 3;
 
     USB_LOG_INFO("dwc2 has %d endpoints and dfifo depth(32-bit words) is %d\r\n",
                  g_dwc2_udc[busid].hw_params.num_dev_ep + 1,
@@ -521,6 +523,10 @@ int usb_dc_init(uint8_t busid)
     USB_OTG_GLB->GCCFG |= g_dwc2_udc[busid].user_params.device_gccfg;
 
     ret = dwc2_core_init(busid);
+    if (ret < 0) {
+        USB_LOG_ERR("DWC2 core init failed\r\n");
+        goto err;
+    }
 
     /* Force Device Mode*/
     dwc2_set_mode(busid, USB_OTG_MODE_DEVICE);
@@ -586,7 +592,7 @@ int usb_dc_init(uint8_t busid)
     USB_OTG_GLB->GRXFSIZ = g_dwc2_udc[busid].user_params.device_rx_fifo_size;
 
     fifo_num = g_dwc2_udc[busid].user_params.device_rx_fifo_size;
-    for (uint8_t i = 0; i < (g_dwc2_udc[busid].hw_params.num_dev_ep + 1); i++) {
+    for (uint8_t i = 0; i < g_dwc2_udc[busid].hw_params.num_dev_ep + 1; i++) {
         dwc2_set_txfifo(busid, i, g_dwc2_udc[busid].user_params.device_tx_fifo_size[i]);
         fifo_num += g_dwc2_udc[busid].user_params.device_tx_fifo_size[i];
 
@@ -600,11 +606,21 @@ int usb_dc_init(uint8_t busid)
     }
 
     ret = dwc2_flush_txfifo(busid, 0x10U);
+    if (ret < 0) {
+        USB_LOG_ERR("Flush tx fifo failed\r\n");
+        goto err;
+    }
+
     ret = dwc2_flush_rxfifo(busid);
+    if (ret < 0) {
+        USB_LOG_ERR("Flush rx fifo failed\r\n");
+        goto err;
+    }
 
     USB_OTG_GLB->GAHBCFG |= USB_OTG_GAHBCFG_GINT;
     USB_OTG_DEV->DCTL &= ~USB_OTG_DCTL_SDIS;
 
+err:
     return ret;
 }
 
